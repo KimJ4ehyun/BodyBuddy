@@ -9,4 +9,18 @@
 		FROM routines
 	</select>
 	
+	<!-- 루틴 등록 -->
+	<insert id="insertRoutine" parameterType="Routine">
+		INSERT INTO routines (user_id, routine_title, description)
+		VALUES (#{userId}, #{routineTitle}, #{description})
+	</insert>
+	
+	<!-- 루틴 등록 - 운동 등록 -->
+	<insert id="insertExercise" parameterType="Exercise" >
+		INSERT INTO exercises
+			(routine_id, exercise_name, exercise_part, set_cnt, weight, repetitions, day_of_the_week, time)
+		VALUES 
+			(#{routineId}, #{exerciseName}, #{exercisePart}, #{setCnt}, #{weight}, #{repetitions}, #{dayOfTheWeek}, #{time})
+	</insert>
+	
 </mapper>

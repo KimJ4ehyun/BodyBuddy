@@ -15,9 +15,11 @@ public interface RoutineService {
 	// 해당 루틴의 각 운동 상세보기
 	Exercise getExerciseInfo(int routineId, int exerciseId);
 	
-	// 찜 추가
+	// 루틴 등록
+	int addRoutine(Routine routine);
 	
-	// 찜 해제
+	// 루틴 등록 - 운동 등록
+	int addExercise(Exercise exercise);
 	
 	// 내 루틴에 추가
 	
