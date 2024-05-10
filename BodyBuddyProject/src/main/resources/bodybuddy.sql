@@ -40,25 +40,13 @@ CREATE TABLE `wishes` (
 	FOREIGN KEY (routine_id) REFERENCES routines(routine_id) ON DELETE CASCADE
 )ENGINE=InnoDB;
 
-CREATE TABLE `boards` (
-	`board_id` INT AUTO_INCREMENT PRIMARY KEY,
-	`title` VARCHAR(30)  NOT NULL,
-	`user_id` VARCHAR(20) NOT NULL,
-	`content` TEXT NOT NULL,
-	`date` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-	`view_cnt` INT DEFAULT 0,
-	`like_cnt` INT DEFAULT 0,
-	FOREIGN KEY(user_id) REFERENCES users(user_id) ON DELETE CASCADE
-)ENGINE=InnoDB;
-
 CREATE TABLE `reviews` (
 	`review_id` INT AUTO_INCREMENT PRIMARY KEY,
-	`board_id` INT NOT NULL,
+	`routine_id` INT NOT NULL,
 	`user_id` VARCHAR(20) NOT NULL,
 	`content` TEXT NOT NULL,
 	`date` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-	`like_cnt` INT DEFAULT 0,
-	FOREIGN KEY(board_id) REFERENCES boards(board_id) ON DELETE CASCADE,
+	FOREIGN KEY(routine_id) REFERENCES routines(routine_id) ON DELETE CASCADE,
 	FOREIGN KEY(user_id) REFERENCES users(user_id) ON DELETE CASCADE
 )ENGINE=InnoDB;
 
@@ -66,5 +54,4 @@ SELECT * FROM users;
 SELECT * FROM routines;
 SELECT * FROM exercises;
 SELECT * FROM wishes;
-SELECT * FROM boards;
 SELECT * FROM reviews;
