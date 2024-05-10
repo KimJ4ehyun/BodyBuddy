@@ -5,10 +5,12 @@ import java.util.List;
 import org.springdoc.core.service.SecurityService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,6 +25,7 @@ import lombok.AllArgsConstructor;
 
 @RestController
 @RequestMapping("/users")
+@CrossOrigin("*")
 @Tag(name="UserController", description="회원가입 로그인")
 public class UserController {
 	
@@ -35,7 +38,7 @@ public class UserController {
 	// 회원가입
 	@PostMapping("/join")
 	@Operation(summary="회원가입", description="아이디는 소문자, 대문자, 숫자, 6~12자 / 비밀번호는 소문자, 대문자, 숫자, 특수문자 8~16자 / 닉네임은 한글, 알파벳 대소문자, 숫자로 구성. 2-8자 /이메일도 형식에 맞게")
-	public ResponseEntity<?> join(User user){
+	public ResponseEntity<?> join(@RequestBody User user){
 		String password = user.getPassword();
 		String email = user.getEmail();
 
@@ -105,7 +108,7 @@ public class UserController {
 	//회원 정보 수정
 	@PutMapping("/edit")
 	@Operation(summary="회원 정보 수정", description="형식에 맞는지 확인, 회원가입이랑 동일한 로직")
-	public ResponseEntity<?> edit(User user){
+	public ResponseEntity<?> edit(@RequestBody User user){
 		String password = user.getPassword();
 		String email = user.getEmail();
 		

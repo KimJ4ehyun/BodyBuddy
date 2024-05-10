@@ -5,7 +5,6 @@ import java.util.List;
 import com.bodybuddy.fit.model.dto.User;
 
 public interface UserService {
-
 	// 회원가입
 	int join(User user);
 	// 로그인
@@ -16,8 +15,6 @@ public interface UserService {
 	boolean searchByNickname(String nickname);
 	// 회원 정보 수정
 	int edit(User user);
-	// 회원 탈퇴
-	int withdrawal(String userId);
 	// 전체 회원 검색
 	List<User> searchAll();
 }
