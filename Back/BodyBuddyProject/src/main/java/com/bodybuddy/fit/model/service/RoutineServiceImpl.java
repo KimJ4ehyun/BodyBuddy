@@ -36,4 +36,17 @@ public class RoutineServiceImpl implements RoutineService {
 		return routineDao.selectExercise(map);
 	}
 
+	// 루틴 등록
+	@Override
+	public int addRoutine(Routine routine) {
+		return routineDao.insertRoutine(routine);
+	}
+
+	// 루틴 등록 - 운동 등록
+	@Override
+	public int addExercise(Exercise exercise) {
+		return routineDao.insertExercise(exercise);
+	}
+
+
 }

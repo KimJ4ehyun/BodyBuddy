@@ -14,10 +14,11 @@ public interface RoutineDao {
 	// 해당 루틴의 각 운동 정보 상세보기
 	Exercise selectExercise(Map<String, Integer> map);
 	
-	// 찜 추가
+	// 루틴 등록
+	int insertRoutine(Routine routine);
 	
-	
-	// 찜 해제
+	// 루틴 등록 - 운동 등록
+	int insertExercise(Exercise exercise);
 	
 	// 내 루틴에 추가
 	

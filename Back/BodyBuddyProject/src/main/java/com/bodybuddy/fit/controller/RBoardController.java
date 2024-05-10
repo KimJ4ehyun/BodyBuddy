@@ -13,16 +13,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bodybuddy.fit.model.dto.Exercise;
 import com.bodybuddy.fit.model.dto.Routine;
+import com.bodybuddy.fit.model.dto.User;
 import com.bodybuddy.fit.model.service.RoutineService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping("/routine/board")
 @CrossOrigin("*")
-@Tag(name="RoutineController", description="Routine Rest Controller")
-public class RoutineController {
+@Tag(name="RBoardController", description="Routine Board Rest Controller")
+public class RBoardController {
 	
 	@Autowired
 	private RoutineService rService;
@@ -43,5 +45,7 @@ public class RoutineController {
 		Exercise ex = rService.getExerciseInfo(routineId, exId);
 		return new ResponseEntity<>(ex, HttpStatus.OK);
 	}
+	
+	
 	
 }
