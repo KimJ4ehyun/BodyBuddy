@@ -52,12 +52,6 @@ public class UserServiceImpl implements UserService {
 	public int edit(User user) {
 		return userDao.edit(user);
 	}
-
-	// 회원 탈퇴
-	@Override
-	public int withdrawal(String userId) {
-		return userDao.withdrawal(userId);
-	}
 	
 	// 전체 회원 검색
 	@Override

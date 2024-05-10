@@ -16,8 +16,6 @@ public interface UserDao {
 	User searchByNickname(String nickname);
 	// 회원 정보 수정
 	int edit(User user);
-	// 회원 탈퇴
-	int withdrawal(String userId);
 	// 전체 회원 검색
 	List<User> searchAll();
 }
