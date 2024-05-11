@@ -14,6 +14,7 @@ export const useUserStore = defineStore('user', () => {
       data: user
     })
     .then(() => {
+      alert("회원가입 성공");
       router.push({name: 'login'})
     })
     .catch((err) => {
@@ -31,19 +32,46 @@ export const useUserStore = defineStore('user', () => {
       router.push({name: 'home'})
       console.log("로그인 성공")
     })
+  }
 
+  const checkDuplicateUserId = function(userId){
+    axios({
+      url: `${REST_USER_API}/check-duplicate-id`,
+      method: 'POST',
+      params: {userId: userId}
+    })
+    .then((response) => {
+      console.log(response.data)
+      return response.data
+      
+    })
+    .catch((response) => {
+      console.log(response.data)
+      return response.data
+    })
   }
 
   const checkDuplicateNickname = function(nickname){
     axios({
       url: `${REST_USER_API}/check-duplicate-nickname`,
       method: 'POST',
-      data: nickname
+      params: {nickname: nickname}
     })
     .then((response) => {
-      return response.data;
+      console.log(response.data)
+      return response.data
+      
+    })
+    .catch((response) => {
+      console.log(response.data)
+      return response.data
     })
   }
 
-  return { join, login, checkDuplicateNickname }
+  return { 
+    join, 
+    login, 
+    checkDuplicateUserId, 
+    checkDuplicateNickname, 
+  }
 })
