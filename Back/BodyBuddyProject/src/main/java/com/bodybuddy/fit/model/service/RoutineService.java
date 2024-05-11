@@ -10,9 +10,13 @@ public interface RoutineService {
 	// 루틴 전체 목록 보여주기
 	List<Routine> getAllRoutine();
 	
-	// 루틴 상세보기 (모달)?
+	// 루틴 상세보기
+	Routine getOneRoutine(int routineId);
 	
-	// 해당 루틴의 각 운동 상세보기
+	// 해당 루틴의 운동 정보 리스트 가져오기
+	List<Exercise> getAllExercise(int routineId);
+	
+	// 해당 루틴의 각 운동 상세보기 (운동 한 개)
 	Exercise getExerciseInfo(int routineId, int exerciseId);
 	
 	// 루틴 등록
