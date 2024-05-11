@@ -22,7 +22,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @RequestMapping("/routine/board")
-@CrossOrigin("*")
+//@CrossOrigin("*")
 @Tag(name="RBoardController", description="Routine Board Rest Controller")
 public class RBoardController {
 	
