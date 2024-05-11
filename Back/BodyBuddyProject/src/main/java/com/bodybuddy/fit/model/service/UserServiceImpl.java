@@ -26,10 +26,7 @@ public class UserServiceImpl implements UserService {
 
 	// 로그인
 	@Override
-	public User login(String userId, String password) {
-		Map<String, String> map = new ConcurrentHashMap<>();
-		map.put("userId", userId);
-		map.put("password", password);
+	public User login(Map<String, String> map) {
 		return userDao.login(map);
 	}
 

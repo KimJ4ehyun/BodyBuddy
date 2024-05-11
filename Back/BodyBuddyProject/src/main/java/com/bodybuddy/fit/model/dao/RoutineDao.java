@@ -11,8 +11,14 @@ public interface RoutineDao {
 	// 루틴 전체 목록 보여주기
 	List<Routine> selectAll();
 	
-	// 해당 루틴의 각 운동 정보 상세보기
+	// 해당 루틴의 운동 정보 리스트 가져오기
+	List<Exercise> selectAllExercise(int routineId);
+	
+	// 해당 루틴의 각 운동 정보 상세보기 (운동 한 개)
 	Exercise selectExercise(Map<String, Integer> map);
+	
+	// 루틴 상세보기
+	Routine selectOne(int routineId);
 	
 	// 루틴 등록
 	int insertRoutine(Routine routine);

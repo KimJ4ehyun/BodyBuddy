@@ -1,12 +1,11 @@
 package com.bodybuddy.fit.controller;
 
 import java.util.List;
+import java.util.Map;
 
-import org.springdoc.core.service.SecurityService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -21,7 +20,6 @@ import com.bodybuddy.fit.model.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpSession;
-import lombok.AllArgsConstructor;
 
 @RestController
 @RequestMapping("/users")
@@ -58,8 +56,8 @@ public class UserController {
 	// 로그인
 	@PostMapping("/login")
 	@Operation(summary="로그인", description="기존 유저 목록에서 userId, password가 일치하면 session에 user를 저장")
-	public ResponseEntity<?> login(HttpSession httpSession, @RequestParam("userId") String userId, @RequestParam("password") String password){
-		User user = userService.login(userId, password);
+	public ResponseEntity<?> login(HttpSession httpSession, @RequestBody Map<String, String> map){
+		User user = userService.login(map);
 		if(user != null) {
 			httpSession.setAttribute("user", user);
 			return new ResponseEntity<>("로그인 성공", HttpStatus.OK);
