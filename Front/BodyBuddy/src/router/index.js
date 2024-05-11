@@ -23,6 +23,7 @@ const router = createRouter({
       name: 'join',
       component: JoinView
     },
+
     // ----예림 추가------
     {
       path: '/board',

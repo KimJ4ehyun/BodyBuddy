@@ -1,4 +1,5 @@
 <template>
+
     <!-- ======예림 수정 (css)======== -->
     <div id="headerBox">
         <header>
@@ -23,6 +24,9 @@
   </script>
   
   <style scoped>
+
+  
+
         /* ========= 예림 수정 ========== */
         #headerBox {
             width: 100%;
@@ -47,5 +51,6 @@
         header #user {
             margin-right: 10px;
         }
+
   </style>
   
