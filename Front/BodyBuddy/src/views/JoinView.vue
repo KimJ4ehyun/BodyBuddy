@@ -18,12 +18,12 @@
         </div>
       </div>
       <div class="item">
-      <div>
+       <div>
           <label for="userId">ID</label>
           <br>
           <input type="text" id="userId" @input="userIdValid(user.userId)" v-model="user.userId" placeholder="알파벳 소문자, 숫자 6~12자">
-          <button @click="openPopup" id="duplicateBtn">중복 확인</button>
-      </div>
+          <button @click="openPopupUserId" id="duplicateBtn">중복 확인</button>
+        </div>
       <div v-if="userIdFlag === 0">
         <span>&nbsp;</span>
       </div>
@@ -45,7 +45,7 @@
           <label for="nickname">Nickname</label>
           <br>
           <input type="text" id="nickname" @input="nicknameValid(user.nickname)" v-model="user.nickname" placeholder="특수문자 제외 2~8자">
-          <button @click="checkDuplicateNickname" id="duplicateBtn">중복확인</button>
+          <button @click="openPopupNickname" id="duplicateBtn">중복 확인</button>
       </div>
       <div v-if="nicknameFlag === 0">
         <span>&nbsp;</span>
@@ -121,36 +121,13 @@
       </div>
     </div> 
       <div>
-          <button @click="join">가입하기</button>
+          <button @click="join" :disabled="nameFlag !== 1 || userIdFlag !== 1 || nicknameFlag !== 1 || passwordFlag !== 1 || passwordCheckFlag !== 1 || emailFlag !== 1">가입하기</button>
       </div>          
   </div>  
+
 </template>
 
 <script setup>
-const openPopup = function() {
-  // 팝업 창 크기 및 위치 설정
-  const width = 400;
-  const height = 200;
-  const left = (window.innerWidth - width) / 2;
-  const top = (window.innerHeight - height) / 2;
-
-  // 팝업 창 열기
-  const popup = window.open('', '_blank', `width=${width},height=${height},top=${top},left=${left}`);
-
-  popup.document.write(`
-    <div>
-      <p>아이디는 알파벳 소문자, 숫자 6~12자로 입력해주세요.</p>
-      <div>
-          <label for="userId">ID</label>
-          <br>
-          <input type="text" id="userId" v-model="user.userId" placeholder="알파벳 소문자, 숫자 6~12자">
-          <button @click="store.checkDuplicateUserId(user.userId)" id="duplicateBtn">중복 확인</button>
-      </div>
-    </div>
-  `);
-}
-
-
 import { useUserStore } from '@/stores/user';
 import { ref } from 'vue';
 
@@ -248,6 +225,31 @@ const emailValid = function(email){
   }
 }
 
+const openPopupUserId = function() {
+  // 팝업 창 크기 및 위치 설정
+  const width = 690;
+  const height = 400;
+  const left = (window.innerWidth - width) / 2;
+  const top = (window.innerHeight - height) / 2;
+
+  // 팝업 창 열기
+  const popup = window.open('/PopupUserId', '_blank', `width=${width},height=${height},top=${top},left=${left}`);
+
+}
+
+const openPopupNickname = function() {
+  // 팝업 창 크기 및 위치 설정
+  const width = 600;
+  const height = 400;
+  const left = (window.innerWidth - width) / 2;
+  const top = (window.innerHeight - height) / 2;
+
+  // 팝업 창 열기
+  const popup = window.open('/PopupNickname', '_blank', `width=${width},height=${height},top=${top},left=${left}`);
+
+}
+
+
 </script>
 
 <style scoped>
@@ -272,6 +274,10 @@ button {
   color: white; /* 버튼 텍스트 색상 */
   border: none; /* 테두리 없애기 */
   cursor: pointer; /* 커서를 포인터로 변경하여 클릭 가능한 상태 표시 */
+}
+
+button:disabled {
+    cursor: not-allowed; /* 비활성화된 상태일 때 마우스 커서를 금지 표시로 변경 */
 }
 
 button:hover {
