@@ -8,7 +8,7 @@
             </div>
             <div id="nav">
                 <RouterLink to="/">Home</RouterLink> |
-                <RouterLink :to="{ name: 'routineBoard'}">루틴게시판</RouterLink>
+                <RouterLink :to="{ name: 'routineList'}">루틴게시판</RouterLink>
             </div>
             <div id="user">
                 <RouterLink :to="{ name: 'login' }">로그인</RouterLink> |
