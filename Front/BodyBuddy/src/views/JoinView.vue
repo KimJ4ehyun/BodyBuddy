@@ -218,6 +218,18 @@ window.addEventListener('message', (event) => {
   }
 });
 
+// 페이지를 벗어날 때 저장소에 저장된 값 초기화
+window.addEventListener('beforeunload', () => {
+  store.state.nickname = '';
+  store.state.userId = '';
+});
+
+// 뒤로가기 버튼을 클릭할 때 저장소에 저장된 값 초기화
+window.addEventListener('popstate', () => {
+  store.state.nickname = '';
+  store.state.userId = '';
+});
+
 </script>
 
 <style scoped>
