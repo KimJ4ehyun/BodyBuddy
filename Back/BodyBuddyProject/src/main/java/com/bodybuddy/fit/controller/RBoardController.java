@@ -30,11 +30,15 @@ public class RBoardController {
 	private RoutineService rService;
 	
 	// 루틴 목록 보여주기
-	@GetMapping("/")
+	@GetMapping("")
 	@Operation(summary="루틴 목록 보여주기", description="루틴 전체 목록을 반환한다.")
 	public ResponseEntity<List<Routine>> routineList(){
 		List<Routine> list = rService.getAllRoutine();
 		
+		// 여기서 운동 리스트도 가져와야 목록 게시판에서 보여줄 것 같은데... 흠
+		for(int i=0; i<list.size(); i++) {
+			list.get(i).getRoutineId();
+		}
 		return new ResponseEntity<>(list, HttpStatus.OK); 
 	}
 	

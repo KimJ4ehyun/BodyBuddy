@@ -4,8 +4,26 @@
 
         <div id="container">
             <div class="boardBox" 
-                v-for="routine in boardList"
-                :key="routine.routineId">
+                v-for="routine in store.boardList"
+                :key="routine.routineId"
+            >
+                <!-- <table class="table table-bordered">
+                    <tr>
+                        <th>월</th>
+                        <th>화</th>
+                        <th>수</th>
+                        <th>목</th>
+                        <th>금</th>
+                        <th>토</th>
+                        <th>일</th>
+                    </tr>
+                    <tr>
+                        <td :class="{'timeCheck': store.boardList.routineTitle='월'}">
+                            {{ store.boardList }}
+                        </td>
+                        <td>ddd</td>
+                    </tr>
+                </table> -->
                 <span>{{ routine.routineTitle }}</span>
             </div>
         </div>

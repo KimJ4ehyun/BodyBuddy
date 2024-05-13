@@ -10,18 +10,26 @@ export const useBoardStore = defineStore('board', () => {
     const boardList = ref([])
 
     const getBoardList = function() {
-        axios({
-            url: REST_ROUTINE_BOARD_API,
-            method: 'GET'
-        })
-        .then((response) => {
-            boardList.value = response.data
-        })
+        axios.get(REST_ROUTINE_BOARD_API)
+            .then((response) => {
+                boardList.value = response.data
+            })
+    }
+
+    const exerciseList = ref([])
+
+    const getExerciseList = function(routineId) {
+        axios.get(`${REST_ROUTINE_BOARD_API}/${routineId}`)
+            .then((response) => {
+                console.log(response.data);
+            })
     }
 
     return {
         boardList,
         getBoardList,
-
+        exerciseList,
+        getExerciseList,
+        
     }
 })
