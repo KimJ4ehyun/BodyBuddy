@@ -2,11 +2,11 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import LoginView from '@/views/LoginView.vue'
 import JoinView from '@/views/JoinView.vue'
-
 import RoutineBoardView from '@/views/RoutineBoardView.vue'
 import BoardList from '@/components/routineBoard/BoardList.vue'
+import PopupNickname from '@/components/popup/PopupNickname.vue'
+import PopupUserId from '@/components/popup/PopupUserId.vue'
 import BoardDetail from '@/components/routineBoard/BoardDetail.vue'
-
 import MyPageView from '@/views/MyPageView.vue'
 import myRoutine from '@/components/myPage/myRoutine.vue'
 
@@ -26,8 +26,19 @@ const router = createRouter({
     {
       path: '/join',
       name: 'join',
-      component: JoinView
+      component: JoinView,
     },
+    {
+      path: '/PopupNickname',
+      name: 'PopupNickname',
+      component: PopupNickname
+    },
+    {
+      path: '/PopupUserId',
+      name: 'PopupUserId',
+      component: PopupUserId
+    },
+    
 
     // ----예림 추가------
     {
