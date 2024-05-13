@@ -11,6 +11,7 @@
                 <RouterLink :to="{ name: 'routineList'}">루틴게시판</RouterLink>
             </div>
             <div id="user">
+                <RouterLink :to="{ name: 'myRoutineList' }">😃</RouterLink> | 
                 <RouterLink :to="{ name: 'login' }">로그인</RouterLink> |
                 <RouterLink :to="{ name: 'join' }">회원가입</RouterLink>
             </div>

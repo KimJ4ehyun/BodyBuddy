@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>Routine 배너</h1>
+        <h2>My Page 배너</h2>
         <RouterView />
     </div>
 </template>

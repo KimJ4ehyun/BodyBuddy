@@ -22,6 +22,7 @@ export const useUserStore = defineStore('user', () => {
     })
   }
 
+  const loginId = ref('')
   const login = function (user) {
     axios({
       url: `${REST_USER_API}/login`,
@@ -29,6 +30,8 @@ export const useUserStore = defineStore('user', () => {
       data: user
     })
     .then(() => {
+      loginId.value = user.userId;
+      console.log(loginId.value)
       router.push({name: 'home'})
       console.log("로그인 성공")
     })
