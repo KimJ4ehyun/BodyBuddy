@@ -27,7 +27,7 @@ CREATE TABLE `exercises` (
 	`set_cnt` INT NOT NULL,
 	`weight` INT NOT NULL,
 	`repetitions` INT NOT NULL,
-	`day_of_the_week` VARCHAR(20)  NOT NULL,
+	`day_of_the_week` SET('월', '화', '수', '목', '금', '토', '일'),
 	`time` VARCHAR(20) NOT NULL,
 	FOREIGN KEY(routine_id) REFERENCES routines(routine_id) ON DELETE CASCADE
 )ENGINE=InnoDB;

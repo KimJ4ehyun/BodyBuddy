@@ -27,7 +27,7 @@ import jakarta.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping("/mypage")
-@CrossOrigin("*")
+//@CrossOrigin("*")
 @Tag(name="MyPageController", description="MyPage Rest Controller")
 public class MyPageController {
 	

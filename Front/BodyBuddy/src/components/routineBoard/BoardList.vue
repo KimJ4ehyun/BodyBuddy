@@ -7,30 +7,14 @@
                 v-for="routine in store.boardList"
                 :key="routine.routineId"
             >
-                <!-- <table class="table table-bordered">
-                    <tr>
-                        <th>월</th>
-                        <th>화</th>
-                        <th>수</th>
-                        <th>목</th>
-                        <th>금</th>
-                        <th>토</th>
-                        <th>일</th>
-                    </tr>
-                    <tr>
-                        <td :class="{'timeCheck': store.boardList.routineTitle='월'}">
-                            {{ store.boardList }}
-                        </td>
-                        <td>ddd</td>
-                    </tr>
-                </table> -->
-                <span>{{ routine.routineTitle }}</span>
+                <BoardListOne :board-one="routine" />
             </div>
         </div>
     </div>
 </template>
 
 <script setup>
+    import BoardListOne from '@/components/routineBoard/BoardListOne.vue'
     import { useBoardStore } from '@/stores/board'
     import { onMounted } from 'vue';
 
@@ -45,17 +29,24 @@
 
 <style scoped>
     #container {
-        border: 1px solid lightgray;
+        /* border: 1px solid lightgray; */
         width: 90%;
         margin: 0 auto;
         display: flex;
-        flex-wrap: row wrap;
+        flex-direction: column;
         justify-content: space-around;
     }
 
     #container .boardBox {
-        border: 1px solid blue;
-        width: 40%;
-
+        /* border: 1px solid lightgray; */
+        background-color: #F0F6F6;
+        width: 60%;
+        display: flex;
+        flext-direction: row;
+        margin: 20px auto;
+        padding: 10px 20px;
     }
+
+    
+    
 </style>
