@@ -6,6 +6,9 @@ import RoutineBoardView from '@/views/RoutineBoardView.vue'
 import BoardList from '@/components/routineBoard/BoardList.vue'
 import PopupNickname from '@/components/popup/PopupNickname.vue'
 import PopupUserId from '@/components/popup/PopupUserId.vue'
+import BoardDetail from '@/components/routineBoard/BoardDetail.vue'
+import MyPageView from '@/views/MyPageView.vue'
+import myRoutine from '@/components/myPage/myRoutine.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -48,6 +51,23 @@ const router = createRouter({
           name: 'routineList',
           component: BoardList
         },
+        {
+          path: ':routineId',
+          name: 'boardDetail',
+          component: BoardDetail
+        }
+      ]
+    },
+    {
+      path: '/mypage',
+      name: 'myPage',
+      component: MyPageView,
+      children: [
+        {
+          path: '',
+          name: 'myRoutineList',
+          component: myRoutine
+        }
       ]
     }
   ]

@@ -27,6 +27,7 @@ export const useUserStore = defineStore('user', () => {
     })
   }
 
+  const loginId = ref('')
   const login = function (user) {
     axios({
       url: `${REST_USER_API}/login`,
@@ -35,8 +36,8 @@ export const useUserStore = defineStore('user', () => {
     })
     .then(() => {
       alert("로그인 성공");
+      loginId.value = user.userId;
       router.push({name: 'home'})
-      console.log("로그인 성공")
     })
     .catch(() => {
       alert("아이디 또는 비밀번호가 일치하지 않습니다");
