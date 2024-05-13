@@ -2,10 +2,11 @@
     <div class="item">
       <div>
         <p>아이디는 알파벳 소문자, 숫자 6~12자로 입력해주세요.</p>
-          <label for="userId">ID</label>
-          <br>
-          <input type="text" id="userId" @input="userIdValid(user.userId)" v-model="user.userId" placeholder="알파벳 소문자, 숫자 6~12자">
-          <button @click="store.checkDuplicateUserId(user.userId)" :disabled="userIdFlag !== 1">중복 확인</button>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="userId" @input="userIdValid(user.userId)" v-model="user.userId" placeholder="알파벳 소문자, 숫자 6~12자">
+            <label for="userId">ID</label>
+          </div>
+          <button @click="checkUserIdValid(user.userId)" :disabled="userIdFlag !== 1">중복 확인</button>
         </div>
       <div v-if="userIdFlag === 0">
         <span>&nbsp;</span>
@@ -21,6 +22,10 @@
       </div>
       <div v-else-if="userIdFlag === 4">
        <small class="color-red">이미 사용 중인 아이디입니다.</small>
+      </div>
+      <div v-else-if="userIdFlag === 5">
+       <small class="color-green">사용 가능한 아이디입니다.</small>
+       <button @click="closeWindow(user.userId)">사용하기</button>
       </div>
     </div>
 </template>
@@ -48,6 +53,27 @@
   }
 }
 
+const checkUserIdValid = function(userId){
+  store.checkDuplicateUserId(userId)
+    .then((isNotDuplicate) => {
+      if (isNotDuplicate) {
+        userIdFlag.value = 5;
+        alert('사용 가능한 아이디입니다.');
+      } else {
+        userIdFlag.value = 4;
+        alert('이미 사용 중인 아이디입니다.');
+      }
+    })
+    .catch((error) => {
+      console.error('에러 발생:', error);
+    });
+}
+
+const closeWindow = function(userId)  {
+  store.storeUserId(userId)
+  window.opener.postMessage({ type: 'userIdUpdate', userId: userId }, '*');
+  window.close(); // 현재 창 닫기
+}
 </script>
 
 <style scoped>
@@ -55,16 +81,16 @@
     text-align: center;
   }
     /* 팝업 내 버튼 스타일 */
-  button {
-    margin-left: 10px;
-    margin-top: 10px; /* 버튼 위쪽 여백 추가 */
-    padding: 5px 10px; /* 버튼 내부 여백 추가 */
-    border-radius: 5px; /* 버튼 둥글게 만들기 */
-    background-color: #7FABB2; /* 버튼 배경색 */
-    color: white; /* 버튼 텍스트 색상 */
-    border: none; /* 테두리 없애기 */
-    cursor: pointer; /* 커서를 포인터로 변경하여 클릭 가능한 상태 표시 */
-  }
+button {
+  margin-left: 10px;
+  margin-top: 10px; /* 버튼 위쪽 여백 추가 */
+  padding: 5px 10px; /* 버튼 내부 여백 추가 */
+  border-radius: 5px; /* 버튼 둥글게 만들기 */
+  background-color: #7FABB2; /* 버튼 배경색 */
+  color: white; /* 버튼 텍스트 색상 */
+  border: none; /* 테두리 없애기 */
+  cursor: pointer; /* 커서를 포인터로 변경하여 클릭 가능한 상태 표시 */
+}
 
   button:disabled {
     cursor: not-allowed; /* 비활성화된 상태일 때 마우스 커서를 금지 표시로 변경 */
@@ -72,10 +98,6 @@
 
   button:hover {
     background-color: #A9DDDE; /* 마우스 호버 시 배경색 변경 */
-  }
-
-  input {
-    width: 200px;
   }
 
   .color-red{

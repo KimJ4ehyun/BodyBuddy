@@ -1,4 +1,4 @@
-import { ref, computed } from 'vue'
+import { ref, reactive } from 'vue'
 import { defineStore } from 'pinia'
 import axios from 'axios'
 import router from '@/router'
@@ -7,6 +7,11 @@ const REST_USER_API = `http://localhost:8080/users`
 
 export const useUserStore = defineStore('user', () => {
   
+  const state = reactive({
+    nickname: '',
+    userId: '',
+  })
+
   const join = function (user) {
     axios({
       url: `${REST_USER_API}/join`,
@@ -29,48 +34,63 @@ export const useUserStore = defineStore('user', () => {
       data: user
     })
     .then(() => {
+      alert("로그인 성공");
       router.push({name: 'home'})
       console.log("로그인 성공")
+    })
+    .catch(() => {
+      alert("아이디 또는 비밀번호가 일치하지 않습니다");
     })
   }
 
   const checkDuplicateUserId = function(userId){
-    axios({
+    return axios({
       url: `${REST_USER_API}/check-duplicate-id`,
       method: 'POST',
       params: {userId: userId}
     })
     .then((response) => {
-      console.log(response.data)
       return response.data
       
     })
     .catch((response) => {
-      console.log(response.data)
       return response.data
     })
   }
 
   const checkDuplicateNickname = function(nickname){
-    axios({
+    return axios({
       url: `${REST_USER_API}/check-duplicate-nickname`,
       method: 'POST',
       params: {nickname: nickname}
     })
     .then((response) => {
-      console.log(response.data)
       return response.data
     })
     .catch((response) => {
-      console.log(response.data)
       return response.data
     })
   }
 
+  const storeNickname = function(nickname){
+    state.nickname = nickname
+  }
+
+  const storeUserId = function(userId){
+    state.userId = userId
+  }
+
   return { 
+    state,
     join, 
     login, 
     checkDuplicateUserId, 
-    checkDuplicateNickname, 
+    checkDuplicateNickname,
+    storeNickname,
+    storeUserId,
   }
-})
+},
+{
+  persist: true
+}
+)

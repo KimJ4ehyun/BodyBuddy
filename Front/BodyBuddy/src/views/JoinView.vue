@@ -2,12 +2,11 @@
   <div class="container">
     <h4>회원가입</h4>
       <div class="item">
-        <div>
+        <div class="form-floating mb-3"> 
+          <input type="email" id="name" class="form-control" @input="nameValid(user.name)" v-model="user.name" placeholder="이름">
           <label for="name">name</label>
-          <br>
-          <input type="text" id="name" @input="nameValid(user.name)" v-model="user.name" placeholder="이름">
         </div>
-      <div v-if="nameFlag === 0">
+        <div v-if="nameFlag === 0">
           <span>&nbsp;</span>
         </div>
         <div v-else-if="nameFlag === 1">
@@ -17,57 +16,36 @@
          <small class="color-red">이름을 입력해주세요.</small>
         </div>
       </div>
-      <div class="item">
-       <div>
+      <div class="item">  
+        <div class="form-floating mb-3">
+          <input type="text" id="userId" class="form-control" v-model="store.state.userId" placeholder="알파벳 소문자, 숫자 6~12자" disabled>
           <label for="userId">ID</label>
-          <br>
-          <input type="text" id="userId" @input="userIdValid(user.userId)" v-model="user.userId" placeholder="알파벳 소문자, 숫자 6~12자">
-          <button @click="openPopupUserId" id="duplicateBtn">중복 확인</button>
+          <button @click="openPopupUserId">중복 확인</button>
         </div>
-      <div v-if="userIdFlag === 0">
-        <span>&nbsp;</span>
+          <div v-if="store.state.userId">
+          <small class="color-green">사용 가능한 아이디입니다.</small>
+        </div>
+        <div v-else>
+          <span>&nbsp;</span>
+        </div>
       </div>
-      <div v-else-if="userIdFlag === 1">
-        <small class="color-green">사용 가능한 아이디입니다.</small>
-      </div>
-      <div v-else-if="userIdFlag === 2">
-        <small class="color-red">닉네임을 입력해주세요.</small>
-      </div>
-      <div v-else-if="userIdFlag === 3">
-       <small class="color-red">아이디는 알파벳 소문자, 숫자 6~12자로 입력해주세요.</small>
-      </div>
-      <div v-else-if="userIdFlag === 4">
-       <small class="color-red">이미 사용 중인 아이디입니다.</small>
-      </div>
-    </div>
     <div class="item">
-      <div>
-          <label for="nickname">Nickname</label>
-          <br>
-          <input type="text" id="nickname" @input="nicknameValid(user.nickname)" v-model="user.nickname" placeholder="특수문자 제외 2~8자">
-          <button @click="openPopupNickname" id="duplicateBtn">중복 확인</button>
+      <div class="form-floating mb-3">
+        <input type="text" id="nickname" class="form-control" v-model="store.state.nickname" placeholder="특수문자 제외 2~8자" disabled>
+        <label for="nickname">Nickname</label>
+        <button @click="openPopupNickname">중복 확인</button>
       </div>
-      <div v-if="nicknameFlag === 0">
-        <span>&nbsp;</span>
-      </div>
-      <div v-else-if="nicknameFlag === 1">
+      <div v-if="store.state.nickname">
         <small class="color-green">사용 가능한 닉네임입니다.</small>
       </div>
-      <div v-else-if="nicknameFlag === 2">
-        <small class="color-red">닉네임을 입력해주세요.</small>
-      </div>
-      <div v-else-if="nicknameFlag === 3">
-       <small class="color-red">닉네임은 특수문자 제외 2~8자로 입력해주세요.</small>
-      </div>
-      <div v-else-if="nicknameFlag === 4">
-       <small class="color-red">이미 사용 중인 닉네임입니다.</small>
+      <div v-else>
+        <span>&nbsp;</span>
       </div>
     </div>
     <div class="item">
-      <div>
-          <label for="password">Password</label>
-          <br>
-          <input type="password" id="password" @input="passwordValid(user.password, user.passwordCheck)" v-model="user.password" placeholder="알파벳 대소문자, 숫자, 특수문자 8~16자">
+      <div class="form-floating mb-3">
+        <input type="password" id="password" class="form-control" @input="passwordValid(user.password, user.passwordCheck)" v-model="user.password" placeholder="알파벳 대소문자, 숫자, 특수문자 8~16자">
+        <label for="password">Password</label>
       </div>
       <div v-if="passwordFlag === 0">
         <span>&nbsp;</span>
@@ -83,10 +61,9 @@
       </div>
     </div>
     <div class="item">
-      <div>
-          <label for="passwordCheck">Password Check</label>
-          <br>
-          <input type="password" id="passwordCheck" @input="passwordValid(user.password, user.passwordCheck)" v-model="user.passwordCheck" placeholder="알파벳 대소문자, 숫자, 특수문자 8~16자">
+      <div class="form-floating mb-3">
+        <input type="password" id="passwordCheck" class="form-control" @input="passwordValid(user.password, user.passwordCheck)" v-model="user.passwordCheck" placeholder="알파벳 대소문자, 숫자, 특수문자 8~16자">
+        <label for="passwordCheck">Password Check</label>
       </div>
       <div v-if="passwordCheckFlag === 0">
         <span>&nbsp;</span>
@@ -102,16 +79,15 @@
       </div>
     </div>
     <div class="item">
-      <div>
-          <label for="email">Email address</label>
-          <br>
-          <input type="text" id="email" @input="emailValid(user.email)" v-model="user.email" placeholder="Abc@def.com">
+      <div class="form-floating mb-3">
+        <input type="text" id="email" class="form-control" @input="emailValid(user.email)" v-model="user.email" placeholder="Abc@def.com">
+        <label for="email">Email address</label>
       </div>
       <div v-if="emailFlag === 0">
         <span>&nbsp;</span>
       </div>
       <div v-else-if="emailFlag === 1">
-        <small class="color-green">사용 가능한 이메일입니다다.</small>
+        <small class="color-green">사용 가능한 이메일입니다.</small>
       </div>
       <div v-else-if="emailFlag === 2">
        <small class="color-red">이메일을 입력해주세요.</small>
@@ -121,15 +97,14 @@
       </div>
     </div> 
       <div>
-          <button @click="join" :disabled="nameFlag !== 1 || userIdFlag !== 1 || nicknameFlag !== 1 || passwordFlag !== 1 || passwordCheckFlag !== 1 || emailFlag !== 1">가입하기</button>
+          <button @click="join" :disabled="nameFlag !== 1 || !store.state.userId || !store.state.nickname || passwordFlag !== 1 || passwordCheckFlag !== 1 || emailFlag !== 1">가입하기</button>
       </div>          
   </div>  
-
 </template>
 
 <script setup>
 import { useUserStore } from '@/stores/user';
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 
 const store = useUserStore()
 
@@ -141,18 +116,30 @@ const user = ref({
   email: '',
 })
 
+// 저장소의 nickname, userId가 변할 시에 해당 값을 user객체의 nickname 또는 userId에 넣어준다
+watch(() => store.state.nickname, (newValue) => {
+    user.value.nickname = newValue;
+});
+
+watch(() => store.state.userId, (newValue) => {
+    user.value.userId = newValue;
+});
+
+// 회원가입 및 회원가입 완료 후에 저장 값을 비운다
 const join = function () {
   store.join(user.value)
+  store.state.nickname = ''
+  store.state.userId=''
 }
 
+// flag에 따라 출력되는 메시지가 다르게 설정
 let nameFlag = ref(0)
-let userIdFlag = ref(0)
-let nicknameFlag = ref(0)
 let passwordFlag = ref(0)
 let passwordCheckFlag = ref(0)
 let emailFlag = ref(0)
 
 const nameValid = function(name){
+  // !를 사용하여 해당 변수가 null인지 확인
   if (!name) {
     nameFlag.value = 2
   } 
@@ -161,37 +148,8 @@ const nameValid = function(name){
   }
 }
 
-const userIdValid = function(userId){
-  if (store.checkDuplicateUserId(userId)){
-    userIdFlag.value = 4
-  }
-  else if (/^[a-zA-Z0-9]{6,12}$/.test(userId)) {
-    userIdFlag.value = 1
-  } 
-  else if(!userId){
-    userIdFlag.value = 2
-  }
-  else {
-    userIdFlag.value = 3
-  }
-}
-
-const nicknameValid = function(nickname){
-  if (store.checkDuplicateNickname(nickname)){
-    nicknameFlag.value = 4
-  }
-  else if (/^[가-힣a-zA-Z0-9]{2,8}$/.test(nickname)) {
-    nicknameFlag.value = 1
-  } 
-  else if(!nickname){
-    nicknameFlag.value = 2
-  }
-  else {
-    nicknameFlag.value = 3
-  }
-}
-
 const passwordValid = function(password, passwordCheck){
+  // 비밀번호가 정규표현식에 맞는 형태인지 확인
   if (/^[a-zA-Za-z0-9!@#$%^&*()._-]{8,16}$/.test(password)){
     passwordFlag.value = 1
   }
@@ -227,42 +185,49 @@ const emailValid = function(email){
 
 const openPopupUserId = function() {
   // 팝업 창 크기 및 위치 설정
-  const width = 690;
+  const width = 500;
   const height = 400;
   const left = (window.innerWidth - width) / 2;
   const top = (window.innerHeight - height) / 2;
 
-  // 팝업 창 열기
+  // 팝업 창 열기, index.js에서 설정해놓은 Router로 이동
   const popup = window.open('/PopupUserId', '_blank', `width=${width},height=${height},top=${top},left=${left}`);
 
 }
 
 const openPopupNickname = function() {
   // 팝업 창 크기 및 위치 설정
-  const width = 600;
+  const width = 500;
   const height = 400;
   const left = (window.innerWidth - width) / 2;
   const top = (window.innerHeight - height) / 2;
 
-  // 팝업 창 열기
+  // 팝업 창 열기, index.js에서 설정해놓은 Router로 이동
   const popup = window.open('/PopupNickname', '_blank', `width=${width},height=${height},top=${top},left=${left}`);
-
+  
 }
 
+// 저장소(store)가 갱신되었다면 새로고침 없이 현재 페이지의 userId, nickname에 값을 추가하기 위해서 사용
+window.addEventListener('message', (event) => {
+  if (event.data.type === 'userIdUpdate') {
+    store.storeUserId(event.data.userId);
+  }
+
+  if (event.data.type === 'nicknameUpdate') {
+    store.storeNickname(event.data.nickname);
+  }
+});
 
 </script>
 
 <style scoped>
+
+h4 {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
 .container {
   text-align: center;
-}
-
-input {
-  width: 300px;
-  height: 30px;
-  border-radius: 10px;
-  margin-bottom: 10px; /* 입력 요소 간의 간격 조절 */
-  border: 1px solid #9f9f9f; 
 }
 
 button {
@@ -282,10 +247,6 @@ button:disabled {
 
 button:hover {
   background-color: #A9DDDE; /* 마우스 호버 시 배경색 변경 */
-}
-
-#duplicateBtn{
-  background-color: #A9DDDE;
 }
 
 .color-red{

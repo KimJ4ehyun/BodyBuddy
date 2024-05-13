@@ -53,16 +53,4 @@ const router = createRouter({
   ]
 })
 
-// // Navigation Guards를 사용하여 특정 경로에서 헤더와 푸터를 숨김
-// router.beforeEach((to, from, next) => {
-//   const hideHeaderFooterRoutes = ['/PopupNicknameView', '/PopupUserIdView']; // 헤더와 푸터를 숨길 경로
-//   if (hideHeaderFooterRoutes.includes(to.path)) {
-//     store.dispatch('hideHeaderFooter'); // Vuex를 사용하여 상태 변경
-//   } else {
-//     store.dispatch('showHeaderFooter'); // Vuex를 사용하여 상태 변경
-//   }
-//   next();
-// });
-
-
 export default router
