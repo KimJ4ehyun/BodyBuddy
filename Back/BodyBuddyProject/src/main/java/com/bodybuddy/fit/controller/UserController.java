@@ -71,7 +71,7 @@ public class UserController {
 			System.out.println(httpSession.getAttribute("user"));
 			return new ResponseEntity<>(user, HttpStatus.OK);
 		}
-		return new ResponseEntity<>("로그인 실패", HttpStatus.NOT_FOUND);	
+		return new ResponseEntity<>("로그인 실패", HttpStatus.UNAUTHORIZED);	
 	}
 	
 	// 로그아웃
@@ -80,7 +80,6 @@ public class UserController {
 	public ResponseEntity<?> logout(HttpSession httpSession){
 		User user = (User)httpSession.getAttribute("user");
 		System.out.println(user);
-		System.out.println(httpSession.getAttribute("user"));
 		if(user != null) {
 			httpSession.invalidate();
 			return new ResponseEntity<>("로그아웃 성공", HttpStatus.OK);
