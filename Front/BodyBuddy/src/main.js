@@ -1,3 +1,4 @@
+import piniaPluginPersistedState from 'pinia-plugin-persistedstate'
 import './assets/style.css'
 import piniaPluginPersistedState from 'pinia-plugin-persistedstate'
 

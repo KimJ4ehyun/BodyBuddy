@@ -18,11 +18,11 @@
       </div>
       <div class="item">  
         <div class="form-floating mb-3">
-          <input type="text" id="userId" class="form-control" v-model="store.state.userId" placeholder="알파벳 소문자, 숫자 6~12자" disabled>
+          <input type="text" id="userId" class="form-control" v-model="store.joinInfo.userId" placeholder="알파벳 소문자, 숫자 6~12자" disabled>
           <label for="userId">ID</label>
           <button @click="openPopupUserId">중복 확인</button>
         </div>
-          <div v-if="store.state.userId">
+          <div v-if="store.joinInfo.userId">
           <small class="color-green">사용 가능한 아이디입니다.</small>
         </div>
         <div v-else>
@@ -31,11 +31,11 @@
       </div>
     <div class="item">
       <div class="form-floating mb-3">
-        <input type="text" id="nickname" class="form-control" v-model="store.state.nickname" placeholder="특수문자 제외 2~8자" disabled>
+        <input type="text" id="nickname" class="form-control" v-model="store.joinInfo.nickname" placeholder="특수문자 제외 2~8자" disabled>
         <label for="nickname">Nickname</label>
         <button @click="openPopupNickname">중복 확인</button>
       </div>
-      <div v-if="store.state.nickname">
+      <div v-if="store.joinInfo.nickname">
         <small class="color-green">사용 가능한 닉네임입니다.</small>
       </div>
       <div v-else>
@@ -97,7 +97,7 @@
       </div>
     </div> 
       <div>
-          <button @click="join" :disabled="nameFlag !== 1 || !store.state.userId || !store.state.nickname || passwordFlag !== 1 || passwordCheckFlag !== 1 || emailFlag !== 1">가입하기</button>
+          <button @click="join" :disabled="nameFlag !== 1 || !store.joinInfo.userId || !store.joinInfo.nickname || passwordFlag !== 1 || passwordCheckFlag !== 1 || emailFlag !== 1">가입하기</button>
       </div>          
   </div>  
 </template>
@@ -117,19 +117,19 @@ const user = ref({
 })
 
 // 저장소의 nickname, userId가 변할 시에 해당 값을 user객체의 nickname 또는 userId에 넣어준다
-watch(() => store.state.nickname, (newValue) => {
+watch(() => store.joinInfo.nickname, (newValue) => {
     user.value.nickname = newValue;
 });
 
-watch(() => store.state.userId, (newValue) => {
+watch(() => store.joinInfo.userId, (newValue) => {
     user.value.userId = newValue;
 });
 
 // 회원가입 및 회원가입 완료 후에 저장 값을 비운다
 const join = function () {
   store.join(user.value)
-  store.state.nickname = ''
-  store.state.userId=''
+  store.joinInfo.nickname = ''
+  store.joinInfo.userId=''
 }
 
 // flag에 따라 출력되는 메시지가 다르게 설정
@@ -220,14 +220,14 @@ window.addEventListener('message', (event) => {
 
 // 페이지를 벗어날 때 저장소에 저장된 값 초기화
 window.addEventListener('beforeunload', () => {
-  store.state.nickname = '';
-  store.state.userId = '';
+  store.joinInfo.nickname = '';
+  store.joinInfo.userId = '';
 });
 
 // 뒤로가기 버튼을 클릭할 때 저장소에 저장된 값 초기화
 window.addEventListener('popstate', () => {
-  store.state.nickname = '';
-  store.state.userId = '';
+  store.joinInfo.nickname = '';
+  store.joinInfo.userId = '';
 });
 
 </script>
