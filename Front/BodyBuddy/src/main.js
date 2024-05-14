@@ -1,4 +1,6 @@
 import './assets/style.css'
+import piniaPluginPersistedState from 'pinia-plugin-persistedstate'
+
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import 'bootstrap/dist/css/bootstrap.css'

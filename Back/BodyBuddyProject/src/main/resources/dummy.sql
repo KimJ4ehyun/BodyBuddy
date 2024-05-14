@@ -15,7 +15,11 @@ insert into exercises (routine_id, exercise_name, exercise_part,
 					set_cnt, weight, repetitions, day_of_the_week, time)
 values (1, '운동', '하체', '10', '100', '20', ('월,수'), '오전');
 
+insert into exercises (routine_id, exercise_name, exercise_part, 
+					set_cnt, weight, repetitions, day_of_the_week, time)
+values (1, '운동', '상체', '10', '100', '20', ('목'), '저녁');
 
+delete from exercises where exercise_id=2;
 
 select * from routines;				
 select * from exercises;
