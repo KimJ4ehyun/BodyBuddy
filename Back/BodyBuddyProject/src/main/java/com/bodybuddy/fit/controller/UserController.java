@@ -37,21 +37,29 @@ public class UserController {
 	@PostMapping("/join")
 	@Operation(summary="회원가입", description="아이디는 소문자, 대문자, 숫자, 6~12자 / 비밀번호는 소문자, 대문자, 숫자, 특수문자 8~16자 / 닉네임은 한글, 알파벳 대소문자, 숫자로 구성. 2-8자 /이메일도 형식에 맞게")
 	public ResponseEntity<?> join(@RequestBody User user){
-		System.out.println(user);
+		String userId = user.getUserId();
 		String password = user.getPassword();
+		String nickname = user.getNickname();
 		String email = user.getEmail();
-
-		// 아이디, 닉네임 중복 체크가 있어서 비밀번호, 이메일만 체크
-		if(!password.matches("^[a-zA-Za-z0-9!@#$%^&*()._-]{8,16}$")){	
+		
+		// 중복 확인은 따로해서 패스
+		// 아이디 유효성 검사
+		if(!userId.matches("^[a-zA-Z0-9]{6,12}$"))
+			return new ResponseEntity<>("올바르지 않은 아이디 형식입니다.", HttpStatus.BAD_REQUEST);
+		// 비밀번호 유효성 검사
+		if(!password.matches("^[a-zA-Za-z0-9!@#$%^&*()._-]{8,16}$"))
 			return new ResponseEntity<>("올바르지 않은 비밀번호 형식입니다.", HttpStatus.BAD_REQUEST);
-		}	
-		if(email.matches("^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")) {
-			if(userService.join(user) == 1) {
-				return new ResponseEntity<>("회원가입 완료", HttpStatus.CREATED);				
-			}
-			return new ResponseEntity<>("회원가입 실패", HttpStatus.BAD_REQUEST);
-		}
-		return new ResponseEntity<>("올바르지 않은 이메일 형식입니다.", HttpStatus.BAD_REQUEST);
+		// 닉네임 유효성 검사
+		if(!nickname.matches("^[가-힣a-zA-Z0-9]{2,8}$"))
+			return new ResponseEntity<>("올바르지 않은 닉네임 형식입니다.", HttpStatus.BAD_REQUEST);
+		// 이메일 유효성 검사	
+		if(!email.matches("^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")) 
+			return new ResponseEntity<>("올바르지 않은 이메일 형식입니다.", HttpStatus.BAD_REQUEST);
+		// 로그인 등록이 잘 됐는지 확인	
+		if(userService.join(user) == 1) return new ResponseEntity<>("회원가입 완료", HttpStatus.CREATED);				
+
+		return new ResponseEntity<>("회원가입 실패", HttpStatus.BAD_REQUEST);
+		
 	}
 	
 	// 로그인
@@ -70,26 +78,25 @@ public class UserController {
 	@PostMapping("/check-duplicate-id")
 	@Operation(summary="id 중복 체크", description="형식에 맞는지 확인, 이미 존재하는 id인지 확인")
 	public ResponseEntity<?> checkDuplicateId(@RequestParam("userId") String userId) {
-	    if(userId.matches("^[a-zA-Z0-9]{6,12}$")) {
-	        if(!userService.searchById(userId)) {
-	            return new ResponseEntity<>("사용 가능한 아이디입니다.", HttpStatus.OK);    
-	        }
-	        return new ResponseEntity<>("이미 사용 중인 아이디입니다.", HttpStatus.BAD_REQUEST);    
-	    }
-	    return new ResponseEntity<>("올바르지 않은 아이디 형식입니다.", HttpStatus.BAD_REQUEST);    
+	    if(!userId.matches("^[a-zA-Z0-9]{6,12}$")) 
+	    	return new ResponseEntity<>("올바르지 않은 아이디 형식입니다.", HttpStatus.BAD_REQUEST);    
+	    
+	    if(!userService.searchById(userId)) return new ResponseEntity<>("사용 가능한 아이디입니다.", HttpStatus.OK);    
+	    
+	    return new ResponseEntity<>("이미 사용 중인 아이디입니다.", HttpStatus.BAD_REQUEST);    
 	}
 	
 	// 닉네임 중복 체크 + 형식도 맞는지 체크
 	@PostMapping("/check-duplicate-nickname")
 	@Operation(summary="닉네임 중복 체크", description="형식에 맞는지 확인, 이미 존재하는 닉네임인지 확인")
 	public ResponseEntity<?> checkDuplicateNickname(@RequestParam("nickname") String nickname){
-		if(nickname.matches("^[가-힣a-zA-Z0-9]{2,8}$")){
-			if(!userService.searchByNickname(nickname)) {
-				return new ResponseEntity<>(true, HttpStatus.OK);					
-			}
+		if(!nickname.matches("^[가-힣a-zA-Z0-9]{2,8}$"))
+			return new ResponseEntity<>("올바르지 않은 닉네임 형식입니다.", HttpStatus.BAD_REQUEST);	
+		
+			if(!userService.searchByNickname(nickname)) return new ResponseEntity<>("사용 가능한 닉네임입니다.", HttpStatus.OK);					
+			
 			return new ResponseEntity<>("이미 사용 중인 닉네임입니다.", HttpStatus.BAD_REQUEST);	
-		}
-		return new ResponseEntity<>("올바르지 않은 닉네임 형식입니다.", HttpStatus.BAD_REQUEST);		
+		
 	}
 	
 	// 로그아웃
@@ -108,20 +115,28 @@ public class UserController {
 	@PutMapping("/edit")
 	@Operation(summary="회원 정보 수정", description="형식에 맞는지 확인, 회원가입이랑 동일한 로직")
 	public ResponseEntity<?> edit(@RequestBody User user){
+		String userId = user.getUserId();
 		String password = user.getPassword();
+		String nickname = user.getNickname();
 		String email = user.getEmail();
 		
-		// 아이디, 닉네임 중복 체크가 있어서 비밀번호, 이메일만 체크
-		if(!password.matches("^[a-zA-Za-z0-9!@#$%^&*()._-]{8,16}$")){	
+		// 중복 확인은 따로해서 패스
+		// 아이디 유효성 검사
+		if(!userId.matches("^[a-zA-Z0-9]{6,12}$"))
+			return new ResponseEntity<>("올바르지 않은 아이디 형식입니다.", HttpStatus.BAD_REQUEST);
+		// 비밀번호 유효성 검사
+		if(!password.matches("^[a-zA-Za-z0-9!@#$%^&*()._-]{8,16}$"))
 			return new ResponseEntity<>("올바르지 않은 비밀번호 형식입니다.", HttpStatus.BAD_REQUEST);
-		}
-		if(email.matches("^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")) {
-			if(userService.edit(user) == 1) {
-				return new ResponseEntity<>("회원 정보 수정 완료", HttpStatus.CREATED);				
-			}
-			return new ResponseEntity<>("회원 정보 수정 실패", HttpStatus.BAD_REQUEST);
-		}
-		return new ResponseEntity<>("올바르지 않은 이메일 형식입니다.", HttpStatus.BAD_REQUEST);
+		// 닉네임 유효성 검사
+		if(!nickname.matches("^[가-힣a-zA-Z0-9]{2,8}$"))
+			return new ResponseEntity<>("올바르지 않은 닉네임 형식입니다.", HttpStatus.BAD_REQUEST);
+		// 이메일 유효성 검사	
+		if(!email.matches("^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")) 
+			return new ResponseEntity<>("올바르지 않은 이메일 형식입니다.", HttpStatus.BAD_REQUEST);
+		// 로그인 등록이 잘 됐는지 확인	
+		if(userService.edit(user) == 1) return new ResponseEntity<>("회원 정보 수정 완료", HttpStatus.CREATED);				
+
+		return new ResponseEntity<>("회원 정보 수정 실패", HttpStatus.BAD_REQUEST);
 	}
 	
 	// 전체 확인 테스트용
