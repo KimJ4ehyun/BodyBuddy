@@ -12,7 +12,8 @@
             </div>
             <div id="user">
                 <RouterLink :to="{ name: 'myRoutineList' }">😃</RouterLink> | 
-                <RouterLink :to="{ name: 'login' }">로그인</RouterLink> |
+                <RouterLink v-if="!isLoginFlag" :to="{ name: 'login' }">로그인</RouterLink>
+                <span v-else @click="logout">로그아웃</span> |
                 <RouterLink :to="{ name: 'join' }">회원가입</RouterLink>
             </div>
         </header>
@@ -21,7 +22,24 @@
   </template>
   
   <script setup>
+  import { ref, onMounted } from 'vue'
+  import { useUserStore } from '@/stores/user'
+  const store = useUserStore()
+  let isLoginFlag = ref(false)
+  const isLogin = function(){
+    const nickname = sessionStorage.getItem("nickname")
+    const userId = sessionStorage.getItem("userId")
+    if(userId && nickname) isLoginFlag.value = true
+  }
+
+  const logout = function(){
+    isLoginFlag.value = false
+    store.logout()
+  }
   
+  onMounted(() => {
+    isLogin()
+})
   </script>
   
   <style scoped>

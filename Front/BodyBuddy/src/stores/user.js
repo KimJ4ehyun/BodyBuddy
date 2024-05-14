@@ -7,11 +7,16 @@ const REST_USER_API = `http://localhost:8080/users`
 
 export const useUserStore = defineStore('user', () => {
   
-  const state = reactive({
+  const joinInfo = reactive({
     nickname: '',
     userId: '',
   })
 
+  const loginInfo = reactive({
+    nickname: '',
+    userId: '',
+  })
+  
   const join = function (user) {
     axios({
       url: `${REST_USER_API}/join`,
@@ -27,20 +32,49 @@ export const useUserStore = defineStore('user', () => {
     })
   }
 
-  const loginId = ref('')
   const login = function (user) {
     axios({
       url: `${REST_USER_API}/login`,
       method: 'POST',
       data: user
     })
-    .then(() => {
+    .then((response) => {
+      sessionStorage.setItem('userId', response.data.userId)
+      sessionStorage.setItem('nickname', response.data.nickname)
+      
+      loginInfo.userId = response.data.userId;
+      loginInfo.nickname = response.data.nickname;
       alert("로그인 성공");
-      loginId.value = user.userId;
       router.push({name: 'home'})
     })
-    .catch(() => {
+    .catch((error) => {
+      console.log(error)
       alert("아이디 또는 비밀번호가 일치하지 않습니다");
+    })
+  }
+
+  const logout = function () {
+    axios({
+      url: `${REST_USER_API}/logout`,
+      method: 'POST',
+      withCredentials: true
+    })
+    .then(() => {
+      sessionStorage.removeItem("nickname");
+      sessionStorage.removeItem("userId");
+
+      loginInfo.userId = ''
+      loginInfo.nickname = ''
+      alert("로그아웃 성공");
+      router.push({name: 'home'})
+    })
+    .catch((err) => {
+      sessionStorage.removeItem("nickname");
+      sessionStorage.removeItem("userId");
+
+      loginInfo.userId = ''
+      loginInfo.nickname = ''
+      console.log(err)
     })
   }
 
@@ -54,8 +88,8 @@ export const useUserStore = defineStore('user', () => {
       return response.data
       
     })
-    .catch((response) => {
-      return response.data
+    .catch((error) => {
+      console.log(error)
     })
   }
 
@@ -74,17 +108,19 @@ export const useUserStore = defineStore('user', () => {
   }
 
   const storeNickname = function(nickname){
-    state.nickname = nickname
+    joinInfo.nickname = nickname
   }
 
   const storeUserId = function(userId){
-    state.userId = userId
+    joinInfo.userId = userId
   }
 
   return { 
-    state,
+    joinInfo,
+    loginInfo,
     join, 
     login, 
+    logout,
     checkDuplicateUserId, 
     checkDuplicateNickname,
     storeNickname,
