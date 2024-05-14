@@ -3,6 +3,7 @@ import { defineStore } from 'pinia'
 import axios from 'axios'
 import router from '@/router'
 
+axios.defaults.withCredentials = true;
 const REST_USER_API = `http://localhost:8080/users`
 
 export const useUserStore = defineStore('user', () => {
@@ -56,8 +57,7 @@ export const useUserStore = defineStore('user', () => {
   const logout = function () {
     axios({
       url: `${REST_USER_API}/logout`,
-      method: 'POST',
-      withCredentials: true
+      method: 'POST'
     })
     .then(() => {
       sessionStorage.removeItem("nickname");
@@ -69,11 +69,6 @@ export const useUserStore = defineStore('user', () => {
       router.push({name: 'home'})
     })
     .catch((err) => {
-      sessionStorage.removeItem("nickname");
-      sessionStorage.removeItem("userId");
-
-      loginInfo.userId = ''
-      loginInfo.nickname = ''
       console.log(err)
     })
   }
