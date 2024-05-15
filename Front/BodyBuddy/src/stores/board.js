@@ -1,4 +1,4 @@
-import { ref, computed, reactive } from 'vue'
+import { ref, onMounted,computed, reactive } from 'vue'
 import { defineStore } from 'pinia'
 import axios from 'axios'
 import router from '@/router'
@@ -28,15 +28,15 @@ export const useBoardStore = defineStore('board', () => {
 
     const board = ref({})
 
-    const getBoard = function (routineId) {
+    const getBoard = (async (routineId) => {
         console.log(routineId)
-        axios.get(`${REST_ROUTINE_BOARD_API}/${routineId}`)
+        await axios.get(`${REST_ROUTINE_BOARD_API}/${routineId}`)
             .then((response) => {
                 board.value = response.data
                 // console.log(board.value)
                 // console.log(board.value.routine.routineTitle)
             })
-    }
+    })
 
     return {
         boardList,

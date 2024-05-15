@@ -2,11 +2,13 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import LoginView from '@/views/LoginView.vue'
 import JoinView from '@/views/JoinView.vue'
-import RoutineBoardView from '@/views/RoutineBoardView.vue'
-import BoardList from '@/components/routineBoard/BoardList.vue'
 import PopupNickname from '@/components/popup/PopupNickname.vue'
 import PopupUserId from '@/components/popup/PopupUserId.vue'
+
+import RoutineBoardView from '@/views/RoutineBoardView.vue'
+import BoardList from '@/components/routineBoard/BoardList.vue'
 import BoardDetail from '@/components/routineBoard/BoardDetail.vue'
+
 import MyPageView from '@/views/MyPageView.vue'
 import myRoutine from '@/components/myPage/myRoutine.vue'
 
@@ -55,7 +57,7 @@ const router = createRouter({
           path: ':routineId',
           name: 'boardDetail',
           component: BoardDetail
-        }
+        },
       ]
     },
     {
@@ -64,7 +66,7 @@ const router = createRouter({
       component: MyPageView,
       children: [
         {
-          path: '',
+          path: '/my-routine',
           name: 'myRoutineList',
           component: myRoutine
         }
