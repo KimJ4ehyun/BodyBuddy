@@ -9,6 +9,7 @@ import PopupUserId from '@/components/popup/PopupUserId.vue'
 import BoardDetail from '@/components/routineBoard/BoardDetail.vue'
 import MyPageView from '@/views/MyPageView.vue'
 import myRoutine from '@/components/myPage/myRoutine.vue'
+import ReviewList from '@/components/review/ReviewDetail.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
