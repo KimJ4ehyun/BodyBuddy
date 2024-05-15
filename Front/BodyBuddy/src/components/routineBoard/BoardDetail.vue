@@ -295,6 +295,7 @@
     onMounted(async () => {
         await store.getBoard(route.params.routineId)
         boardLoaded.value = true
+
         exercises.value = store.board.exList
 
         mon1.value = exercises.value.filter(ex => {
@@ -371,19 +372,6 @@
         console.log(rId.value)
     })
 
-
-    // const openExInfo = function(exId) {
-    //     // 팝업 창 크기 및 위치 설정
-    //     const width = 500;
-    //     const height = 400;
-    //     const left = (window.innerWidth - width) / 2;
-    //     const top = (window.innerHeight - height) / 2;
-
-    //     // 팝업 창 열기, index.js에서 설정해놓은 Router로 이동
-    //     const popup = window.open(`/board/${store.board.routine.routineId}/${exId}`, '_blank', `width=${width},height=${height},top=${top},left=${left}`);
-
-    // }
-
     
 
 </script>
@@ -438,6 +426,7 @@
         font-size: 0.8em;
         font-weight: bold;
         color: white;
+        margin-top: 5px;
     }
     table {
         width: 100% !important;

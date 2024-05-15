@@ -11,7 +11,7 @@
                 <RouterLink :to="{ name: 'routineList'}">루틴게시판</RouterLink>
             </div>
             <div id="user">
-                <RouterLink :to="{ name: 'myRoutineList' }">😃</RouterLink> | 
+                <RouterLink :to="{ name: 'myRoutineList' }">마이페이지</RouterLink> | 
                 <RouterLink v-if="!isLoginFlag" :to="{ name: 'login' }">로그인</RouterLink>
                 <span v-else @click="logout">로그아웃</span> |
                 <RouterLink :to="{ name: 'join' }">회원가입</RouterLink>

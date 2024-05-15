@@ -11,6 +11,7 @@ import BoardDetail from '@/components/routineBoard/BoardDetail.vue'
 
 import MyPageView from '@/views/MyPageView.vue'
 import myRoutine from '@/components/myPage/myRoutine.vue'
+import MyRoutineDetail from '@/components/myPage/MyRoutineDetail.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -68,7 +69,14 @@ const router = createRouter({
         {
           path: '/my-routine',
           name: 'myRoutineList',
-          component: myRoutine
+          component: myRoutine,
+          children: [
+            {
+              path: ':routineId',
+              name: 'myRoutine',
+              component: MyRoutineDetail
+            }
+          ]
         }
       ]
     }

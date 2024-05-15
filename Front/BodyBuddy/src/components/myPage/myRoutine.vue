@@ -1,20 +1,28 @@
 <template>
-    <div>
-        <h3>My Routine</h3>
+    <!-- <h3>My Routine</h3> -->
+    
+    <!-- side bar-->
 
-        <div>
-            <div v-for="myRoutine in store.myRoutineList" :key="myRoutine.routineId">
-                <span>{{ myRoutine.routineTitle }}</span>
-            </div>
+    <main>
+        <div class="bar">
+            <span v-for="myRoutine in store.myRoutineList" :key="myRoutine.routineId">
+                <RouterLink :to="`/mypage/my-routine/${myRoutine.routineId}`">
+                    {{ myRoutine.routineTitle }} | 
+                </RouterLink>
+            </span>
         </div>
-        <div>
+        <!-- <div class="myR">
+            <span v-for="myRoutine in store.myRoutineList" :key="myRoutine.routineId">
+                {{ myRoutine.routineTitle }}
+            </span>
+        </div> -->
+        <!-- <MyRoutineDetail /> -->
 
-        </div>
-    </div>
+    </main>
 </template>
 
 <script setup>
-
+    import MyRoutineDetail from '@/components/myPage/MyRoutineDetail.vue'
     import { useMyPageStore } from '@/stores/myPage'
     import { useUserStore } from '@/stores/user'
     import { onMounted } from 'vue';
@@ -23,11 +31,18 @@
     const userStore = useUserStore()
 
     onMounted(() => {
-        store.getMyRoutines(userStore.loginId)
+        store.getMyRoutines()
     })
+
+    console.log(userStore.loginInfo)
 
 </script>
 
 <style scoped>
+    main .bar {
+        border: 1px solid lightgray;
+        width: 60%;
+        margin: 10px auto;
 
+    }
 </style>
