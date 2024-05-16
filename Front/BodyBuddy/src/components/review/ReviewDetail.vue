@@ -6,25 +6,40 @@
             </svg>
             &nbsp;{{ reviewOne.nickname }}
         </p>
-        <p>{{ reviewOne.content }}</p>
+        <p v-if="!reviewUpdateFlag">{{ reviewOne.content }}</p>
+        <input type="text" v-else v-model="reviewOne.content">
         <span class="reviewDate">{{ reviewOne.date }}</span>&nbsp;
         <span>🤍</span>&nbsp;
-        <button type="button" id="delBtn" v-if="sameUser(reviewOne.userId)" @click="deleteReview(reviewOne.reviewId, reviewOne.routineId)" class="btn btn-primary btn-sm">삭제</button>
+        <!-- <span id="editSpan" v-if="sameUser(reviewOne.userId)" @click="updateReview(reviewOne.reviewId, reviewOne.routineId, reviewOne.content)">수정</span>&nbsp; -->
+        <span id="deleteSpan" v-if="sameUser(reviewOne.userId)" @click="deleteReview(reviewOne.reviewId, reviewOne.routineId)">삭제</span>
     </div>
 </template>
 
 <script setup>
-    import { defineProps } from 'vue';
+    import { defineProps, ref } from 'vue';
     const { reviewOne } = defineProps(['reviewOne']);   
 
     import { useReviewStore } from '@/stores/review'
     const store = useReviewStore()
+
+    const reviewUpdateFlag = ref(false)
 
     const sameUser = function(userId) {
         const sessionUser = sessionStorage.getItem('userId')
         if(sessionUser === userId) return true
         return false
     }
+
+    // const updateReview = function(reviewId, routineId, content){
+    //     store.reviewUpdate(reviewId, routineId, content)
+    //         .then(() => {
+    //             // 갱신하기
+    //             store.getReviewList(routineId)
+    //         })
+    //         .catch(error => {
+    //             console.log(error)
+    //         });
+    // }
 
     const deleteReview = function(reviewId, routineId){
         store.reviewDelete(reviewId, routineId)
@@ -50,17 +65,13 @@
     font-size: 0.9em;
   }
 
-  #delBtn {
-    background-color: #7FABB2; /* 버튼 배경색 */
-    color: white; /* 버튼 텍스트 색상 */
-    border: none; /* 테두리 없애기 */
-    cursor: pointer; /* 커서를 포인터로 변경하여 클릭 가능한 상태 표시 */
-    /* width: 40px;   
-    height: 20px;   
-    font-size: 10px; */
-  }
-
   button:hover {
     background-color: #A9DDDE; /* 마우스 호버 시 배경색 변경 */
+  }
+
+  #deleteSpan {
+    cursor: pointer;
+    font-size: 0.8em;
+    color: gray;
   }
 </style>
