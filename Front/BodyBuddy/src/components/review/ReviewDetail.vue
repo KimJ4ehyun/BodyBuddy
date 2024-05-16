@@ -42,7 +42,7 @@
     // }
 
     const deleteReview = function(reviewId, routineId){
-        store.reviewDelete(reviewId, routineId)
+        store.reviewDelete(reviewId)
             .then(() => {
                 // 갱신하기
                 store.getReviewList(routineId)

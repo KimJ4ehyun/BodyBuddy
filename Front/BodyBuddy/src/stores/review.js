@@ -41,8 +41,8 @@ export const useReviewStore = defineStore('review', () => {
   //       });
   // };
 
-  const reviewDelete = function (reviewId, routineId) {
-    return axios.delete(`${REST_REVIEW_API}/${routineId}/delete`, {
+  const reviewDelete = function (reviewId) {
+    return axios.delete(`${REST_REVIEW_API}/delete`, {
         params: {
           reviewId: reviewId
         }

@@ -66,7 +66,6 @@
 .review-list {
   max-height: 400px; /* 원하는 최대 높이 설정 */
   overflow-y: auto; /* 세로 스크롤바 추가 */
-  border: 1px solid #ddd; /* 선택사항: 리뷰 리스트에 테두리 추가 */
   padding: 10px; /* 선택사항: 패딩 추가 */
 }
 

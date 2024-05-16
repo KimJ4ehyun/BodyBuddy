@@ -3,11 +3,11 @@
     <h4>로그인</h4>
       <br>
       <div class="form-floating mb-3">
-        <input type="text" id="userId" class="form-control" v-model="user.userId" placeholder="특수문자 제외 2~8자">
+        <input type="text" id="userId" class="form-control" v-model="user.userId">
         <label for="userId">ID</label>
       </div>
       <div class="form-floating mb-3">
-        <input type="password" id="password" class="form-control" v-model="user.password" placeholder="특수문자 제외 2~8자">
+        <input type="password" id="password" class="form-control" v-model="user.password">
         <label for="password">Password</label>
       </div>
       <br>

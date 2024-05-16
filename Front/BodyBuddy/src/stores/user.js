@@ -68,12 +68,8 @@ export const useUserStore = defineStore('user', () => {
       alert("로그아웃 성공");
       router.push({name: 'home'})
     })
-    .catch(() => {
-      sessionStorage.removeItem("nickname");
-      sessionStorage.removeItem("userId");
-
-      loginInfo.userId = ''
-      loginInfo.nickname = ''
+    .catch((error) => {
+      console.log(error)
       router.push({name: 'home'})
     })
   }

@@ -23,7 +23,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import jakarta.servlet.http.HttpSession;
 
 @RestController
-@RequestMapping("/routine/board/review/{routineId}")
+@RequestMapping("/routine/board/review")
 public class ReviewController {
 
 	private final ReviewService reviewService;
@@ -33,7 +33,7 @@ public class ReviewController {
 	}
 	
 	//루틴에 맞는 리뷰 목록 가져오기
-	@GetMapping
+	@GetMapping("/{routineId}")
 	@Operation(summary="리뷰 목록 가져오기", description="루틴에 맞는 리뷰 목록 가져오기")
 	public ResponseEntity<List<Review>> getReviewList(@PathVariable("routineId") int routineId){
 		List<Review> reviews = reviewService.getReviewList(routineId);
@@ -41,7 +41,7 @@ public class ReviewController {
 	}
 	
 	// 리뷰 등록
-	@PostMapping("/regist")
+	@PostMapping("/{routineId}/regist")
 	@Operation(summary="리뷰 등록", description="리뷰 등록")
 	public ResponseEntity<?> reviewRegist(@RequestBody Review review, @PathVariable("routineId") int routineId, HttpSession session){
 		User user = (User)session.getAttribute("user");
