@@ -2,15 +2,16 @@
     <div>
         <br>
         <p>리뷰 목록</p>
-        <div>
+        <div class="review-list">
             <div
                 v-for="review in store.reviewList"
                 :key="review.reviewId"
             >
-                <ReviewDetail :review-one="review" @delete-success="handleDeleteSuccess(routineId)" />
+                <ReviewDetail :review-one="review" @delete-success="handleDeleteSuccess(routineId)"/>
                 <span>&nbsp;</span>
             </div>
         </div>
+        <span>&nbsp;</span>
         <div class="row">
             <div class="col-md-8">
                 <input type="text" id="inputReview" v-model="review.content" class="form-control" placeholder="리뷰를 입력해주세요.">
@@ -29,6 +30,7 @@
     import { useRoute } from 'vue-router';
 
     const store = useReviewStore()
+    const route = useRoute();
     
     const review = ref({
         routineId: '',
@@ -38,7 +40,6 @@
     })
 
     const reviewRegist = function(content){
-        const route = useRoute();
         const routineId = route.params.routineId
         if(content) {
             store.reviewRegist(review.value, routineId)
@@ -53,7 +54,6 @@
     }
 
     onMounted(() => {
-        const route = useRoute();
         const routineId = route.params.routineId
         store.getReviewList(routineId)
     })
@@ -62,6 +62,14 @@
 </script>
 
 <style scoped>
+
+.review-list {
+  max-height: 400px; /* 원하는 최대 높이 설정 */
+  overflow-y: auto; /* 세로 스크롤바 추가 */
+  border: 1px solid #ddd; /* 선택사항: 리뷰 리스트에 테두리 추가 */
+  padding: 10px; /* 선택사항: 패딩 추가 */
+}
+
 button {
   background-color: #7FABB2; /* 버튼 배경색 */
   color: white; /* 버튼 텍스트 색상 */
@@ -75,5 +83,30 @@ button:disabled {
 
 button:hover {
   background-color: #A9DDDE; /* 마우스 호버 시 배경색 변경 */
+}
+
+/* 반응형 높이 설정 */
+@media (max-width: 1200px) {
+  .review-list {
+    max-height: 300px;
+  }
+}
+
+@media (max-width: 992px) {
+  .review-list {
+    max-height: 250px;
+  }
+}
+
+@media (max-width: 768px) {
+  .review-list {
+    max-height: 200px;
+  }
+}
+
+@media (max-width: 576px) {
+  .review-list {
+    max-height: 150px;
+  }
 }
 </style>

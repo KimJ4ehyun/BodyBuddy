@@ -5,7 +5,8 @@
         <div class="detailContainer">
             <div class="detailBox" v-if="boardLoaded">
                 <div class="timetable">
-                    <table class="table table-bordered">
+                    <TimeTable :exercises="exercises" :isExist="isExist" :randomBrightColor="randomBrightColor" />
+                    <!-- <table class="table table-bordered">
                         <tr>
                             <th></th>
                             <th>월</th>
@@ -216,7 +217,7 @@
                                 </td>
                             </tr>
                         </tbody>
-                    </table>
+                    </table> -->
                 </div>
                 <div class="info">
                     <span class="rTitle">
@@ -234,11 +235,11 @@
 
     </div>
 
-    <!-- <Modal :my-ex="exercises"/> -->
 </template>
 
 <script setup>
     import Modal from '@/components/routineBoard/Modal.vue'
+    import TimeTable from '@/components/routineBoard/TimeTable.vue'
     import { useBoardStore } from '@/stores/board'
     import { onMounted, ref, computed } from 'vue'
     import { useRoute, useRouter } from 'vue-router'
