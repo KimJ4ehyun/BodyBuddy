@@ -68,8 +68,13 @@ export const useUserStore = defineStore('user', () => {
       alert("로그아웃 성공");
       router.push({name: 'home'})
     })
-    .catch((err) => {
-      console.log(err)
+    .catch(() => {
+      sessionStorage.removeItem("nickname");
+      sessionStorage.removeItem("userId");
+
+      loginInfo.userId = ''
+      loginInfo.nickname = ''
+      router.push({name: 'home'})
     })
   }
 
@@ -83,9 +88,7 @@ export const useUserStore = defineStore('user', () => {
       return response.data
       
     })
-    .catch((error) => {
-      console.log(error)
-    })
+    .catch(() => {})
   }
 
   const checkDuplicateNickname = function(nickname){
@@ -97,9 +100,7 @@ export const useUserStore = defineStore('user', () => {
     .then((response) => {
       return response.data
     })
-    .catch((response) => {
-      return response.data
-    })
+    .catch(() => {})
   }
 
   const storeNickname = function(nickname){

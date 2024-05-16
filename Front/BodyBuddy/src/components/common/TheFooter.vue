@@ -1,6 +1,5 @@
 <template>
-    <div>
-        footer
+    <div id="footerBox">
     </div>
   </template>
   
@@ -9,6 +8,5 @@
   </script>
   
   <style scoped>
-  
   </style>
   

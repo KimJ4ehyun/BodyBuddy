@@ -10,6 +10,7 @@ public class Review {
 	private int reviewId;
 	private int routineId;
 	private String userId;
+	private String nickname;
 	private String content;
 	private String date;
 	
