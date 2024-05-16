@@ -21,15 +21,6 @@ export const useMyPageStore = defineStore('myPage', () => {
 
     const myRoutine = ref({})
 
-    // const getMyRoutine = (async (routineId) => {
-    //   console.log(routineId)
-    //   await axios.get(`${REST_MYPAGE_API}/my-routine/${routineId}`)
-    //     .then((response) => {
-    //       myRoutine.value = response.data
-    //       console.log(myRoutine.value)
-    //     })
-    // })
-
     const getMyRoutine = async (routineId) => {
         myRoutine.value = {}; // 초기화
         console.log(`routineID: ${routineId}`);
