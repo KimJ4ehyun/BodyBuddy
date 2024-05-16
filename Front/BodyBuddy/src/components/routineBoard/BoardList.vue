@@ -42,7 +42,7 @@
         background-color: #F0F6F6;
         width: 60%;
         display: flex;
-        flext-direction: row;
+        flex-direction: row;
         margin: 20px auto;
         padding: 10px 20px;
     }

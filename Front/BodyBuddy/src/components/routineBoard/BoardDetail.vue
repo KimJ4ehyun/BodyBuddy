@@ -226,6 +226,8 @@
                     <span class="rWriter">{{ store.board.routine.userId }}</span>
                     <span class="rDesc">{{ store.board.routine.description }}</span>
                     <button class="myAddBtn">내 루틴에 추가</button>
+                    <!-- 재현 추가 (리뷰 목록) -->
+                    <ReviewList />
                 </div>
             </div>
         </div>
@@ -242,7 +244,9 @@
     import { useRoute, useRouter } from 'vue-router'
     import axios from 'axios'
 
-    
+    /* 재현 추가 (리뷰 목록) */
+    import ReviewList from '@/components/review/ReviewList.vue'
+
     const store = useBoardStore()
     const boardLoaded = ref(false)
 

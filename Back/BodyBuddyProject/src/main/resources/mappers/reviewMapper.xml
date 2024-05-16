@@ -11,8 +11,8 @@
 	
 	<!-- 리뷰 등록 -->
 	<insert id="reviewRegist" parameterType="Review">
-		INSERT INTO reviews (routine_id, user_id, content)
-		VALUES (#{routineId}, #{userId}, #{content});
+		INSERT INTO reviews (routine_id, user_id, nickname, content)
+		VALUES (#{routineId}, #{userId}, #{nickname}, #{content});
 	</insert>
 	
 	<!-- 리뷰 수정 -->
