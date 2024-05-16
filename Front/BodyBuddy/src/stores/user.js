@@ -1,5 +1,6 @@
 import { ref, reactive } from 'vue'
 import { defineStore } from 'pinia'
+import { useMyPageStore } from '@/stores/myPage'
 import axios from 'axios'
 import router from '@/router'
 
@@ -17,6 +18,8 @@ export const useUserStore = defineStore('user', () => {
     nickname: '',
     userId: '',
   })
+
+  
   
   const join = function (user) {
     axios({
@@ -33,8 +36,8 @@ export const useUserStore = defineStore('user', () => {
     })
   }
 
-  const login = function (user) {
-    axios({
+  const login = (async (user) => {
+    await axios({
       url: `${REST_USER_API}/login`,
       method: 'POST',
       data: user
@@ -45,6 +48,11 @@ export const useUserStore = defineStore('user', () => {
       
       loginInfo.userId = response.data.userId;
       loginInfo.nickname = response.data.nickname;
+
+      const myPageStore = useMyPageStore();
+      myPageStore.myRoutineList = myPageStore.getMyRoutines()
+      // myPageStore.myRoutine = myPageStore.getMyRoutine()
+
       alert("로그인 성공");
       router.push({name: 'home'})
     })
@@ -52,10 +60,10 @@ export const useUserStore = defineStore('user', () => {
       console.log(error)
       alert("아이디 또는 비밀번호가 일치하지 않습니다");
     })
-  }
+  })
 
-  const logout = function () {
-    axios({
+  const logout = (async () => {
+    await axios({
       url: `${REST_USER_API}/logout`,
       method: 'POST'
     })
@@ -65,18 +73,18 @@ export const useUserStore = defineStore('user', () => {
 
       loginInfo.userId = ''
       loginInfo.nickname = ''
+
+      const myPageStore = useMyPageStore();
+      myPageStore.myRoutineList = {};
+      myPageStore.myRoutine = []
+
       alert("로그아웃 성공");
       router.push({name: 'home'})
     })
     .catch(() => {
-      sessionStorage.removeItem("nickname");
-      sessionStorage.removeItem("userId");
-
-      loginInfo.userId = ''
-      loginInfo.nickname = ''
       router.push({name: 'home'})
     })
-  }
+  })
 
   const checkDuplicateUserId = function(userId){
     return axios({

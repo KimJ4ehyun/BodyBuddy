@@ -5,8 +5,8 @@
         <div class="detailContainer">
             <div class="detailBox" v-if="boardLoaded">
                 <div class="timetable">
-                    <TimeTable :exercises="exercises" :isExist="isExist" :randomBrightColor="randomBrightColor" />
-                    <!-- <table class="table table-bordered">
+                    <!-- <TimeTable :exercises="exercises" :isExist="isExist" :randomBrightColor="randomBrightColor" /> -->
+                    <table class="table table-bordered">
                         <tr>
                             <th></th>
                             <th>월</th>
@@ -217,7 +217,7 @@
                                 </td>
                             </tr>
                         </tbody>
-                    </table> -->
+                    </table>
                 </div>
                 <div class="info">
                     <span class="rTitle">
@@ -303,6 +303,13 @@
 
         exercises.value = store.board.exList
 
+        updateExerciseData();
+
+        rId.value = store.board.routine.routineId;
+        console.log(rId.value)
+    })
+
+    const updateExerciseData = () => {
         mon1.value = exercises.value.filter(ex => {
             return isExist(ex.dayOfTheWeek, ex.time, '월', '오전');
         });
@@ -373,10 +380,7 @@
             return isExist(ex.dayOfTheWeek, ex.time, '일', '저녁');
         });
 
-        rId.value = store.board.routine.routineId;
-        console.log(rId.value)
-    })
-
+    };
     
 
 </script>
@@ -435,6 +439,7 @@
     }
     table {
         width: 100% !important;
+        height: 250px;
     }
     table th {
         text-align: center;
