@@ -12,6 +12,7 @@ import BoardDetail from '@/components/routineBoard/BoardDetail.vue'
 import MyPageView from '@/views/MyPageView.vue'
 import myRoutine from '@/components/myPage/myRoutine.vue'
 import MyRoutineDetail from '@/components/myPage/MyRoutineDetail.vue'
+import LikeList from '@/components/myPage/LikeList.vue'
 
 import ReviewList from '@/components/review/ReviewDetail.vue'
 
@@ -79,6 +80,11 @@ const router = createRouter({
               component: MyRoutineDetail
             }
           ]
+        },
+        {
+          path: 'like',
+          name: 'like',
+          component: LikeList,
         }
       ]
     }
