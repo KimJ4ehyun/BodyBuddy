@@ -2,10 +2,11 @@ package com.bodybuddy.fit.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.ToString;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class Routine {
 	
 	private int routineId;

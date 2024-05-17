@@ -7,7 +7,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,32 +39,47 @@ public class MyPageController {
 	// 루틴 등록하기
 	@PostMapping("/my-routine/regist")
 	@Operation(summary="루틴 등록하기", description="루틴 정보를 등록한다.")
-	public ResponseEntity<Routine> addRoutine(@RequestBody Routine routine, HttpSession session){
-		
-		User loginUser = (User)session.getAttribute("user");
-		
-		String loginId = loginUser.getUserId();
-		
-		routine.setUserId(loginId);
-		rService.addRoutine(routine);
-		
-		return new ResponseEntity<>(routine, HttpStatus.CREATED);
+	public ResponseEntity<?> addRoutine(HttpSession session) {
+	    // 세션에서 사용자 정보 가져오기
+	    User loginUser = (User) session.getAttribute("user");
+	    
+	    if (loginUser == null) {
+	        return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+	    }
+	    
+	    Routine routine = new Routine();
+	    // 루틴 객체 생성 및 사용자 ID 설정
+	    String userId = loginUser.getUserId();
+	    routine.setUserId(userId);
+	    rService.addRoutine(routine);
+	    int routineId = routine.getRoutineId();
+	    // 루틴 등록 서비스 호출
+	    System.out.println(routineId);
+	    	
+	    return new ResponseEntity<>(routineId, HttpStatus.CREATED);	    	
+
 	}
 	
 	
 	// 루틴 등록 - 운동 추가하기
-	@PostMapping("/my-routine/regist/{routine_id}")
+	@PostMapping("/my-routine/regist/{routineId}")
 	@Operation(summary="루틴의 운동 등록하기", description="해당 루틴의 운동 정보를 등록한다.")
-	public ResponseEntity<?> addExercise(@PathVariable("routine_id") int routineId, 
+	public ResponseEntity<?> addExercise(@PathVariable("routineId") int routineId, 
 										@RequestBody Exercise[] exercises) {
-		
+		System.out.println("start");
 		for(Exercise exercise : exercises) {
+			System.out.println("for");
+			System.out.println(exercise);
+			System.out.println("after for");
 			exercise.setRoutineId(routineId);
 			rService.addExercise(exercise);
+			System.out.println("one");
 		}
 		
 		return new ResponseEntity<>(exercises, HttpStatus.CREATED);
 	}
+	
+	// 루틴 수정
 	
 	
 	// 내 루틴 전체 목록 (내 루틴 관리 페이지)

@@ -40,6 +40,15 @@ values ('2', 'yelim123', 'yelim', '최고2', date_format(now(), '%Y%m%d'));
 insert into routines (user_id, routine_title, date, description)
 values ('jaehyun12', 'woww', date_format(now(), '%Y%m%d'), '우와와아아아아ㅏ아ㅏ');
 
+-- 다른 사람 루틴을 추가했을 때
+insert into routines 
+values (0, 'b');
+
+insert into exercises (routine_id, exercise_name, exercise_part, setCnt, weight, repetitions, day_of_the_week, time)
+	(select 2, a, b, g, c, d, e, f from (
+		select exercise_name a, exercise_part b, setCnt g, weight c, repetitions d, day_of_the_week e, time f from exercises where routine_id=1
+	));
+
 select * from users;
 select * from routines;				
 select * from exercises;

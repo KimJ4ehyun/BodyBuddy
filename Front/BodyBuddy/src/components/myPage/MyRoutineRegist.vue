@@ -14,8 +14,14 @@
       </button>
     </div>
     <div class="ex-container">
-      <div class="ex-col" v-for="(exercise, index) in filteredExercises" :key="exercise.id">
-        <input type="checkbox" :id="exercise.id" v-model="selectedExercises" :value="exercise" class="ex-check"/>
+      <div class="ex-col" v-for="exercise in filteredExercises" :key="exercise.id">
+        <input 
+          type="checkbox" 
+          :id="exercise.id" 
+          @change="toggleExercise(exercise)" 
+          :checked="selectedExercises.some(e => e.id === exercise.id)" 
+          class="ex-check" 
+        />
         <label :for="exercise.id" class="ex-label">{{ exercise.name }}</label>
       </div>
     </div>
@@ -26,7 +32,7 @@
         <span>{{ exercise.name }}</span>
         <button @click="removeExercise(exercise.id)" class="remove-button">-</button>
       </div>
-      <div >
+      <div>
         <div class="exInfo">
           <div>
             <label>세트</label>
@@ -47,61 +53,83 @@
           <div>
             <label v-for="day in allDays" :key="day">
               <div>
-                <input type="checkbox" :value="day" class="dayCheck"/>{{ day }}
-              </div>
+                <input type="checkbox" :value="day" @change="() => toggleDay(exercise, day)" :checked="exercise.days && exercise.days.includes(day)" class="dayCheck"/> {{ day }}              </div>
             </label>
-            </div>
           </div>
         </div>
         <div>
           <label for="floatingSelectGrid">시간</label>&nbsp;
           <select id="floatingSelectGrid" class="timeInput" v-model="exercise.time">
-            <option value="1">오전</option>
-            <option value="2">오후</option>
-            <option value="3">저녁</option>
+            <option value="">시간 선택</option>
+            <option value="오전">오전</option>
+            <option value="오후">오후</option>
+            <option value="저녁">저녁</option>
           </select>
         </div>
       </div>
     </div>
+    <div>
+      <button type="button" v-if="isFormValid" id="registBtn" class="btn btn-primary" @click="store.addExercises(route.params.routineId, selectedExercises)">등록하기</button>
+    </div>
+  </div>
 </template>
 
-<script>
-import { exercises } from '@/data/exercises.js'
+<script setup>
+import { ref, computed } from 'vue';
+import { exercises } from '@/data/exercises.js';
+import { useMyPageStore } from '@/stores/myPage'
+import { useRoute } from 'vue-router';
 
-export default {
-  data() {
-    return {
-      search: '',
-      selectedPart: '',
-      selectedExercises: [],
-      exercises, 
-      parts: ['하체', '가슴', '등', '어깨', '팔', '복근', '유산소'],
-      allDays: ['월', '화', '수', '목', '금', '토', '일'],
-    };
-  },
-  computed: {
-    filteredExercises() {
-      return this.exercises.filter(exercise => exercise.part === this.selectedPart && exercise.name.includes(this.search));
-    },
-  },
-  methods: {
-    addExercise(exercise) {
-      if (!this.selectedExercises.some(e => e.id === exercise.id)) {
-        this.selectedExercises.push({
-          // ...exercise,
-          exercise,
-          days: [],
-          sets: 1, // Default values can be adjusted
-          weight: 0,
-          reps: 0,
-          time: ''
-        });
-      }
-    },
-    removeExercise(id) {
-      this.selectedExercises = this.selectedExercises.filter(exercise => exercise.id !== id);
-    },
-  },
+const route = useRoute()
+const store = useMyPageStore()
+
+const search = ref('');
+const selectedPart = ref('');
+const selectedExercises = ref([]);
+const parts = ['하체', '가슴', '등', '어깨', '팔', '복근', '유산소'];
+const allDays = ['월', '화', '수', '목', '금', '토', '일'];
+
+const filteredExercises = computed(() => {
+  return exercises.filter(exercise => exercise.part === selectedPart.value && exercise.name.includes(search.value));
+});
+
+const isFormValid = computed(() => {
+  return selectedExercises.value.length > 0 && selectedExercises.value.every(exercise => exercise.days.length > 0 && exercise.time !== '');
+});
+
+const addExercise = (exercise) => {
+  if (!selectedExercises.value.some(e => e.id === exercise.id)) {
+    selectedExercises.value.push({
+      ...exercise,
+      days: [],
+      sets: 0,
+      weight: 0,
+      reps: 0,
+      time: ''
+    });
+  }
+};
+
+const removeExercise = (id) => {
+  selectedExercises.value = selectedExercises.value.filter(exercise => exercise.id !== id);
+};
+
+const toggleExercise = (exercise) => {
+  const index = selectedExercises.value.findIndex(e => e.id === exercise.id);
+  if (index === -1) {
+    addExercise(exercise);
+  } else {
+    removeExercise(exercise.id);
+  }
+};
+
+const toggleDay = (exercise, day) => {
+  const index = exercise.days.indexOf(day);
+  if (index === -1) {
+    exercise.days.push(day);
+  } else {
+    exercise.days.splice(index, 1);
+  }
 };
 </script>
 
@@ -123,18 +151,16 @@ h2 {
   margin-bottom: 20px;
 }
 
-.search {
-  display: flex;
-  margin-bottom: 20px;
-}
-
 .exInput {
-  flex-grow: 1;
-  margin-right: 10px;
+  width: calc(100% - 20px);
+  margin: 10px auto;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  margin-bottom: 15px;
+}
+
+.partBtns {
+  margin: 15px 0;
 }
 
 .partBtn {
@@ -213,4 +239,19 @@ h2 {
   margin-left: 30px;
 }
 
+#registBtn {
+  background-color: #7FABB2;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+#registBtn:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+#registBtn:hover {
+  background-color: #A9DDDE;
+}
 </style>
