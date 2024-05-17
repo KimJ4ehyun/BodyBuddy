@@ -13,7 +13,7 @@ CREATE TABLE `users` (
 CREATE TABLE `routines` (
     `routine_id`  INT AUTO_INCREMENT PRIMARY KEY,
 	`user_id` VARCHAR(20) NOT NULL,
-    `routine_title` VARCHAR(50) NOT NULL,
+    `routine_title` VARCHAR(50) DEFAULT '제목 없음',
     `date` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     `description` TEXT,
 	FOREIGN KEY(user_id) REFERENCES users(user_id) ON DELETE CASCADE

@@ -31,9 +31,9 @@
 	</select>
 	
 	<!-- 루틴 등록 -->
-	<insert id="insertRoutine" parameterType="Routine">
-		INSERT INTO routines (user_id, routine_title, description)
-		VALUES (#{userId}, #{routineTitle}, #{description})
+	<insert id="insertRoutine" parameterType="Routine" useGeneratedKeys="true" keyProperty="routineId">
+    	INSERT INTO routines (user_id)
+    	VALUES (#{userId})
 	</insert>
 	
 	<!-- 루틴 등록 - 운동 등록 -->

@@ -12,12 +12,12 @@
             </span>
             <!-- 나중에 type 수정하기 -->
             <div class="btn-class">
-                <RouterLink :to="{ name: 'myRoutineRegist' }"  type="button" class="regBtn">루틴 등록하기</RouterLink>
+                <button @click="store.addRoutine()" type="button" class="regBtn">루틴 등록하기</button>
             </div>
         </div>
         <div class="bar noRoutine" v-else>
             <div class="btn-class">
-                <RouterLink :to="{ name: 'myRoutineRegist' }" type="button" class="regBtn">루틴 등록하기</RouterLink>
+                <button type="button" @click="store.addRoutine()" class="regBtn">루틴 등록하기</button>
             </div>
             <hr>
             내 루틴이 없습니다.
@@ -35,6 +35,7 @@
     import { useUserStore } from '@/stores/user'
     import { onMounted, nextTick } from 'vue';
     import { useRouter } from 'vue-router'
+
 
     const store = useMyPageStore()
     const userStore = useUserStore()
