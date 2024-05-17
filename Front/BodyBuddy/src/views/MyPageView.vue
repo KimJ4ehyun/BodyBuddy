@@ -14,14 +14,11 @@
             </span>
 
         </div>
-        <RouterView />
-        <MyRoutineRegist />
-        
+        <RouterView />        
     </div>
 </template>
 
 <script setup>
-    import MyRoutineRegist from '@/components/myPage/MyRoutineRegist.vue'
 
 </script>
 
