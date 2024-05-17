@@ -10,19 +10,26 @@
         <span class="rDate">{{ boardOne.date }}</span>
         <span class="rReview"></span>
     </p>
-    <span class="heart">🤍</span>
+    <span class="heart" @click="wishStore.addWish(boardOne.routineId)">🤍</span>
 
 </template>
 
 <script setup>
     import { useBoardStore } from '@/stores/board'
+    import { useUserStore } from '@/stores/user';
+    import { useWishStore } from '@/stores/wish';
     import { onMounted } from 'vue';
 
     const store = useBoardStore()
+    const wishStore = useWishStore()
+    const userStore = useUserStore()
 
     defineProps({
         boardOne: Object
     })
+
+    // 하트 클릭하면 찜하기 상태 변경
+   
     
 </script>
 
@@ -49,5 +56,8 @@
         width: 10%;
         font-size: 1.2em;
         text-align: right;
+    }
+    .heart:hover {
+        cursor: pointer;
     }
 </style>
