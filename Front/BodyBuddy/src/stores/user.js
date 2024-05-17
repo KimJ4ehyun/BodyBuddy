@@ -82,6 +82,8 @@ export const useUserStore = defineStore('user', () => {
       router.push({name: 'home'})
     })
     .catch(() => {
+      loginInfo.userId = ''
+      loginInfo.nickname = ''
       router.push({name: 'home'})
     })
   })

@@ -46,9 +46,11 @@
           <label>요일</label>
           <div>
             <label v-for="day in allDays" :key="day">
-              <input type="checkbox" :value="day" v-model="exercise.days" class="dayCheck"/>
-              {{ day }}
+              <div>
+                <input type="checkbox" :value="day" class="dayCheck"/>{{ day }}
+              </div>
             </label>
+            </div>
           </div>
         </div>
         <div>
@@ -61,7 +63,6 @@
         </div>
       </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -87,7 +88,8 @@ export default {
     addExercise(exercise) {
       if (!this.selectedExercises.some(e => e.id === exercise.id)) {
         this.selectedExercises.push({
-          ...exercise,
+          // ...exercise,
+          exercise,
           days: [],
           sets: 1, // Default values can be adjusted
           weight: 0,

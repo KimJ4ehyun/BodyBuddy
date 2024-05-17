@@ -12,12 +12,12 @@
             </span>
             <!-- 나중에 type 수정하기 -->
             <div class="btn-class">
-                <button type="button" class="regBtn">루틴 등록하기</button>
+                <RouterLink :to="{ name: 'myRoutineRegist' }"  type="button" class="regBtn">루틴 등록하기</RouterLink>
             </div>
         </div>
         <div class="bar noRoutine" v-else>
             <div class="btn-class">
-                <button type="button" class="regBtn">루틴 등록하기</button>
+                <RouterLink :to="{ name: 'myRoutineRegist' }" type="button" class="regBtn">루틴 등록하기</RouterLink>
             </div>
             <hr>
             내 루틴이 없습니다.

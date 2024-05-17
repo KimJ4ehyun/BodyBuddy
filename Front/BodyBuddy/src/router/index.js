@@ -13,8 +13,7 @@ import MyPageView from '@/views/MyPageView.vue'
 import myRoutine from '@/components/myPage/myRoutine.vue'
 import MyRoutineDetail from '@/components/myPage/MyRoutineDetail.vue'
 import LikeList from '@/components/myPage/LikeList.vue'
-
-import ReviewList from '@/components/review/ReviewDetail.vue'
+import MyRoutineRegist from '@/components/myPage/MyRoutineRegist.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -78,8 +77,13 @@ const router = createRouter({
               path: ':routineId',
               name: 'myRoutine',
               component: MyRoutineDetail
-            }
+            },
           ]
+        },
+        {
+          path: '/regist',
+          name: 'myRoutineRegist',
+          component: MyRoutineRegist
         },
         {
           path: 'like',
