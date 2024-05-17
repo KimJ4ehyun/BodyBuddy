@@ -3,6 +3,7 @@ import { defineStore } from 'pinia'
 import { useMyPageStore } from '@/stores/myPage'
 import axios from 'axios'
 import router from '@/router'
+import { useWishStore } from './wish'
 
 axios.defaults.withCredentials = true;
 const REST_USER_API = `http://localhost:8080/users`
@@ -53,6 +54,9 @@ export const useUserStore = defineStore('user', () => {
       myPageStore.myRoutineList = myPageStore.getMyRoutines()
       // myPageStore.myRoutine = myPageStore.getMyRoutine()
 
+      const wishStore = useWishStore();
+      wishStore.wishList = wishStore.getwishList()
+
       alert("로그인 성공");
       router.push({name: 'home'})
     })
@@ -77,6 +81,9 @@ export const useUserStore = defineStore('user', () => {
       const myPageStore = useMyPageStore();
       myPageStore.myRoutineList = {};
       myPageStore.myRoutine = []
+
+      const wishStore = useWishStore()
+      wishStore.wishList = [];
 
       alert("로그아웃 성공");
       router.push({name: 'home'})

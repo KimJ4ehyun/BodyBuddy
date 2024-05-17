@@ -10,7 +10,11 @@
         <span class="rDate">{{ boardOne.date }}</span>
         <span class="rReview"></span>
     </p>
-    <span class="heart" @click="wishStore.addWish(boardOne.routineId)">🤍</span>
+    <span class="heart" @click="checkWish()">
+         <!-- 찜 목록에 있으면 파란 하트, 없으면 흰 하트 -->
+         <span v-if="isWished">💙</span>
+        <span v-else>🤍</span>
+    </span>
 
 </template>
 
@@ -18,17 +22,37 @@
     import { useBoardStore } from '@/stores/board'
     import { useUserStore } from '@/stores/user';
     import { useWishStore } from '@/stores/wish';
-    import { onMounted } from 'vue';
+    import { computed, onMounted } from 'vue';
 
     const store = useBoardStore()
     const wishStore = useWishStore()
     const userStore = useUserStore()
 
-    defineProps({
+    const { boardOne } = defineProps({
         boardOne: Object
     })
 
+    // console.log(props)
+
     // 하트 클릭하면 찜하기 상태 변경
+    //  찜한 아이템인지 확인하는 computed 속성
+     const isWished = computed(() => {
+        return wishStore.wishList.some(item =>
+            item.routineId === boardOne.routineId && item.userId === userStore.loginInfo.userId
+        );
+    });
+
+    // console.log(props.routineId)
+    // console.log(isWished)
+
+    // 클릭 이벤트 핸들러
+    const checkWish = (() => {
+        if (isWished) {
+            wishStore.delWish(boardOne.routineId);
+        } else {
+            wishStore.addWish(boardOne.routineId);
+        }
+    })
    
     
 </script>
