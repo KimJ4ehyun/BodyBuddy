@@ -1,11 +1,14 @@
 package com.bodybuddy.fit.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,7 +50,7 @@ public class WishController {
 		wish.setUserId(loginId);
 		
 		int check = wService.wishCheck(wish);
-		
+		System.out.println("wishCheck"+check);
 		int n = 0;
 		
 		// 찜이 되어있지 않은 상태이면 찜 추가
@@ -61,7 +64,7 @@ public class WishController {
 
 
 	// 찜 해제
-	@GetMapping("/delete-heart/{routine_id}")
+	@DeleteMapping("/delete-heart/{routine_id}")
 	public ResponseEntity<?> delWish(@PathVariable("routine_id") int routineId, HttpSession session){
 		Map<String, Integer> map = new HashMap<>();
 		
@@ -84,8 +87,21 @@ public class WishController {
 		
 		map.put("result", n);
 		
+		System.out.println("해제: "+n);
 		return new ResponseEntity<>(map, HttpStatus.CREATED);
 	}
 	
+	// 찜 목록 불러오기
+	@GetMapping("/wishList")
+	public ResponseEntity<?>wishList(HttpSession session) {
+		
+		User loginUser = (User)session.getAttribute("user");
+		String loginId = loginUser.getUserId();
+		
+		List<Wish> wishList = wService.wishList(loginId);
+		
+		System.out.println(wishList);
+		return new ResponseEntity<>(wishList, HttpStatus.OK);
+	}
 	
 }
