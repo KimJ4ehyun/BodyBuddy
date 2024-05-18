@@ -32,50 +32,61 @@ export const useMyPageStore = defineStore('myPage', () => {
     const addRoutine = function() {
       axios.post(`${REST_MYPAGE_API}/my-routine/regist`)
         .then((response) => {
-          console.log()
           const routineId = response.data
           router.push(`/mypage/regist/${routineId}`)
-          //router.push(`/mypage/regist/${routineId}`)
         })
         .catch((error) => {
           console.log(error)
         })
     }
 
-    const addExercises = function(routineId, exercises) {
-      console.log("routineId " + routineId)
-      console.log("exercises " + exercises)
-      exercises.forEach(exercise => {
-        exercise.exerciseName = exercise.name;
-        exercise.exercisePart = exercise.part;
-        exercise.repetitions = exercise.reps;
-        exercise.setCnt = exercise.sets;
-        exercise.dayOfTheWeek = exercise.days;
-        delete exercise.name;
-        delete exercise.part;
-        delete exercise.reps;
-        delete exercise.sets;
-        delete exercise.days;
-        console.log(exercise);
+    const deleteRoutine = async (routineId) => {
+      await axios.delete(`${REST_MYPAGE_API}/my-routine/${routineId}`)
+      .then(() => {
+        getMyRoutines()
+        router.push({ name: 'myRoutineList' });
+      })
+      .catch((error) => {
+        console.error(error);
       });
+    };
+
+    const addExercises = function(routineId, exercises, routineTitle, description) {
       axios.post(`${REST_MYPAGE_API}/my-routine/regist/${routineId}`, exercises)
-        .then((response) => {
-          console.log(response.data)
+        .then(() => {
+          updateText(routineId, routineTitle, description)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    }
+
+    // null 빼면 데이터 똑바로 안 감
+    const updateText = function(routineId, routineTitle, description) {
+      axios.put(`${REST_MYPAGE_API}/my-routine/regist/${routineId}`, null, {
+        params: {
+          routineTitle: routineTitle,
+          description: description
+        }
+      })
+        .then(() => {
           router.push(`/my-routine`)
         })
         .catch((error) => {
+          console.log("안되는 이유가 뭘까나?")
           console.log(error)
         })
     }
   
-
     return {
       myRoutineList,
       getMyRoutines,
       myRoutine,
       getMyRoutine,
       addRoutine,
+      deleteRoutine,
       addExercises,
+      updateText,
     }
 
 })

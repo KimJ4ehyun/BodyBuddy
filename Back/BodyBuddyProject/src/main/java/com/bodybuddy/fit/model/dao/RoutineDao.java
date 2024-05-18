@@ -20,11 +20,17 @@ public interface RoutineDao {
 	// 루틴 상세보기
 	Routine selectOne(int routineId);
 	
-	// 루틴 등록
+	// 1. 루틴 등록
 	int insertRoutine(Routine routine);
 	
-	// 루틴 등록 - 운동 등록
+	// 2. 루틴 등록 - 운동 등록
 	int insertExercise(Exercise exercise);
+
+	// 3. 루틴 수정 - 제목, 내용 추가 (루틴 처음 만들 떄 사용)
+	int updateText(Map<String, Object> map);
+	
+	// 루틴 삭제
+	int deleteRoutine(int routineId);
 	
 	// 내 루틴에 추가
 	
