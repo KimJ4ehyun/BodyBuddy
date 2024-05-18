@@ -10,7 +10,7 @@
         <span class="rDate">{{ boardOne.date }}</span>
         <span class="rReview"></span>
     </p>
-    <span class="heart" @click="checkWish()">
+    <span class="heart" @click="checkWish(boardOne.routineId)">
          <!-- 찜 목록에 있으면 파란 하트, 없으면 흰 하트 -->
          <span v-if="isWished">💙</span>
         <span v-else>🤍</span>
@@ -22,7 +22,7 @@
     import { useBoardStore } from '@/stores/board'
     import { useUserStore } from '@/stores/user';
     import { useWishStore } from '@/stores/wish';
-    import { computed, onMounted } from 'vue';
+    import { computed, onMounted, ref } from 'vue';
 
     const store = useBoardStore()
     const wishStore = useWishStore()
@@ -32,27 +32,27 @@
         boardOne: Object
     })
 
-    // console.log(props)
+    console.log(boardOne)
+    const isWished = ref(false)
 
-    // 하트 클릭하면 찜하기 상태 변경
-    //  찜한 아이템인지 확인하는 computed 속성
-     const isWished = computed(() => {
-        return wishStore.wishList.some(item =>
+    // 컴포넌트가 마운트될 때 현재 찜 상태를 확인
+    onMounted(() => {
+        isWished.value = wishStore.wishList.some(item =>
             item.routineId === boardOne.routineId && item.userId === userStore.loginInfo.userId
         );
     });
 
-    // console.log(props.routineId)
-    // console.log(isWished)
-
     // 클릭 이벤트 핸들러
-    const checkWish = (() => {
-        if (isWished) {
-            wishStore.delWish(boardOne.routineId);
+    const checkWish = (routineId) => {
+        // 현재 찜 상태를 바탕으로 조건을 체크하고 찜 상태를 변경
+        if (isWished.value) {
+            wishStore.delWish(routineId);
+            isWished.value = false;  // 상태 업데이트
         } else {
-            wishStore.addWish(boardOne.routineId);
+            wishStore.addWish(routineId);
+            isWished.value = true;  // 상태 업데이트
         }
-    })
+    }
    
     
 </script>

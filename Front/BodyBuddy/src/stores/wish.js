@@ -11,7 +11,7 @@ export const useWishStore = defineStore('wish', () => {
 
     const wishList = ref([])
 
-    const getwishList = ((userId) => {
+    const getwishList = (() => {
         axios.get(`${REST_WISH_API}/wishList`)
             .then((response) => {
                 console.log(response.data)
