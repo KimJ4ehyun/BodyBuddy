@@ -5,7 +5,7 @@
            
             <div class="likeBox" v-for="wish in wRoutines" :key="wish.wishId">
                 <BoardListOne :board-one="wish.boardInfo" />
-                <button class="addBtn">내 루틴에 추가</button>
+                <button class="addBtn" @click="boardStore.addMyRoutine(wish.boardInfo.routineId)">내 루틴에 추가</button>
             </div>
         </div>
     </div>
@@ -21,38 +21,25 @@
     const store = useWishStore()
     const boardStore = useBoardStore()
 
-    // console.log(store.wishList)
-    // onMounted (() => {
-    //     store.getwishList()
-    // })
-
-    // onMounted(async () => {
-    //     await Promise.all(store.wishList.map(async wish => {
-    //         await boardStore.getBoard(wish.routineId);
-    //         wish.boardInfo = boardStore.board;  // 각 wish에 board 정보 추가
-    //     }));
-    // });
-
     const wRoutines = ref([])
     const isLoading = ref(false);
 
-    // 찜한 루틴 정보를 가져오는 함수
+    // 찜한 루틴 정보를 가져오기
     const isWish = (async () => {
-          // boardList를 새로 가져오는 함수 호출
         wRoutines.value = store.wishList.map(wish => {
             const boardInfo = boardStore.boardList.find(board => board.routineId === wish.routineId);
             return {
                 ...wish,
-                boardInfo: boardInfo  // `boardInfo`를 `wish` 객체에 추가
+                boardInfo: boardInfo
             };
-        }).filter(wish => wish.boardInfo);  // `boardInfo`가 있는 `wish`만 필터링
+        }).filter(wish => wish.boardInfo);
     });
 
     onMounted(async () => {
         await boardStore.getBoardList();
-        await isWish();  // 초기 데이터 로드
+        await isWish();
         console.log(wRoutines.value)
-        isLoading.value = true;  // 로딩 상태 업데이트
+        isLoading.value = true; 
     });
 
 

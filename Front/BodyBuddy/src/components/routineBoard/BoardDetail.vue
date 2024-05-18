@@ -230,7 +230,7 @@
                     </span>
                     <span class="rWriter">{{ store.board.routine.userId }}</span>
                     <span class="rDesc">{{ store.board.routine.description }}</span>
-                    <button class="myAddBtn">내 루틴에 추가</button>
+                    <button class="myAddBtn" @click="store.addMyRoutine(store.board.routine.routineId)">내 루틴에 추가</button>
                     <!-- 재현 추가 (리뷰 목록) -->
                     <ReviewList />
                 </div>
@@ -479,7 +479,7 @@ import { useUserStore } from '@/stores/user'
         vertical-align: middle;
         text-align: center;
         font-size: 0.9em;
-        width: 13%;
+        width: 12%;
     }
 
     td div {

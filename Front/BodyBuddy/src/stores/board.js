@@ -2,6 +2,7 @@ import { ref, onMounted,computed, reactive } from 'vue'
 import { defineStore } from 'pinia'
 import axios from 'axios'
 import router from '@/router'
+import { useMyPageStore } from './myPage'
 
 const REST_ROUTINE_BOARD_API = `http://localhost:8080/routine/board`
 
@@ -38,6 +39,22 @@ export const useBoardStore = defineStore('board', () => {
             })
     })
 
+
+    const addMyRoutine = (async (routineId) => {
+        await axios.get(`${REST_ROUTINE_BOARD_API}/my-routine/add`, {
+            params: {
+                routineId: routineId
+            }
+        })
+            .then((response) => {
+                const myStore = useMyPageStore()
+                myStore.myRoutineList = response.data
+                console.log(response.data)
+
+                alert("내 루틴에 추가되었습니다.")
+            })
+    })
+
     return {
         boardList,
         getBoardList,
@@ -45,7 +62,7 @@ export const useBoardStore = defineStore('board', () => {
         getExerciseList,
         board,
         getBoard,
-        
+        addMyRoutine,
     }
 },
 {
