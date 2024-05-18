@@ -89,4 +89,8 @@ export const useMyPageStore = defineStore('myPage', () => {
       updateText,
     }
 
-})
+},
+{
+  persist: true
+}
+)

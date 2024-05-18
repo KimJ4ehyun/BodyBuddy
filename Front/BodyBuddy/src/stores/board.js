@@ -47,4 +47,8 @@ export const useBoardStore = defineStore('board', () => {
         getBoard,
         
     }
-})
+},
+{
+  persist: true
+}
+)

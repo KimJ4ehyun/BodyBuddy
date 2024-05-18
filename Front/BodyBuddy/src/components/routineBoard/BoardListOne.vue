@@ -1,8 +1,8 @@
 <template>
     <p class="contents">     
-        <span>
+        <!-- <span>
             {{ boardOne.routineId }}
-        </span>           
+        </span>            -->
         <span class="rTitle">
             <RouterLink :to="`/board/${boardOne.routineId}`">{{ boardOne.routineTitle }}</RouterLink>
         </span>
@@ -68,9 +68,21 @@
     .contents span {
         margin-bottom: 10px;
     }
+    .contents a {
+        text-decoration: none;
+        
+        color: #324B4F;
+    }
+    .contents a:hover {
+        text-decoration: underline;
+        color: #7FABB2;
+    }
     .rTitle {
         font-weight: bold;
         font-size: 1.4em;
+    }
+    .rWriter {
+        color: gray;
     }
     .rDate {
         font-size: 0.9em;

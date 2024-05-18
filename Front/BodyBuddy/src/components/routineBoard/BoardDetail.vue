@@ -222,7 +222,11 @@
                 <div class="info">
                     <span class="rTitle">
                         {{ store.board.routine.routineTitle }}
-                        <span class="heart">🤍</span>
+                        <span class="heart" @click="checkWish(store.board.routine.routineId)">
+                            <!-- 찜 목록에 있으면 파란 하트, 없으면 흰 하트 -->
+                            <span v-if="isWished">💙</span>
+                            <span v-else>🤍</span>
+                        </span>
                     </span>
                     <span class="rWriter">{{ store.board.routine.userId }}</span>
                     <span class="rDesc">{{ store.board.routine.description }}</span>
@@ -241,14 +245,19 @@
     import Modal from '@/components/routineBoard/Modal.vue'
     import TimeTable from '@/components/routineBoard/TimeTable.vue'
     import { useBoardStore } from '@/stores/board'
+    import { useWishStore } from '@/stores/wish'
     import { onMounted, ref, computed } from 'vue'
     import { useRoute, useRouter } from 'vue-router'
     import axios from 'axios'
 
     /* 재현 추가 (리뷰 목록) */
     import ReviewList from '@/components/review/ReviewList.vue'
+import { useUserStore } from '@/stores/user'
 
     const store = useBoardStore()
+    const wishStore = useWishStore()
+    const userStore = useUserStore()
+
     const boardLoaded = ref(false)
 
     const route = useRoute()
@@ -264,6 +273,20 @@
         let color_b = Math.floor(Math.random() * 127 + 128).toString(16);
         return `#${color_r+color_g+color_b}`;
     }
+
+    // 클릭 이벤트 핸들러
+    const checkWish = (routineId) => {
+        // 현재 찜 상태를 바탕으로 조건을 체크하고 찜 상태를 변경
+        if (isWished.value) {
+            wishStore.delWish(routineId);
+            isWished.value = false;  // 상태 업데이트
+        } else {
+            wishStore.addWish(routineId);
+            isWished.value = true;  // 상태 업데이트
+        }
+    }
+
+    const isWished = ref(false)
 
     const exercises = ref([])
 
@@ -300,6 +323,10 @@
     onMounted(async () => {
         await store.getBoard(route.params.routineId)
         boardLoaded.value = true
+
+        isWished.value = wishStore.wishList.some(item =>
+            item.routineId === store.board.routine.routineId && item.userId === userStore.loginInfo.userId
+        );
 
         exercises.value = store.board.exList
 
@@ -393,6 +420,7 @@
         display: flex;
         flex-direction: row;
         padding: 10px;
+        margin-bottom: 100px;
     }
 
     .detailBox .timetable {
@@ -471,5 +499,7 @@
     .isExist span:hover {
         cursor: pointer;
     }
-
+    .heart:hover {
+        cursor: pointer;
+    }
 </style>

@@ -44,11 +44,11 @@
     onMounted(() => {
         store.getMyRoutines()
         if (store.myRoutineList.length > 0) {
-        // 첫 번째 루틴의 상세 페이지로 리다이렉트
-        nextTick(() => {
-            router.push(`/my-routine/${store.myRoutineList[0].routineId}`);
-        })
-    }
+            // 첫 번째 루틴의 상세 페이지로 리다이렉트
+            nextTick(() => {
+                router.push(`/my-routine/${store.myRoutineList[0].routineId}`);
+            })
+        }
     })
 
     console.log(userStore.loginInfo)
