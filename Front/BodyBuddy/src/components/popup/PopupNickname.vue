@@ -57,15 +57,11 @@ const checkNicknameValid = function(nickname){
     .then((isNotDuplicate) => {
       if (isNotDuplicate) {
         nicknameFlag.value = 5;
-        alert('사용 가능한 닉네임입니다.');
       } else {
         nicknameFlag.value = 4;
-        alert('이미 사용 중인 닉네임입니다.');
       }
     })
-    .catch((error) => {
-      console.error('에러 발생:', error);
-    });
+    .catch(() => {});
 }
 
 const closeWindow = function(nickname)  {

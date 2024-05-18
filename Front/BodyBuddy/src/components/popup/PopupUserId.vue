@@ -58,15 +58,11 @@ const checkUserIdValid = function(userId){
     .then((isNotDuplicate) => {
       if (isNotDuplicate) {
         userIdFlag.value = 5;
-        alert('사용 가능한 아이디입니다.');
       } else {
         userIdFlag.value = 4;
-        alert('이미 사용 중인 아이디입니다.');
       }
     })
-    .catch((error) => {
-      console.error('에러 발생:', error);
-    });
+    .catch(() => {});
 }
 
 const closeWindow = function(userId)  {

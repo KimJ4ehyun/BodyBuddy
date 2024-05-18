@@ -117,16 +117,22 @@ public class UserController {
 	// 회원 정보 수정
 	@PutMapping("/edit")
 	@Operation(summary = "회원 정보 수정", description = "형식에 맞는지 확인, 회원가입이랑 동일한 로직")
-	public ResponseEntity<?> edit(@RequestBody User user) {
+	public ResponseEntity<?> edit(@RequestBody User user, HttpSession httpSession) {
+		System.out.println(user);
 		String userId = user.getUserId();
 		String password = user.getPassword();
 		String nickname = user.getNickname();
 		String email = user.getEmail();
+		
+		User loginUser = (User) httpSession.getAttribute("user");
+		String loginUserId = loginUser.getUserId();
+		System.out.println(loginUserId);
+		
+		// 프론트 로그인 정보와 백엔드 로그인 정보가 일치하는지 확인
+		if(!userId.equals(loginUserId)) {
+			return new ResponseEntity<>("유저 아이디가 일치하지 않습니다.", HttpStatus.BAD_REQUEST);
+		}
 
-		// 중복 확인은 따로해서 패스
-		// 아이디 유효성 검사
-		if (!userId.matches("^[a-zA-Z0-9]{6,12}$"))
-			return new ResponseEntity<>("올바르지 않은 아이디 형식입니다.", HttpStatus.BAD_REQUEST);
 		// 비밀번호 유효성 검사
 		if (!password.matches("^[a-zA-Za-z0-9!@#$%^&*()._-]{8,16}$"))
 			return new ResponseEntity<>("올바르지 않은 비밀번호 형식입니다.", HttpStatus.BAD_REQUEST);

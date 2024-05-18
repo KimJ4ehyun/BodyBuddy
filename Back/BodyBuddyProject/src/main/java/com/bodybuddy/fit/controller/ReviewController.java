@@ -59,12 +59,13 @@ public class ReviewController {
 	// 리뷰 수정
 	@PutMapping("/update")
 	@Operation(summary="리뷰 수정", description="리뷰 수정")
-	public ResponseEntity<?> reviewUpdate(@RequestBody Review review){
-		System.out.println(review);
-		if(reviewService.reviewUpdate(review) == 1) {
-			return new ResponseEntity<>("리뷰 수정 완료", HttpStatus.OK);
-		}
-		return new ResponseEntity<>("리뷰 수정 실패", HttpStatus.BAD_REQUEST);
+	public ResponseEntity<?> reviewUpdate(@RequestParam("reviewId") int reviewId, @RequestParam("content") String content){
+		System.out.println("reviewId " + reviewId);
+		System.out.println("content " + content);
+		System.out.println(reviewService.reviewUpdate(reviewId, content));
+		return new ResponseEntity<>("리뷰 수정 완료", HttpStatus.OK);
+		
+//		return new ResponseEntity<>("리뷰 수정 실패", HttpStatus.BAD_REQUEST);
 	}
 	
 	// 리뷰 삭제

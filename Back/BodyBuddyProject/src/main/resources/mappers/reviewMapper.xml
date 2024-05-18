@@ -16,7 +16,7 @@
 	</insert>
 	
 	<!-- 리뷰 수정 -->
-	<update id="reviewUpdate" parameterType="Review">
+	<update id="reviewUpdate" parameterType="Map">
 		UPDATE reviews
 		SET content = #{content}
 		WHERE review_id = #{reviewId};

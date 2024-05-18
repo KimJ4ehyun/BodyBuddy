@@ -21,11 +21,11 @@ export const useMyPageStore = defineStore('myPage', () => {
 
     const getMyRoutine = async (routineId) => {
         myRoutine.value = {}; // 초기화
-        console.log(`routineID: ${routineId}`);
+        // console.log(`routineID: ${routineId}`);
         await axios.get(`${REST_MYPAGE_API}/my-routine/${routineId}`)
         .then((response) => {
             myRoutine.value = response.data;
-            console.log(myRoutine.value);
+            // console.log(myRoutine.value);
         });
     };
 
@@ -73,7 +73,6 @@ export const useMyPageStore = defineStore('myPage', () => {
           router.push(`/my-routine`)
         })
         .catch((error) => {
-          console.log("안되는 이유가 뭘까나?")
           console.log(error)
         })
     }

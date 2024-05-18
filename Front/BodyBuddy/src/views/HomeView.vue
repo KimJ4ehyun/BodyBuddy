@@ -29,7 +29,7 @@
                 <span class="mainMyD">
                     내가 하고 싶은 운동을 원하는 요일과 시간에
                     할 수 있도록 시간표로 편하게 관리해요!<br>
-                    <button class="mainMyBtn">루틴 만들기</button>
+                    <button class="mainMyBtn" @click="myPageStore.addRoutine()">루틴 만들기</button>
                 </span>
             </div>
             <div class="mainMyR">
@@ -46,8 +46,10 @@
   
   <script setup>
     import { useUserStore } from '@/stores/user'
+    import { useMyPageStore } from '@/stores/myPage'
 
     const store = useUserStore()
+    const myPageStore = useMyPageStore()
   
   </script>
   

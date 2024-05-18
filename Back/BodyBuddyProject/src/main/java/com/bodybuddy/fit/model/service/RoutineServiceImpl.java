@@ -3,6 +3,7 @@ package com.bodybuddy.fit.model.service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -64,7 +65,7 @@ public class RoutineServiceImpl implements RoutineService {
 	// 3. 루틴 수정 - 제목, 내용 추가 (루틴 처음 만들 떄 사용)
 	@Override
 	public int updateText(int routineId, String routineTitle, String description) {
-		Map<String, Object> map = new HashMap<>();
+		Map<String, Object> map = new ConcurrentHashMap<>();
 		// 루틴 제목을 입력 안 하면 제목 없음으로 생성 
 		if (routineTitle == null) routineTitle = "제목 없음";
 		map.put("routineId", routineId);

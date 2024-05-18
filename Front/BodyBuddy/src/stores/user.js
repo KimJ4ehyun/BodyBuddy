@@ -20,8 +20,6 @@ export const useUserStore = defineStore('user', () => {
     userId: '',
   })
 
-  
-  
   const join = function (user) {
     axios({
       url: `${REST_USER_API}/join`,
@@ -29,11 +27,25 @@ export const useUserStore = defineStore('user', () => {
       data: user
     })
     .then(() => {
-      alert("회원가입 성공");
       router.push({name: 'login'})
     })
-    .catch((err) => {
-      console.log(err)
+    .catch(() => {})
+  }
+
+  const edit = function (user) {
+    axios.put(`${REST_USER_API}/edit`, user)
+    .then(() => {
+      sessionStorage.setItem('nickname', user.nickname)
+      loginInfo.nickname = user.nickname
+      joinInfo.nickname = ''
+      joinInfo.userId = ''
+      router.push({name: 'home'})
+      alert("회원 정보 수정 완료");
+    })
+    .catch((error) => {
+      joinInfo.nickname = ''
+      joinInfo.userId = ''
+      console.log(error)
     })
   }
 
@@ -57,11 +69,9 @@ export const useUserStore = defineStore('user', () => {
       const wishStore = useWishStore();
       wishStore.wishList = wishStore.getwishList()
 
-      alert("로그인 성공");
       router.push({name: 'home'})
     })
-    .catch((error) => {
-      console.log(error)
+    .catch(() => {
       alert("아이디 또는 비밀번호가 일치하지 않습니다");
     })
   })
@@ -85,7 +95,6 @@ export const useUserStore = defineStore('user', () => {
       const wishStore = useWishStore()
       wishStore.wishList = [];
 
-      alert("로그아웃 성공");
       router.push({name: 'home'})
     })
     .catch(() => {
@@ -132,6 +141,7 @@ export const useUserStore = defineStore('user', () => {
     joinInfo,
     loginInfo,
     join, 
+    edit,
     login, 
     logout,
     checkDuplicateUserId, 

@@ -11,6 +11,7 @@
                     내 루틴 관리
                 </RouterLink>
                 <RouterLink :to="{ name: 'like' }">찜 목록</RouterLink>
+                <RouterLink :to="{ name: 'userInfoEdit' }">회원 정보 수정</RouterLink>
             </span>
 
         </div>

@@ -14,6 +14,7 @@
   import MyRoutineDetail from '@/components/myPage/MyRoutineDetail.vue'
   import LikeList from '@/components/myPage/LikeList.vue'
   import MyRoutineRegist from '@/components/myPage/MyRoutineRegist.vue'
+  import UserInfoEdit from '@/components/myPage/UserInfoEdit.vue'
 
   const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -89,7 +90,12 @@
             path: 'like',
             name: 'like',
             component: LikeList,
-          }
+          },
+          {
+            path: '/users/edit',
+            name: 'userInfoEdit',
+            component: UserInfoEdit,
+          },
         ]
       }
     ]
