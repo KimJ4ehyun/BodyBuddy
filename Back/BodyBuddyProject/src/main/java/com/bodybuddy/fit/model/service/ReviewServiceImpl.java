@@ -1,6 +1,8 @@
 package com.bodybuddy.fit.model.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -30,8 +32,11 @@ public class ReviewServiceImpl implements ReviewService {
 
 	// 리뷰 수정
 	@Override
-	public int reviewUpdate(Review review) {
-		return reviewDao.reviewUpdate(review);
+	public int reviewUpdate(int reviewId, String content) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("reviewId", reviewId);
+		map.put("content", content);
+		return reviewDao.reviewUpdate(map);
 	}
 
 	// 리뷰 삭제

@@ -30,7 +30,7 @@
 	<!-- 회원 수정 -->
 	<update id="edit" parameterType="User">
 		UPDATE users
-		SET user_id = #{userId}, password = #{password}, name = #{name}, nickname = #{nickname}, email = #{email}
+		SET password = #{password}, name = #{name}, nickname = #{nickname}, email = #{email}
 		WHERE user_id = #{userId};
 	</update>
 	

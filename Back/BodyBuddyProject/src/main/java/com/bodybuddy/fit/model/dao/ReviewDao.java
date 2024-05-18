@@ -1,6 +1,7 @@
 package com.bodybuddy.fit.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.bodybuddy.fit.model.dto.Review;
 
@@ -10,7 +11,7 @@ public interface ReviewDao {
 	// 리뷰 등록
 	int reviewRegist(Review review);
 	// 리뷰 수정
-	int reviewUpdate(Review review);
+	int reviewUpdate(Map<String, Object> map);
 	// 리뷰 삭제
 	int reviewDelete(int reviewId);
 }

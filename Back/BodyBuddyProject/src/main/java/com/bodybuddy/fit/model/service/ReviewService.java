@@ -10,7 +10,7 @@ public interface ReviewService {
 	// 리뷰 등록
 	int reviewRegist(Review review);
 	// 리뷰 수정
-	int reviewUpdate(Review review);
+	int reviewUpdate(int reviewId, String content);
 	// 리뷰 삭제
 	int reviewDelete(int reviewId);
 }

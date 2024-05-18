@@ -6,11 +6,12 @@
             </svg>
             &nbsp;{{ reviewOne.nickname }}
         </p>
-        <p v-if="!reviewUpdateFlag">{{ reviewOne.content }}</p>
-        <input type="text" v-else v-model="reviewOne.content">
+        <div>
+          <p v-if="!reviewUpdateFlag">{{ reviewOne.content }}</p>
+          <input type="text" v-else class="form-control" v-model="reviewOne.content">
+        </div>
         <span class="reviewDate">{{ reviewOne.date }}</span>&nbsp;
-        <span>🤍</span>&nbsp;
-        <!-- <span id="editSpan" v-if="sameUser(reviewOne.userId)" @click="updateReview(reviewOne.reviewId, reviewOne.routineId, reviewOne.content)">수정</span>&nbsp; -->
+        <span id="editSpan" v-if="sameUser(reviewOne.userId)" @click="changeFlag(reviewOne.reviewId, reviewOne.routineId, reviewOne.content)">수정</span>&nbsp;
         <span id="deleteSpan" v-if="sameUser(reviewOne.userId)" @click="deleteReview(reviewOne.reviewId, reviewOne.routineId)">삭제</span>
     </div>
 </template>
@@ -30,16 +31,17 @@
         return false
     }
 
-    // const updateReview = function(reviewId, routineId, content){
-    //     store.reviewUpdate(reviewId, routineId, content)
-    //         .then(() => {
-    //             // 갱신하기
-    //             store.getReviewList(routineId)
-    //         })
-    //         .catch(error => {
-    //             console.log(error)
-    //         });
-    // }
+    const changeFlag = function(reviewId, routineId, content) {
+      if(reviewUpdateFlag.value === true && content){
+        store.reviewUpdate(reviewId, content)
+         .then(() => {
+          store.getReviewList(routineId)
+         })
+         .catch(() => {
+         })
+      }
+      if(content) reviewUpdateFlag.value = !reviewUpdateFlag.value
+    }
 
     const deleteReview = function(reviewId, routineId){
         store.reviewDelete(reviewId)
@@ -69,9 +71,13 @@
     background-color: #A9DDDE; /* 마우스 호버 시 배경색 변경 */
   }
 
-  #deleteSpan {
+  #deleteSpan, #editSpan {
     cursor: pointer;
     font-size: 0.8em;
     color: gray;
+  }
+
+  .form-control {
+    width: 50%;
   }
 </style>

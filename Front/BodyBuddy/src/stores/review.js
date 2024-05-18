@@ -26,20 +26,18 @@ export const useReviewStore = defineStore('review', () => {
         })
   }
 
-  // const reviewUpdate = function (reviewId, routineId, content) {
-  //   return axios.put(`${REST_REVIEW_API}/${routineId}/update`, {
-  //       params: {
-  //         reviewId: reviewId,
-  //         content: content
-  //       }
-  //     })
-  //       .then((response) => {
-  //           return response.data;
-  //       })
-  //       .catch((error) => {
-  //           console.log(error);
-  //       });
-  // };
+  const reviewUpdate = function (reviewId, content) {
+    return axios.put(`${REST_REVIEW_API}/update`, null, {
+        params: {
+          reviewId: reviewId,
+          content: content
+        }
+      })
+        .then((response) => {
+            return response.data;
+        })
+        .catch(() => {});
+  };
 
   const reviewDelete = function (reviewId) {
     return axios.delete(`${REST_REVIEW_API}/delete`, {
@@ -50,16 +48,14 @@ export const useReviewStore = defineStore('review', () => {
         .then((response) => {
             return response.data;
         })
-        .catch((error) => {
-            console.log(error);
-        });
+        .catch(() => {});
   };
 
   return { 
     reviewList,
     getReviewList,
     reviewRegist,
-    // reviewUpdate,
+    reviewUpdate,
     reviewDelete
   }
 },
