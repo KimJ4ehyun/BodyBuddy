@@ -80,4 +80,19 @@ public class RoutineServiceImpl implements RoutineService {
 		return routineDao.deleteRoutine(routineId);
 	}
 
+	// 예림 추가 -----------------
+	// 내 루틴에 추가 (루틴 추가)
+	@Override
+	public int addMyRoutine(Routine routine) {
+		return routineDao.insertMyRoutine(routine);
+	}
+
+	// 내 루틴에 추가 (운동 추가)
+	@Override
+	public int addMyExercise(Map<String, Object> dataMap) {
+		return routineDao.insertMyExercise(dataMap);
+	}
+	
+	// ------------------------
+
 }

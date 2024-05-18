@@ -7,18 +7,20 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bodybuddy.fit.model.dto.Exercise;
 import com.bodybuddy.fit.model.dto.Routine;
+import com.bodybuddy.fit.model.dto.User;
 import com.bodybuddy.fit.model.service.RoutineService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping("/routine/board")
@@ -73,6 +75,57 @@ public class RBoardController {
 		return new ResponseEntity<>(ex, HttpStatus.OK);
 	}
 	
+	
+	// 예림 추가 ----------
+	@GetMapping("/my-routine/add")
+	@Operation(summary="다른 사람 루틴을 내 루틴으로 추가하기", description="다른 사람 루틴을 내 루틴으로 추가하여 해당 정보를 반환한다.")
+	public ResponseEntity<?> addToMyRoutine(HttpSession session, @RequestParam("routineId") int originRoutineId) {
+		
+		User loginUser = (User) session.getAttribute("user");
+		
+		if (loginUser == null) {
+	        return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+	    }
+		
+		// 로그인한 유저 아이디 저장
+		String loginId = loginUser.getUserId();;
+		
+		// 루틴 객체 생성
+		Routine routine = new Routine();
+		
+		// 로그인한 유저 아이디 값 넣어주기
+		routine.setUserId(loginId);
+		
+		// 루틴 먼저 만들어주기
+		rService.addMyRoutine(routine);
+		
+		System.out.println("routineId="+routine.getRoutineId());
+		
+		// 루틴 아이디값 받기
+		int routineId = routine.getRoutineId();
+		
+		// 운동 객체 생성
+		Exercise exercise = new Exercise();
+		
+		// 방금 만든 루틴 아이디 값 넘겨주기
+		exercise.setRoutineId(routineId);
+		
+		// sql로 넘길 데이터
+		Map<String, Object> dataMap = new HashMap<>();
+		
+		dataMap.put("originRId", originRoutineId);
+		dataMap.put("exercise", exercise);
+		
+		
+		rService.addMyExercise(dataMap);
+		
+		Map<String, Object> map = new HashMap<>();
+		
+		map.put("routine", routine);
+		map.put("exercises", exercise);
+		
+		return new ResponseEntity<>(map, HttpStatus.CREATED);
+	}
 	
 	
 }

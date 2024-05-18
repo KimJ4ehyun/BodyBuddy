@@ -32,7 +32,14 @@ public interface RoutineDao {
 	// 루틴 삭제
 	int deleteRoutine(int routineId);
 	
-	// 내 루틴에 추가
+	// 예림 추가 ---------
+	// 내 루틴에 추가 (루틴 추가)
+	int insertMyRoutine(Routine routine);
+	
+	// 내 루틴에 추가 (운동 추가)
+	int insertMyExercise(Map<String, Object> dataMap);
+	
+	// -------------------
 	
 	// 검색 및 페이징
 
