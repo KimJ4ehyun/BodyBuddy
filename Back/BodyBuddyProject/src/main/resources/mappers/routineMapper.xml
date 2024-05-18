@@ -30,18 +30,32 @@
 		WHERE routine_id = #{routineId} AND exercise_id = #{exerciseId}
 	</select>
 	
-	<!-- 루틴 등록 -->
+	<!-- 1. 루틴 등록 -->
 	<insert id="insertRoutine" parameterType="Routine" useGeneratedKeys="true" keyProperty="routineId">
     	INSERT INTO routines (user_id)
     	VALUES (#{userId})
 	</insert>
 	
-	<!-- 루틴 등록 - 운동 등록 -->
+	<!-- 2. 루틴 등록 - 운동 등록 -->
 	<insert id="insertExercise" parameterType="Exercise" >
 		INSERT INTO exercises
 			(routine_id, exercise_name, exercise_part, set_cnt, weight, repetitions, day_of_the_week, time)
 		VALUES 
 			(#{routineId}, #{exerciseName}, #{exercisePart}, #{setCnt}, #{weight}, #{repetitions}, #{dayOfTheWeek}, #{time})
 	</insert>
+	
+	<!-- 3. 루틴 수정 - 제목, 내용 추가 (루틴 처음 만들 떄 사용) --> 
+	<update id="updateText" parameterType="Map" >
+		UPDATE routines
+		SET routine_title = #{routineTitle}, 
+			description = #{description}
+		WHERE routine_id = #{routineId};
+	</update>
+	
+	<!-- 루틴 삭제 -->
+	<delete id="deleteRoutine" parameterType="int" >
+		DELETE FROM routines
+		WHERE routine_id = #{routineId};
+	</delete>
 	
 </mapper>

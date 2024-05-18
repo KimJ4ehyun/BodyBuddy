@@ -226,7 +226,7 @@
                 <!-- 나중에 type 수정하기 -->
                 <div class="btns">
                     <button class="btn btn-sm updateBtn" type="button">수정</button>
-                    <button class="btn btn-sm deleteBtn" type="button">삭제</button>
+                    <button class="btn btn-sm deleteBtn" type="button" @click="store.deleteRoutine(route.params.routineId)">삭제</button>
 
                 </div>
             </div>
@@ -390,8 +390,6 @@
     }, { immediate: true });
 
     console.log(routine.value)
-
-
 
 </script>
 

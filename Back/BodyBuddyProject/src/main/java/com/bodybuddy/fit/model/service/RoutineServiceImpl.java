@@ -49,20 +49,34 @@ public class RoutineServiceImpl implements RoutineService {
 		return routineDao.selectOne(routineId);
 	}
 
-	// 루틴 등록
+	// 1. 루틴 등록
 	@Override
 	public int addRoutine(Routine routine) {
 		return routineDao.insertRoutine(routine);
 	}
 
-	// 루틴 등록 - 운동 등록
+	// 2. 루틴 등록 - 운동 등록
 	@Override
 	public int addExercise(Exercise exercise) {
 		return routineDao.insertExercise(exercise);
 	}
 
-	
+	// 3. 루틴 수정 - 제목, 내용 추가 (루틴 처음 만들 떄 사용)
+	@Override
+	public int updateText(int routineId, String routineTitle, String description) {
+		Map<String, Object> map = new HashMap<>();
+		// 루틴 제목을 입력 안 하면 제목 없음으로 생성 
+		if (routineTitle == null) routineTitle = "제목 없음";
+		map.put("routineId", routineId);
+		map.put("routineTitle", routineTitle);
+		map.put("description", description);
+		return routineDao.updateText(map);
+	}
 
-
+	// 내 루틴 삭제
+	@Override
+	public int deleteRoutine(int routineId) {
+		return routineDao.deleteRoutine(routineId);
+	}
 
 }

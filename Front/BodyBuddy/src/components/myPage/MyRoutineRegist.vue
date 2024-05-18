@@ -22,21 +22,27 @@
           :checked="selectedExercises.some(e => e.id === exercise.id)" 
           class="ex-check" 
         />
-        <label :for="exercise.id" class="ex-label">{{ exercise.name }}</label>
+        <label :for="exercise.id" class="ex-label">{{ exercise.exerciseName }}</label>
       </div>
     </div>
     <div v-for="(exercise, index) in selectedExercises" :key="'selected-' + exercise.id" class="ex-block">
-      <div>
-        <span>{{ index + 1 }}</span>
-        <span>{{ exercise.part }}</span> | &nbsp;
-        <span>{{ exercise.name }}</span>
-        <button @click="removeExercise(exercise.id)" class="remove-button">-</button>
+      <div class="info">
+        <div>
+          <span>{{ index + 1 }}</span>
+        </div>
+        <div>
+          <span>{{ exercise.exercisePart }}</span>&nbsp;&nbsp; | &nbsp;&nbsp;
+          <span>{{ exercise.exerciseName }}</span>
+        </div>
+        <div>
+          <button @click="removeExercise(exercise.id)" class="remove-button">-</button>
+        </div>
       </div>
       <div>
         <div class="exInfo">
           <div>
             <label>세트</label>
-            <input type="number" v-model="exercise.sets" class="numInput" min="0"/>
+            <input type="number" v-model="exercise.setCnt" class="numInput" min="0"/>
           </div>
           <div>
             <label>무게</label>
@@ -44,23 +50,24 @@
           </div>
           <div>
             <label>횟수</label>
-            <input type="number" v-model="exercise.reps" class="numInput" min="0"/>
+            <input type="number" v-model="exercise.repetitions" class="numInput" min="0"/>
           </div>
         </div>
         <span>&nbsp;</span>
         <div>
-          <label>요일</label>
           <div>
+            <label>요일</label>
             <label v-for="day in allDays" :key="day">
               <div>
-                <input type="checkbox" :value="day" @change="() => toggleDay(exercise, day)" :checked="exercise.days && exercise.days.includes(day)" class="dayCheck"/> {{ day }}              </div>
+                <input type="checkbox" :value="day" @change="() => toggleDay(exercise, day)" :checked="exercise.dayOfTheWeek.includes(day)" class="dayCheck"/> {{ day }}
+              </div>
             </label>
           </div>
         </div>
         <div>
           <label for="floatingSelectGrid">시간</label>&nbsp;
           <select id="floatingSelectGrid" class="timeInput" v-model="exercise.time">
-            <option value="">시간 선택</option>
+            <option value="">선택</option>
             <option value="오전">오전</option>
             <option value="오후">오후</option>
             <option value="저녁">저녁</option>
@@ -68,8 +75,19 @@
         </div>
       </div>
     </div>
-    <div>
-      <button type="button" v-if="isFormValid" id="registBtn" class="btn btn-primary" @click="store.addExercises(route.params.routineId, selectedExercises)">등록하기</button>
+    <div v-if="isFormValid">
+      <div class="text">
+        <div class="col-md-8">
+          <input type="text" id="inputReview" v-model="text.routineTitle" class="form-control" placeholder="제목을 입력해주세요.">
+        </div>
+        <span>&nbsp;</span>
+        <div class="col-md-8">
+          <input type="text" id="inputReview" v-model="text.description" class="form-control" placeholder="설명을 입력해주세요.">
+        </div>
+      </div>
+      <div>
+        <button type="button" id="registBtn" class="btn btn-primary" @click="submitExercises()">등록하기</button>
+      </div>
     </div>
   </div>
 </template>
@@ -90,21 +108,21 @@ const parts = ['하체', '가슴', '등', '어깨', '팔', '복근', '유산소'
 const allDays = ['월', '화', '수', '목', '금', '토', '일'];
 
 const filteredExercises = computed(() => {
-  return exercises.filter(exercise => exercise.part === selectedPart.value && exercise.name.includes(search.value));
+  return exercises.filter(exercise => exercise.exercisePart === selectedPart.value && exercise.exerciseName.includes(search.value));
 });
 
 const isFormValid = computed(() => {
-  return selectedExercises.value.length > 0 && selectedExercises.value.every(exercise => exercise.days.length > 0 && exercise.time !== '');
+  return selectedExercises.value.length > 0 && selectedExercises.value.every(exercise => exercise.dayOfTheWeek.length > 0 && exercise.time !== '');
 });
 
 const addExercise = (exercise) => {
   if (!selectedExercises.value.some(e => e.id === exercise.id)) {
     selectedExercises.value.push({
       ...exercise,
-      days: [],
-      sets: 0,
+      dayOfTheWeek: [],
+      setCnt: 0,
       weight: 0,
-      reps: 0,
+      repetitions: 0,
       time: ''
     });
   }
@@ -124,14 +142,30 @@ const toggleExercise = (exercise) => {
 };
 
 const toggleDay = (exercise, day) => {
-  const index = exercise.days.indexOf(day);
+  const index = exercise.dayOfTheWeek.indexOf(day);
   if (index === -1) {
-    exercise.days.push(day);
+    exercise.dayOfTheWeek.push(day);
   } else {
-    exercise.days.splice(index, 1);
+    exercise.dayOfTheWeek.splice(index, 1);
   }
 };
+
+const text = ref({
+  routineTitle: '',
+  description: ''
+})
+
+const submitExercises = () => {
+  const formattedExercises = selectedExercises.value.map(exercise => ({
+    ...exercise,
+    dayOfTheWeek: exercise.dayOfTheWeek.join(',')
+  }));
+  console.log(text.value.routineTitle)
+  console.log(text.value.description)
+  store.addExercises(route.params.routineId, formattedExercises, text.value.routineTitle, text.value.description);
+};
 </script>
+
 
 <style scoped>
 .routine-container {
@@ -230,7 +264,7 @@ h2 {
   padding: 5px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  width: 100px;
+  width: 90px;
   margin-left: 10px;
   margin-top: 10px;
 }
@@ -244,6 +278,7 @@ h2 {
   color: white;
   border: none;
   cursor: pointer;
+  margin-top: 20px;
 }
 
 #registBtn:disabled {
@@ -254,4 +289,10 @@ h2 {
 #registBtn:hover {
   background-color: #A9DDDE;
 }
+
+.info {
+  display: flex;
+  justify-content: space-between;
+}
+
 </style>

@@ -7,11 +7,14 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bodybuddy.fit.model.dto.Exercise;
@@ -36,7 +39,7 @@ public class MyPageController {
 	@Autowired
 	private MyPageService myService;
 	
-	// 루틴 등록하기
+	// 1. 루틴 등록하기
 	@PostMapping("/my-routine/regist")
 	@Operation(summary="루틴 등록하기", description="루틴 정보를 등록한다.")
 	public ResponseEntity<?> addRoutine(HttpSession session) {
@@ -54,33 +57,41 @@ public class MyPageController {
 	    rService.addRoutine(routine);
 	    int routineId = routine.getRoutineId();
 	    // 루틴 등록 서비스 호출
-	    System.out.println(routineId);
 	    	
 	    return new ResponseEntity<>(routineId, HttpStatus.CREATED);	    	
 
 	}
 	
 	
-	// 루틴 등록 - 운동 추가하기
+	// 2. 루틴 등록 - 운동 추가하기
 	@PostMapping("/my-routine/regist/{routineId}")
 	@Operation(summary="루틴의 운동 등록하기", description="해당 루틴의 운동 정보를 등록한다.")
 	public ResponseEntity<?> addExercise(@PathVariable("routineId") int routineId, 
 										@RequestBody Exercise[] exercises) {
-		System.out.println("start");
 		for(Exercise exercise : exercises) {
-			System.out.println("for");
-			System.out.println(exercise);
-			System.out.println("after for");
 			exercise.setRoutineId(routineId);
 			rService.addExercise(exercise);
-			System.out.println("one");
 		}
-		
 		return new ResponseEntity<>(exercises, HttpStatus.CREATED);
 	}
 	
-	// 루틴 수정
+	// 3. 루틴 수정 - 제목, 내용 추가 (루틴 처음 만들 떄 사용)
+	@PutMapping("/my-routine/regist/{routineId}")
+	@Operation(summary="해당 루틴의 제목, 내용을 추가한다.", description="기존에 만들어놓은 루틴에 추가하는거여서 PutMapping")
+	public ResponseEntity<?> updateText(@PathVariable("routineId") int routineId, 
+			@RequestParam(value = "routineTitle", required = false) String routineTitle, @RequestParam(value = "description", required = false) String description) {
+		rService.updateText(routineId, routineTitle, description);
+		
+		return new ResponseEntity<>(HttpStatus.CREATED);
+	}
 	
+	// 루틴 삭제
+	@DeleteMapping("/my-routine/{routineId}")
+	@Operation(summary="루틴 삭제", description="내 루틴 삭제")
+	public ResponseEntity<?> deleteRoutine(@PathVariable("routineId") int routineId) {
+		rService.deleteRoutine(routineId);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
 	
 	// 내 루틴 전체 목록 (내 루틴 관리 페이지)
 	@GetMapping("/my-routine")
