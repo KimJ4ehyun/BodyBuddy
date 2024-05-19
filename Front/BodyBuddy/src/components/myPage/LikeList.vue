@@ -5,13 +5,15 @@
            
             <div class="likeBox" v-for="wish in wRoutines" :key="wish.wishId">
                 <BoardListOne :board-one="wish.boardInfo" />
-                <button class="addBtn" @click="boardStore.addMyRoutine(wish.boardInfo.routineId)">내 루틴에 추가</button>
+                <button class="addBtn" data-bs-toggle="modal" data-bs-target="#addToMineModal">내 루틴에 추가</button>
+                <addModal :my-rid="wish.boardInfo.routineId" modal-id="addToMineModal" />
             </div>
         </div>
     </div>
 </template>
 
 <script setup>
+    import addModal from '@/components/routineBoard/addModal.vue'
     import BoardListOne from '@/components/routineBoard/BoardListOne.vue'
     import { useBoardStore } from '@/stores/board';
     import { useWishStore } from '@/stores/wish';

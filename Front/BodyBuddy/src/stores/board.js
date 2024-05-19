@@ -40,7 +40,7 @@ export const useBoardStore = defineStore('board', () => {
     })
 
 
-    const addMyRoutine = (async (routineId) => {
+    const addMyRoutine = (async (routine) => {
         // 재현 추가
         // 로그인 안 했을 시에 login페이지로 이동하게
         const sessionId = sessionStorage.getItem('userId')
@@ -50,14 +50,11 @@ export const useBoardStore = defineStore('board', () => {
             return;
         }
 
-        await axios.get(`${REST_ROUTINE_BOARD_API}/my-routine/add`, {
-            params: {
-                routineId: routineId
-            }
-        })
+        await axios.post(`${REST_ROUTINE_BOARD_API}/my-routine/add?routineId=${routine.originRId}`, routine
+        )
             .then((response) => {
                 const myStore = useMyPageStore()
-                myStore.myRoutineList = response.data
+                myStore.myRoutineList.push(response.data)
                 console.log(response.data)
 
                 alert("내 루틴에 추가되었습니다.")
