@@ -6,7 +6,7 @@
         <span class="rTitle">
             <RouterLink :to="`/board/${boardOne.routineId}`">{{ boardOne.routineTitle }}</RouterLink>
         </span>
-        <span class="rWriter">{{ boardOne.userId }}</span>
+        <span class="rWriter">{{ boardOne.nickname }}</span>
         <span class="rDate">{{ boardOne.date }}</span>
         <span class="rReview"></span>
     </p>
@@ -32,7 +32,7 @@
         boardOne: Object
     })
 
-    console.log(boardOne)
+    // console.log(boardOne)
     const isWished = ref(false)
 
     // 컴포넌트가 마운트될 때 현재 찜 상태를 확인

@@ -14,6 +14,6 @@ public class Routine {
 	private String routineTitle;
 	private String date;
 	private String description;
-	
+	private String nickname;
 	
 }

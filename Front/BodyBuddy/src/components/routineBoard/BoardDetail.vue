@@ -228,9 +228,11 @@
                             <span v-else>🤍</span>
                         </span>
                     </span>
-                    <span class="rWriter">{{ store.board.routine.userId }}</span>
+                    <span class="rWriter">{{ store.board.routine.nickname }}</span>
                     <span class="rDesc">{{ store.board.routine.description }}</span>
-                    <button class="myAddBtn" @click="store.addMyRoutine(store.board.routine.routineId)">내 루틴에 추가</button>
+                    <button class="myAddBtn" data-bs-toggle="modal" data-bs-target="#addToMineModal">내 루틴에 추가</button>
+                    <addModal :my-rid="store.board.routine.routineId" modal-id="addToMineModal" />
+                    <!-- <button class="myAddBtn" @click="store.addMyRoutine(store.board.routine.routineId)">내 루틴에 추가</button> -->
                     <!-- 재현 추가 (리뷰 목록) -->
                     <ReviewList />
                 </div>
@@ -242,6 +244,7 @@
 </template>
 
 <script setup>
+    import addModal from '@/components/routineBoard/addModal.vue'
     import Modal from '@/components/routineBoard/Modal.vue'
     import TimeTable from '@/components/routineBoard/TimeTable.vue'
     import { useBoardStore } from '@/stores/board'

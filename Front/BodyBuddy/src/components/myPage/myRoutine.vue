@@ -10,14 +10,16 @@
                     {{ myRoutine.routineTitle }} &nbsp;
                 </RouterLink>
             </span>
-            <!-- 나중에 type 수정하기 -->
+            <!-- 예림 수정 ----- -->
+            <!-- 루틴 등록하기 누르면 바로 루틴이 생성되버리니까 그냥 나가도 '제목없음'루틴이 만들어져서
+                일단 확인하는 alert창 띄우고 들어가게 처리했음. 그래도 등록안하고 나가도 만들어지긴 함..ㅠ -->
             <div class="btn-class">
-                <button @click="store.addRoutine()" type="button" class="regBtn">루틴 등록하기</button>
+                <button @click="confirmAddRoutine" type="button" class="regBtn">루틴 등록하기</button>
             </div>
         </div>
         <div class="bar noRoutine" v-else>
             <div class="btn-class">
-                <button type="button" @click="store.addRoutine()" class="regBtn">루틴 등록하기</button>
+                <button type="button" @click="confirmAddRoutine" class="regBtn">루틴 등록하기</button>
             </div>
             <hr>
             내 루틴이 없습니다.
@@ -50,6 +52,12 @@
             })
         }
     })
+
+    const confirmAddRoutine = () => {
+    if (confirm('루틴을 등록하시겠습니까?')) {
+        store.addRoutine();
+    }
+}
 
     console.log(userStore.loginInfo)
 

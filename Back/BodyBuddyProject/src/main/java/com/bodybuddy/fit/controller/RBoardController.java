@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -59,6 +61,8 @@ public class RBoardController {
 		map.put("routine", routine);
 		map.put("exList", exList);
 		
+		System.out.println(routine);
+		
 		return new ResponseEntity<>(map, HttpStatus.OK);
 	}
 	
@@ -77,9 +81,9 @@ public class RBoardController {
 	
 	
 	// 예림 추가 ----------
-	@GetMapping("/my-routine/add")
+	@PostMapping("/my-routine/add")
 	@Operation(summary="다른 사람 루틴을 내 루틴으로 추가하기", description="다른 사람 루틴을 내 루틴으로 추가하여 해당 정보를 반환한다.")
-	public ResponseEntity<?> addToMyRoutine(HttpSession session, @RequestParam("routineId") int originRoutineId) {
+	public ResponseEntity<?> addToMyRoutine(HttpSession session, @RequestParam("routineId") int originRoutineId, @RequestBody Routine routine) {
 		
 		User loginUser = (User) session.getAttribute("user");
 		
@@ -91,7 +95,7 @@ public class RBoardController {
 		String loginId = loginUser.getUserId();;
 		
 		// 루틴 객체 생성
-		Routine routine = new Routine();
+//		Routine routine = new Routine();
 		
 		// 로그인한 유저 아이디 값 넣어주기
 		routine.setUserId(loginId);
@@ -100,6 +104,7 @@ public class RBoardController {
 		rService.addMyRoutine(routine);
 		
 		System.out.println("routineId="+routine.getRoutineId());
+		System.out.println("routine="+routine);
 		
 		// 루틴 아이디값 받기
 		int routineId = routine.getRoutineId();
@@ -113,12 +118,15 @@ public class RBoardController {
 		// sql로 넘길 데이터
 		Map<String, Object> dataMap = new HashMap<>();
 		
+		System.out.println("origin: "+originRoutineId);
+		
 		dataMap.put("originRId", originRoutineId);
 		dataMap.put("exercise", exercise);
 		
 		
 		rService.addMyExercise(dataMap);
 		
+		System.out.println(exercise);
 		Map<String, Object> map = new HashMap<>();
 		
 		map.put("routine", routine);

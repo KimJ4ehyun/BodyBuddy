@@ -5,15 +5,16 @@
 	
 	<!-- 루틴 전체 목록 가져오기 -->
 	<select id="selectAll" resultType="Routine">
-		SELECT *
-		FROM routines
+		SELECT routine_id, r.user_id, u.nickname, routine_title, date, description
+		FROM routines r, users u
+		WHERE r.user_id = u.user_id
 	</select>
 	
 	<!-- 루틴 상세보기 -->
 	<select id="selectOne" parameterType="int" resultType="Routine">
-		SELECT *
-		FROM routines
-		WHERE routine_id = #{routineId}
+		SELECT routine_id, r.user_id, u.nickname, routine_title, date, description
+		FROM routines r, users u
+		WHERE r.user_id = u.user_id AND routine_id = #{routineId}
 	</select>
 	
 	<!-- 해당 루틴의 운동 정보 리스트 가져오기 -->
@@ -60,8 +61,8 @@
 	
 	<!-- 내 루틴에 추가 (루틴 추가) -->
 	<insert id="insertMyRoutine" parameterType="Routine" useGeneratedKeys="true" keyProperty="routineId">
-		INSERT INTO routines (user_id)
-		VALUES (#{userId})
+		INSERT INTO routines (user_id, routine_title, description)
+		VALUES (#{userId}, #{routineTitle}, #{description})
 	</insert>
 	
 	<!-- 내 루틴에 추가 (운동 추가) -->
