@@ -68,6 +68,8 @@
         path: '/mypage',
         name: 'myPage',
         component: MyPageView,
+        // myPage 관련된 것만 로그인이 필요하게 했음
+        meta: { requiresAuth: true },
         children: [
           {
             path: '/my-routine',
@@ -97,8 +99,30 @@
             component: UserInfoEdit,
           },
         ]
+      },
+      // 홈페이지에 없는 경로에 접근할 시에 로그인 페이지로 이동
+      {
+        path: '/:catchAll(.*)',
+        redirect: '/login',
       }
     ]
   })
+
+  // Front단 Interceptor 처리
+  // sessionStorage에 id, nickname이 없으면 로그인 안된 것으로 처리
+  // myPage 밑에 것들만 처리
+  router.beforeEach((to, from, next) => {
+    const loggedIn = sessionStorage.getItem('userId') && sessionStorage.getItem('nickname'); 
+
+    if (to.matched.some(record => record.meta.requiresAuth)) {
+        if (!loggedIn) {
+            next('/login');
+        } else {
+            next();
+        }
+    } else {
+        next();
+    }
+  });
 
   export default router

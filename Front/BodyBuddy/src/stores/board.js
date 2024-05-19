@@ -41,6 +41,15 @@ export const useBoardStore = defineStore('board', () => {
 
 
     const addMyRoutine = (async (routineId) => {
+        // 재현 추가
+        // 로그인 안 했을 시에 login페이지로 이동하게
+        const sessionId = sessionStorage.getItem('userId')
+        const sessionNickname = sessionStorage.getItem('nickname')
+        if(!(sessionId && sessionNickname)) {
+            router.push('/login')
+            return;
+        }
+
         await axios.get(`${REST_ROUTINE_BOARD_API}/my-routine/add`, {
             params: {
                 routineId: routineId
