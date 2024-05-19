@@ -12,12 +12,9 @@
                     설명설명
                 </span>
                 <button class="mainBtn">
-                    <RouterLink :to="{ name: 'login' }">
+                    <RouterLink :to="{ name: 'myRoutineList'}">
                         함께하기
                     </RouterLink>
-                    <!-- <RouterLink v-else :to="{ name: 'myRoutineList'}">
-                        함께하기
-                    </RouterLink> -->
                 </button>
             </div>
         </div>
