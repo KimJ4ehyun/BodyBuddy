@@ -75,9 +75,13 @@
 </script>
 
 <style scoped>
+    * {
+        font-family: 'SUITE-Regular';
+    }
     .timetable {
         width: 80%;
         margin: 0 auto;
+        font-weight: 600;
     }
     .col {
         display: flex;

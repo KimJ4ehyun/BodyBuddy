@@ -1,6 +1,10 @@
 <template>
     <div class="routineHeader">
-        <h1>Routine 배너</h1>
+        <img src="@/assets/img/banner4.jpg">
+        <div class="category">
+            <span class="categoryA">Routines</span>
+            <span class="categoryB">Home &nbsp; > &nbsp; Routines</span>
+        </div>
     </div>
     <div class="searchBar">
         <input type="text" class="search" placeholder="Search" v-model="keyword" @keyup.enter="search">
@@ -24,13 +28,42 @@
 </script>
 
 <style scoped>
-    .routineHeader {
-        border: 1px solid lightgray;
-        height: 200px;
-        text-align: center;
+    * {
+        font-family: 'SUITE-Regular';
     }
+    .routineHeader {
+        /* border: 1px solid lightgray; */
+        width: 100%;
+        height: 250px;
+        text-align: center;
+        font-family: 'SUITE-Regular';
+        font-weight: 700;
+        position: relative;
+    }
+    .routineHeader img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+    .routineHeader .category {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        flex-direction: column;
+    }
+    .routineHeader .category .categoryA {
+        font-size: 2em;
+    }
+
+    .routineHeader .category .categoryB {
+        font-size: 0.8em;
+    }
+
     .searchBar {
-        border: 1px solid lightblue;
+        /* border: 1px solid lightblue; */
         background-color: #7FABB2;
         height: 60px;
         display: flex;

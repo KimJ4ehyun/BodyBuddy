@@ -1,6 +1,10 @@
 <template>
     <div class="myPageHeader">
-        <h3>My Page 배너</h3>
+        <img src="@/assets/img/banner4.jpg">
+        <div class="category">
+            <span class="categoryA">My Page</span>
+            <span class="categoryB">Home &nbsp; > &nbsp; My Page</span>
+        </div>
     </div>
     <div class="myPageContainer">
         <!-- 예림 추가 (사이드바) -->
@@ -24,10 +28,46 @@
 </script>
 
 <style scoped>
+    * {
+        font-family: 'SUITE-Regular';
+    }
+
     .myPageHeader {
-        border: 1px solid lightgray;
-        height: 200px;
+        /* border: 1px solid lightgray; */
+        width: 100%;
+        height: 250px;
         text-align: center;
+        font-family: 'SUITE-Regular';
+        font-weight: 700;
+        position: relative;
+    }
+    .myPageHeader img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+    .myPageHeader .category {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        flex-direction: column;
+    }
+    .myPageHeader .category .categoryA {
+        font-size: 2em;
+    }
+
+    .myPageHeader .category .categoryB {
+        font-size: 0.8em;
+    }
+
+    .myPageHeader .bar span {
+        margin-left: 70px;
+        font-size: 0.8em;
+        color: white;
+        font-weight: 400;
     }
 
     .myPageContainer {
@@ -38,13 +78,15 @@
     .sideBar {
         /* border: 1px solid lightgray; */
         width: 15%;
-        margin-left: 50px;
+        margin-left: 60px;
         display: flex;
         flex-direction: column;
         height: 200px;
-        font-weight: bold;
-        margin-top: 100px;
-        padding-left: 20px;
+        /* font-weight: bold; */
+        margin-top: 70px;
+        padding-left: 30px;
+        font-weight: 600;
+        font-style: normal;
     }
 
     .sideBar span {
@@ -69,5 +111,6 @@
 
     .sideBar .cName a.router-link-active {
         color: #324B4F;
+        font-weight: 700;
     }
 </style>

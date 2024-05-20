@@ -67,6 +67,10 @@
 </script>
 
 <style scoped>
+    * {
+        font-family: "Gowun Dodum";
+        font-weight: 600;
+    }
     .timetable {
         /* border: 1px solid skyblue; */
         width: 80%;

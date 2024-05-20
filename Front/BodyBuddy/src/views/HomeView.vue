@@ -26,17 +26,19 @@
                 <span class="mainMyD">
                     내가 하고 싶은 운동을 원하는 요일과 시간에
                     할 수 있도록 시간표로 편하게 관리해요!<br>
-                    <button class="mainMyBtn" @click="myPageStore.addRoutine()">루틴 만들기</button>
+                    <button class="mainMyBtn" @click="confirmAddRoutine">루틴 만들기</button>
                 </span>
             </div>
             <div class="mainMyR">
-                이미지
+                <img src="@/assets/img/ex1.png">
+                <img src="@/assets/img/ex2.png">
             </div>
         </div>
 
         <!-- 운동 루틴 보여주기 -->
         <div class="mainRec">
             <span class="mainRecHead">운동 루틴 추천</span>
+
         </div>
     </div>
   </template>
@@ -44,13 +46,23 @@
   <script setup>
     import { useUserStore } from '@/stores/user'
     import { useMyPageStore } from '@/stores/myPage'
+    import { useRouter } from 'vue-router'
 
     const store = useUserStore()
     const myPageStore = useMyPageStore()
+    const router = useRouter()
+
+    const confirmAddRoutine = () => {
+        router.push(`/mypage/regist`)
+    }
   
   </script>
   
   <style scoped>
+    * {
+        font-family: 'SUITE-Regular';
+    }
+    
     .bigContainer .mainBanner {
       /* border: 1px solid lightgray; */
       height: 450px;
@@ -64,8 +76,8 @@
     }
     .mainBanner {
         position: relative;
-        width: 100%; /* 이미지 크기에 따라 조정 가능 */
-        height: auto; /* 이미지 크기에 따라 조정 가능 */
+        width: 100%; 
+        height: auto; 
     }
 
     .mainText {
@@ -86,7 +98,7 @@
 
     .mainT {
         color: #7FABB2;
-        font-weight: bold;
+        font-weight: 700;
         font-size: 1.8em;
 
     }
@@ -107,23 +119,24 @@
 
     /* mainMy */
     .mainMy {
-        border: 1px solid lightgray;   
+        /* border: 1px solid lightgray;   */
         height: 350px;
         display: flex;
         flex-direction: row;
     }
     .mainMy .mainMyL {
         /* border: 1px solid lightgray; */
-        width: 35%;
+        width: 30%;
         text-align: left;
         display: flex;
         flex-direction: column;
         justify-content: space-around;
         padding: 60px 0;
-        padding-left: 35px;
+        padding-left: 40px;
+        padding-right: 15px;
     }
     .mainMyT {
-        font-weight: bold;
+        font-weight: 700;
         font-size: 1.4em;
     }
     .mainMyD {
@@ -131,11 +144,22 @@
     }
 
     .mainMy .mainMyR {
-        border: 1px solid lightgray;
-        width: 65%;
-        padding-left: 30px;
+        /* border: 1px solid lightgray; */
+        width: 70%;
+        padding-left: 60px;
         padding-top: 30px;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
+        align-items: center;
+        padding-bottom: 30px;
     }
+    
+    .mainMyR img {
+        width: 50%;
+        height: 240px;
+    }
+
     .mainMyBtn {
         background-color: #7FABB2;
         border: 1px solid #7FABB2; 
@@ -146,9 +170,10 @@
         margin-top: 20px;
     }
 
+
     /* mainRec */
     .mainRec {
-        border: 1px solid lightgray;
+        /* border: 1px solid lightgray; */
         height: 350px;
         background-color: #EEFEFF;
         padding-top: 30px;
@@ -159,6 +184,13 @@
         font-weight: bold;
         font-size: 1.2em;
     }
+
+    .mainRec .mainRecBox {
+        border: 1px solid blue;
+        width: 20%;
+    }
+
+
 
   </style>
   
