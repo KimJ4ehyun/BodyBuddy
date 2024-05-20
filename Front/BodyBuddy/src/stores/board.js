@@ -11,8 +11,12 @@ export const useBoardStore = defineStore('board', () => {
     const boardList = ref([])
     const currentPage = ref(0)
 
-    const getBoardList = function() {
-        axios.get(REST_ROUTINE_BOARD_API)
+    const getBoardList = function(keyword) {
+        axios.get(REST_ROUTINE_BOARD_API, {
+            params: {
+                keyword: keyword
+            }
+        })
             .then((response) => {
                 boardList.value = response.data
                 // console.log(response.data)

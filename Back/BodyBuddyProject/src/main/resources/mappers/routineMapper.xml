@@ -4,11 +4,14 @@
 <mapper namespace="com.bodybuddy.fit.model.dao.RoutineDao">
 	
 	<!-- 루틴 전체 목록 가져오기 -->
-	<select id="selectAll" resultType="Routine">
+	<select id="selectAll" resultType="Routine" parameterType="string">
 		SELECT routine_id, r.user_id, u.nickname, routine_title, date, description
 		FROM routines r, users u
-		WHERE r.user_id = u.user_id
-	</select>
+		WHERE r.user_id = u.user_id AND
+		<if test="keyword != null">
+			routine_title LIKE CONCAT('%', #{keyword}, '%')
+		</if>
+	</select> 
 	
 	<!-- 루틴 상세보기 -->
 	<select id="selectOne" parameterType="int" resultType="Routine">
