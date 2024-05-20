@@ -84,11 +84,12 @@
 
     .boardBox {
         background-color: #F0F6F6;
-        width: 60%;
+        width: 50%;
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         margin: 20px auto;
         padding: 10px 20px;
+
     }
 
     .pagination {

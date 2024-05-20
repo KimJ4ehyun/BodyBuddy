@@ -14,15 +14,17 @@ export const useBoardStore = defineStore('board', () => {
         axios.get(REST_ROUTINE_BOARD_API)
             .then((response) => {
                 boardList.value = response.data
+                // console.log(response.data)
             })
     }
 
     const exerciseList = ref([])
 
-    const getExerciseList = function(routineId) {
-        axios.get(`${REST_ROUTINE_BOARD_API}/${routineId}`)
+    const getExerciseList = async function(routineId) {
+        await axios.get(`${REST_ROUTINE_BOARD_API}/${routineId}`)
             .then((response) => {
-                console.log(response.data);
+                exerciseList.value = response.data.exList
+                // console.log(response.data.exList);
             })
     }
 

@@ -1,24 +1,29 @@
 <template>
-    <p class="contents">     
-        <!-- <span>
-            {{ boardOne.routineId }}
-        </span>            -->
-        <span class="rTitle">
-            <RouterLink :to="`/board/${boardOne.routineId}`">{{ boardOne.routineTitle }}</RouterLink>
+    <div class=timetable>
+        <TimeTable v-if="exercises && exercises.length > 0" :exercises="exercises" />
+    </div>
+    <div class="col">
+        <p class="contents">     
+            <!-- <span>
+                {{ boardOne.routineId }}
+            </span>            -->
+            <span class="rTitle">
+                <RouterLink :to="`/board/${boardOne.routineId}`">{{ boardOne.routineTitle }}</RouterLink>
+            </span>
+            <span class="rWriter">{{ boardOne.nickname }}</span>
+            <span class="rDate">{{ boardOne.date }}</span>
+            <span class="rReview"></span>
+        </p>
+        <span class="heart" @click="checkWish(boardOne.routineId)">
+            <!-- 찜 목록에 있으면 파란 하트, 없으면 흰 하트 -->
+            <span v-if="isWished">💙</span>
+            <span v-else>🤍</span>
         </span>
-        <span class="rWriter">{{ boardOne.nickname }}</span>
-        <span class="rDate">{{ boardOne.date }}</span>
-        <span class="rReview"></span>
-    </p>
-    <span class="heart" @click="checkWish(boardOne.routineId)">
-         <!-- 찜 목록에 있으면 파란 하트, 없으면 흰 하트 -->
-         <span v-if="isWished">💙</span>
-        <span v-else>🤍</span>
-    </span>
-
+    </div>
 </template>
 
 <script setup>
+    import TimeTable from '@/components/routineBoard/TimeTable.vue'
     import { useBoardStore } from '@/stores/board'
     import { useUserStore } from '@/stores/user';
     import { useWishStore } from '@/stores/wish';
@@ -35,8 +40,18 @@
     // console.log(boardOne)
     const isWished = ref(false)
 
+    const exercises = ref([])
+    const isLoaded = ref(false)
+
     // 컴포넌트가 마운트될 때 현재 찜 상태를 확인
-    onMounted(() => {
+    onMounted(async () => {
+        await store.getExerciseList(boardOne.routineId)
+
+        exercises.value = store.exerciseList
+        console.log(exercises.value)
+
+        isLoaded.value = true
+
         isWished.value = wishStore.wishList.some(item =>
             item.routineId === boardOne.routineId && item.userId === userStore.loginInfo.userId
         );
@@ -44,6 +59,8 @@
 
     // 클릭 이벤트 핸들러
     const checkWish = (routineId) => {
+        console.log(routineId)
+        console.log(isWished.value)
         // 현재 찜 상태를 바탕으로 조건을 체크하고 찜 상태를 변경
         if (isWished.value) {
             wishStore.delWish(routineId);
@@ -58,6 +75,14 @@
 </script>
 
 <style scoped>
+    .timetable {
+        width: 80%;
+        margin: 0 auto;
+    }
+    .col {
+        display: flex;
+        flex-direction: row;
+    }
     .contents {
         display: flex;
         flex-direction: column;

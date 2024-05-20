@@ -65,7 +65,6 @@
     .likeBox .addBtn {
         width: 110px;
         height: 30px;
-        margin-left: 10px;
         border: 1px solid #7FABB2;
         background-color: #7FABB2;
         color: white;
