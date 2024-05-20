@@ -4,7 +4,7 @@
     <div id="headerBox">
         <header>
             <div id="logo">
-                로고
+                <RouterLink :to="{ name: 'home'}">BodyBuddy</RouterLink>
             </div>
             <div id="nav">
                 <RouterLink :to="{ name: 'home'}">Home</RouterLink> 
@@ -31,44 +31,27 @@
   
   <script setup>
 //  import { ref, onMounted } from 'vue'
-  import { useUserStore } from '@/stores/user'
-  import { useRouter } from 'vue-router'
+    import { useUserStore } from '@/stores/user'
+    import { useRouter } from 'vue-router'
 
-const store = useUserStore()
-const router = useRouter()
+    const store = useUserStore()
+    const router = useRouter()
 
-//   let isLoginFlag = ref(false)
-//   const isLogin = function(){
-//     const nickname = sessionStorage.getItem("nickname")
-//     const userId = sessionStorage.getItem("userId")
-//     if(userId && nickname) isLoginFlag.value = true
-//     else isLoginFlag.value = false
-//   }
 
-//   const logout = function(){
-//     isLoginFlag.value = false
-//     store.logout()
-//   }
-
-// // 라우트 업데이트 전에 실행될 콜백 함수 등록
-// router.beforeEach((to, from, next) => {
-//     isLogin()
-//     next()
-// })
-
-// onMounted(() => {
-//     isLogin()
-// })
   </script>
   
   <style scoped>
-  
 
+    * {
+        font-family: 'SUITE-Regular';
+        font-weight: 600;
+    }
         /* ========= 예림 수정 ========== */
+
         #headerBox {
             width: 100%;
             height: 50px;
-            border: 1px solid lightgray;
+            /* border: 1px solid lightgray; */
             display: flex;
             /* justify-content: space-between; */
             align-items: center;
@@ -79,7 +62,8 @@ const router = useRouter()
             flex-direction: row;
         }
         header #logo {
-            margin-left: 10px;
+            margin-left: 20px;
+            font-size: 0.9em;
         }
         header #nav {
             /* border: 1px solid blue; */
@@ -89,13 +73,15 @@ const router = useRouter()
             justify-content: space-around;
             text-align: center;
             margin: 0 auto;
-            font-weight: bold;
+            font-size: 0.9em;
         }
         header #nav .router-link-exact-active {
             color: #7FABB2;
+            font-weight: 900;
         }
         header #user {
             margin-right: 10px;
+            font-size: 0.9em;
         }
         /* ========= 재현 수정 ========== */
         a {

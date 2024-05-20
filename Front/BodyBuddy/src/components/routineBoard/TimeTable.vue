@@ -345,6 +345,7 @@ const mon1 = ref({})
   table {
       width: 100% !important;
       height: 250px;
+      font-family: 'SUITE-Regular';
   }
   table th {
       text-align: center;
@@ -363,6 +364,7 @@ const mon1 = ref({})
   td div {
       width: 100%;
       height: 100%;
+      font-weight: 500;
   }
   
   .isExist {

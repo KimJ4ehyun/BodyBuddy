@@ -30,6 +30,9 @@ const props = defineProps({
 </script>
 
 <style scoped>
+    * {
+        font-family: 'SUITE-Regular';
+    }
     .modal-body {
         display: flex;
         flex-direction: column;
