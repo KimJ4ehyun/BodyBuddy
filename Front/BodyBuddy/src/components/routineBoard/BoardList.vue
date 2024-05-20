@@ -22,7 +22,7 @@
             >
                 {{ pageNumber }}
             </button>
-            <button @click="nextPage" :style="{ visibility: (currentPage === totalPages - 1) ? 'hidden' : 'visible' }" class="btn btn-primary">Next</button>
+            <button @click="nextPage" :style="{ visibility: (currentPage === totalPages - 1 || totalPages === 0) ? 'hidden' : 'visible' }" class="btn btn-primary">Next</button>
         </div>
     </div>
 </template>

@@ -14,7 +14,7 @@
                 
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-primary myAddBtn" @click="add">내 루틴에 추가</button>
+                    <button class="btn btn-primary myAddBtn" @click="add" data-bs-dismiss="modal">내 루틴에 추가</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -41,9 +41,14 @@
 
     const store = useBoardStore()
 
-    const add = (() => {
-        store.addMyRoutine(myRoutine.value)
-    })
+    const add = () => {
+    store.addMyRoutine(myRoutine.value)
+        .then(() => {
+            myRoutine.value.routineTitle = '';
+            myRoutine.value.description = '';
+        })
+        .catch(() => {})
+};
 </script>
 
 <style scoped>

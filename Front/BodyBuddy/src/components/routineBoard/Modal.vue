@@ -10,7 +10,7 @@
                     <span id="eName">🏃‍♂️ 운동 이름 : {{ myEx.exerciseName }} 🏃‍♂️ </span>
                     <span id="ePart">운동 부위 : {{ myEx.exercisePart }}</span>
                     <span id="eSet">{{ myEx.setCnt }} 세트</span>
-                    <span id="eRep">{{ myEx.repetitions }} 회</span>
+                    <span id="eRep">{{ myEx.repetitions }} 회(시간)</span>
                     <span id="eWeight">{{ myEx.weight }} kg</span>
                     <span id="eTime">{{ myEx.dayOfTheWeek }} - {{ myEx.time }}</span>
                 </div>

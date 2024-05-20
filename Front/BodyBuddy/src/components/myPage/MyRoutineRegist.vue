@@ -49,7 +49,7 @@
             <input type="number" v-model="exercise.weight" class="numInput" min="0"/> kg
           </div>
           <div>
-            <label>횟수</label>
+            <label>횟수(시간)</label>
             <input type="number" v-model="exercise.repetitions" class="numInput" min="0"/>
           </div>
         </div>
@@ -162,7 +162,7 @@ const submitExercises = () => {
   }));
   console.log(text.value.routineTitle)
   console.log(text.value.description)
-  store.addExercises(route.params.routineId, formattedExercises, text.value.routineTitle, text.value.description);
+  store.addRoutine(formattedExercises, text.value.routineTitle, text.value.description)
 };
 </script>
 

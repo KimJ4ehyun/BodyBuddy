@@ -84,7 +84,7 @@
             ]
           },
           {
-            path: 'regist/:routineId',
+            path: 'regist',
             name: 'myRoutineRegist',
             component: MyRoutineRegist
           },
