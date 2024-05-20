@@ -50,7 +50,7 @@ export const useBoardStore = defineStore('board', () => {
             return;
         }
 
-        await axios.post(`${REST_ROUTINE_BOARD_API}/my-routine/add?routineId=${routine.originRId}`, routine
+        return await axios.post(`${REST_ROUTINE_BOARD_API}/my-routine/add?routineId=${routine.originRId}`, routine
         )
             .then((response) => {
                 const myStore = useMyPageStore()

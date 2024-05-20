@@ -54,12 +54,8 @@
     })
 
     const confirmAddRoutine = () => {
-    if (confirm('루틴을 등록하시겠습니까?')) {
-        store.addRoutine();
+        router.push(`/mypage/regist`)
     }
-}
-
-    console.log(userStore.loginInfo)
 
 </script>
 

@@ -29,11 +29,12 @@ export const useMyPageStore = defineStore('myPage', () => {
         });
     };
 
-    const addRoutine = function() {
+    const addRoutine = function(exercises, routineTitle, description) {
       axios.post(`${REST_MYPAGE_API}/my-routine/regist`)
         .then((response) => {
           const routineId = response.data
-          router.push(`/mypage/regist/${routineId}`)
+          addExercises(routineId, exercises, routineTitle, description);
+          router.push(`/mypage`)
         })
         .catch((error) => {
           console.log(error)
