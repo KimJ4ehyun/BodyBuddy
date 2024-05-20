@@ -1,6 +1,6 @@
 <template>
   <div class="routine-container">
-    <h2>루틴 추가하기</h2>
+    <h2>루틴 등록하기</h2>
     <div class="searchBar">
       <label id="searchLabel" for="searchInput">운동이름 검색</label>
       <input id="searchInput" type="text" v-model="search" placeholder="Search" class="search" @keyup.enter="search"/>
@@ -31,79 +31,78 @@
       </div>
     </div>
     <div v-for="(exercise, index) in selectedExercises" :key="'selected-' + exercise.id" class="ex-block">
-      <div class="info">
-        <div>
-          <span style="color: #7FABB2">{{ index + 1 }}</span>&nbsp;
-          <span>{{ exercise.exercisePart }}</span>&nbsp; | &nbsp;
-          <span>{{ exercise.exerciseName }}</span>
-        </div>
-        <div>
-          <button @click="removeExercise(exercise.id)" class="remove-button">-</button>
+  <div class="info">
+    <div>
+      <span style="color: #7FABB2">{{ index + 1 }}</span>&nbsp;
+      <span>{{ exercise.exercisePart }}</span>&nbsp; | &nbsp;
+      <span>{{ exercise.exerciseName }}</span>
+    </div>
+    <div>
+      <button @click="removeExercise(exercise.id)" class="remove-button">-</button>
+    </div>
+  </div>
+  <div>
+    <div class="exInfo">
+      <div class="input-group">
+        <label class="left-align">세트</label>
+        <input type="number" v-model="exercise.setCnt" class="numInput" min="0"/>
+      </div>
+      <div class="input-group">
+        <label class="left-align">무게</label>
+        <div class="weight-input-group">
+          <input type="number" v-model="exercise.weight" class="numInput" min="0"/>
+          <span>kg</span>
         </div>
       </div>
-      <div>
-        <div class="exInfo">
-          <div>
-            <label>세트</label>
-            <input type="number" v-model="exercise.setCnt" class="numInput" min="0"/>
-          </div>
-          <div>
-            <label>무게</label>
-            <input type="number" v-model="exercise.weight" class="numInput" min="0"/> kg
-          </div>
-          <div>
-            <label>횟수(시간)</label>
-            <input type="number" v-model="exercise.repetitions" class="numInput" min="0"/>
-          </div>
-        </div>
-        <span>&nbsp;</span>
-        <div>
-          <div>
-            <label>요일</label>
-            <label v-for="day in allDays" :key="day">
-              <div>
-                <input type="checkbox" :value="day" @change="() => toggleDay(exercise, day)" :checked="exercise.dayOfTheWeek.includes(day)" class="dayCheck"/> {{ day }}
-              </div>
-            </label>
-          </div>
-        </div>
-        <div class="timeBox">
-          <label for="floatingSelectGrid">시간</label>&nbsp;
-          <div class="selectBox">
-            <select id="floatingSelectGrid" class="timeInput" v-model="exercise.time">
-              <option value="">선택</option>
-              <option value="오전">오전</option>
-              <option value="오후">오후</option>
-              <option value="저녁">저녁</option>
-            </select>
-          </div>
-        </div>
+      <div class="input-group">
+        <label class="left-align">횟수(시간)</label>
+        <input type="number" v-model="exercise.repetitions" class="numInput" min="0"/>
       </div>
     </div>
-    <div v-if="isFormValid">
-      <div class="text">
-        <div class="col-md-8">
-          <input type="text" id="inputReview" v-model="text.routineTitle" class="form-control" placeholder="제목을 입력해주세요.">
-        </div>
-        <span>&nbsp;</span>
-        <div class="col-md-8">
-          <input type="text" id="inputReview" v-model="text.description" class="form-control" placeholder="설명을 입력해주세요.">
-        </div>
+    <div class="input-group">
+      <label class="left-align">요일</label>
+      <div class="days">
+        <label v-for="day in allDays" :key="day" class="day-label">
+          <input type="checkbox" :value="day" @change="() => toggleDay(exercise, day)" :checked="exercise.dayOfTheWeek.includes(day)" class="dayCheck"/> {{ day }}
+        </label>
       </div>
-      <div>
-        <button type="button" id="registBtn" class="btn btn-primary" @click="submitExercises()">등록하기</button>
+    </div>
+    <div class="input-group">
+      <label for="floatingSelectGrid" class="left-align">시간</label>&nbsp;
+      <div class="selectBox">
+        <select id="floatingSelectGrid" class="timeInput" v-model="exercise.time">
+          <option value="">선택</option>
+          <option value="오전">오전</option>
+          <option value="오후">오후</option>
+          <option value="저녁">저녁</option>
+        </select>
       </div>
     </div>
   </div>
+</div>
+
+<div v-if="isFormValid" class="ex-block">
+  <div class="text">
+    <div class="input-group">
+      <input type="text" id="inputTitle" v-model="text.routineTitle" class="form-control" placeholder="제목을 입력해주세요."/>
+    </div>
+    <div class="input-group">
+      <textarea id="inputDescription" v-model="text.description" class="form-control" placeholder="설명을 입력해주세요."/>
+    </div>
+  </div>
+  <div>
+    <button type="button" id="registBtn" class="btn btn-primary" @click="submitExercises()">등록하기</button>
+  </div>
+</div>
+</div>
+
 </template>
 
 <script setup>
 import { ref, computed } from 'vue';
 import { exercises } from '@/data/exercises.js';
 import { useMyPageStore } from '@/stores/myPage'
-import { useRoute } from 'vue-router';
 
-const route = useRoute()
 const store = useMyPageStore()
 
 const search = ref('');
@@ -165,12 +164,9 @@ const submitExercises = () => {
     ...exercise,
     dayOfTheWeek: exercise.dayOfTheWeek.join(',')
   }));
-  console.log(text.value.routineTitle)
-  console.log(text.value.description)
   store.addRoutine(formattedExercises, text.value.routineTitle, text.value.description)
 };
 </script>
-
 
 <style scoped>
 .routine-container {
@@ -183,38 +179,37 @@ const submitExercises = () => {
 h2 {
   color: #333;
   font-size: 24px;
-  text-align: center;
   margin-bottom: 20px;
 }
 
 .searchBar .search {
   margin-right: 10px;
-   width: 40%;
+  width: 40%;
   padding: 3px 10px;
   font-size: 0.9em;
   border-radius: 5px;
   border: 1px solid lightgray;
 }
 
-  .searchBtn{
-    background-color: #7FABB2;
-    color: white;
-    border: none;
-    cursor: pointer;
-    width: 50px;
-    height: 30px;
-    font-size: 0.9em;
-    border-radius: 5px;
-  }
+.searchBtn {
+  background-color: #7FABB2;
+  color: white;
+  border: none;
+  cursor: pointer;
+  width: 50px;
+  height: 30px;
+  font-size: 0.9em;
+  border-radius: 5px;
+}
 
-  #searchLabel{
-    font-size: 0.8em;
-    margin-right: 20px;
-  }
+#searchLabel {
+  font-size: 0.8em;
+  margin-right: 20px;
+}
 
-  button:hover {
-    background-color: #A9DDDE;
-  }
+button:hover {
+  background-color: #A9DDDE;
+}
 
 .partBtns {
   margin: 20px 0;
@@ -238,11 +233,11 @@ h2 {
   color: #FFFFFF;
 }
 
+
 .ex-container {
   display: flex;
   flex-wrap: wrap;
-  margin-bottom: 20px;
-  margin-top: 20px; 
+  margin: 20px 0;
 }
 
 .ex-col {
@@ -252,6 +247,11 @@ h2 {
 
 .ex-check {
   margin-right: 5px;
+  width: 17px;
+  height: 17px;
+  border: 2px solid #7FABB2;
+  border-radius: 5px;
+  accent-color: #324B4F;
 }
 
 .ex-label {
@@ -261,15 +261,11 @@ h2 {
 
 .ex-block {
   background-color: white;
-  border: 1px solid #ddd;
+  border: 1px solid #324B4F;
   padding: 15px;
   margin-bottom: 10px;
   border-radius: 5px;
-}
-
-.block-header span {
-  margin-right: 10px;
-  font-weight: bold;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .remove-button {
@@ -278,11 +274,10 @@ h2 {
   font-weight: bold;
   cursor: pointer;
   font-size: 20px;
-  height: 5px;
 }
 
 .remove-button:hover {
-  background-color:white;
+  background-color: #FFFFFF;
 }
 
 .exInfo {
@@ -293,10 +288,14 @@ h2 {
 .numInput, .timeInput {
   padding: 5px;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 5px !important;
   width: 90px;
   margin: 10px auto;
 }
+
+/* .numInput {
+  margin-left: 5px;
+} */
 
 .dayCheck {
   margin-left: 30px;
@@ -311,8 +310,8 @@ h2 {
 }
 
 #registBtn:disabled {
-    cursor: not-allowed;
-    opacity: 0.5;
+  cursor: not-allowed;
+  opacity: 0.5;
 }
 
 #registBtn:hover {
@@ -327,30 +326,36 @@ h2 {
   margin-bottom: 10px;
 }
 
-.ex-check {
-    display: inline-block;
-    width: 17px;
-    height: 17px;
-    border: 2px solid #7FABB2;
-    border-radius: 5px;
-    margin-top: 5px;
-    accent-color: #324B4F;
-}
-
-.timeBox{
+.input-group {
   display: flex;
-  flex-direction: row;
   align-items: center;
-  width: 50%;
-}
-.timeBox label {
-  width: 20%;
+  margin-bottom: 10px;
 }
 
-.timeBox .selectBox {
-  width: 80%;
-  text-align: left;
+.input-group label {
+  margin-right: 10px; /* 레이블과 입력창 사이의 간격을 추가합니다. */
 }
 
+.weight-input-group {
+  display: flex;
+  align-items: center;
+}
 
+.weight-input-group span {
+  margin-left: 5px;
+}
+
+.days {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.day-label {
+  margin-right: 10px;
+}
+
+#inputDescription {
+  height: 200px;
+}
 </style>

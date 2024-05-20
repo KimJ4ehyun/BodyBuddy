@@ -1,5 +1,4 @@
 <template>
-
     <div class="libraryHeader">
         <img src="@/assets/img/banner4.jpg">
         <div class="category">
@@ -37,11 +36,10 @@ import { exercises } from '@/data/allExercises.js';
 
 const search = ref('');
 const selectedPart = ref('');
-const selectedExercises = ref([]);
-const parts = ['하체', '가슴', '등', '어깨', '팔', '복근', '유산소'];
+const parts = ['전체', '하체', '가슴', '등', '어깨', '팔', '복근', '유산소'];
 
 const filteredExercises = computed(() => {
-  return exercises.filter(exercise => exercise.exercisePart === selectedPart.value && exercise.exerciseName.includes(search.value));
+  return exercises.filter(exercise => (exercise.exercisePart === selectedPart.value || selectedPart.value === '전체') && exercise.exerciseName.includes(search.value));
 });
 
 </script>
@@ -91,6 +89,30 @@ const filteredExercises = computed(() => {
         /* border: 1px solid lightgray; */
         height: 200px;
         text-align: center;
+        font-family: 'SUITE-Regular';
+        font-weight: 700;
+        position: relative;
+    }
+    .libraryHeader img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+    .libraryHeader .category {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        flex-direction: column;
+    }
+    .libraryHeader .category .categoryA {
+        font-size: 2em;
+    }
+
+    .libraryHeader .category .categoryB {
+        font-size: 0.8em;
     }
     .searchBar {
         /* border: 1px solid lightblue; */
@@ -117,7 +139,6 @@ const filteredExercises = computed(() => {
         width: 50px;
         height: 30px;
         font-weight: bold;
-        color: black;
     }
 
     .partBtns {
@@ -132,7 +153,7 @@ const filteredExercises = computed(() => {
         background-color: #FFFFFF;
         border-radius: 20px;
         cursor: pointer;
-        width: 13%;
+        width: 11%;
     }
 
     .partBtn.active, .partBtn:hover {
@@ -144,8 +165,7 @@ const filteredExercises = computed(() => {
     .ex-container {
         display: flex;
         flex-wrap: wrap;
-        margin-bottom: 20px;
-        margin-top: 20px; 
+        margin: 20px auto;
     }
 
     .ex-col {
