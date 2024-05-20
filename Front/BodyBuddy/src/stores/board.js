@@ -9,6 +9,7 @@ const REST_ROUTINE_BOARD_API = `http://localhost:8080/routine/board`
 export const useBoardStore = defineStore('board', () => {
 
     const boardList = ref([])
+    const currentPage = ref(0)
 
     const getBoardList = function() {
         axios.get(REST_ROUTINE_BOARD_API)
@@ -65,6 +66,7 @@ export const useBoardStore = defineStore('board', () => {
 
     return {
         boardList,
+        currentPage,
         getBoardList,
         exerciseList,
         getExerciseList,

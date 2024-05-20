@@ -1,4 +1,5 @@
   import { createRouter, createWebHistory } from 'vue-router'
+  import { useBoardStore } from '@/stores/board';
   import HomeView from '../views/HomeView.vue'
   import LoginView from '@/views/LoginView.vue'
   import JoinView from '@/views/JoinView.vue'
@@ -108,12 +109,19 @@
     ]
   })
 
-  // Front단 Interceptor 처리
-  // sessionStorage에 id, nickname이 없으면 로그인 안된 것으로 처리
-  // myPage 밑에 것들만 처리
   router.beforeEach((to, from, next) => {
     const loggedIn = sessionStorage.getItem('userId') && sessionStorage.getItem('nickname'); 
 
+    const store = useBoardStore();
+
+    // board/** 이외의 다른 경로로 이동시에 page 0으로 초기화
+    if (from.path.startsWith('/board') && !to.path.startsWith('/board')) {
+        store.currentPage = 0;
+    }
+
+    // Front단 Interceptor 처리
+    // sessionStorage에 id, nickname이 없으면 로그인 안된 것으로 처리
+    // myPage 밑에 것들만 처리
     if (to.matched.some(record => record.meta.requiresAuth)) {
         if (!loggedIn) {
             next('/login');
@@ -124,5 +132,6 @@
         next();
     }
   });
+  
 
   export default router
