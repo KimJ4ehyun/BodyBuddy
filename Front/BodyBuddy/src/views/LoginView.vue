@@ -39,6 +39,10 @@
 </script>
 
 <style scoped>
+* {
+        font-family: 'SUITE-Regular';
+    }
+
 .loginContainer {
   text-align: center;
   border-radius: 10px; /* 모서리를 둥글게 만듭니다. */

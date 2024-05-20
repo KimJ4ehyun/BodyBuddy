@@ -233,6 +233,9 @@ window.addEventListener('popstate', () => {
 </script>
 
 <style scoped>
+* {
+        font-family: 'SUITE-Regular';
+    }
 
 h4 {
   margin-top: 30px;

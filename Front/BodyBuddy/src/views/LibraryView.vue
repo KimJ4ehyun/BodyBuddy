@@ -1,7 +1,11 @@
 <template>
 
     <div class="libraryHeader">
-        <h3>Library 배너</h3>
+        <img src="@/assets/img/banner4.jpg">
+        <div class="category">
+            <span class="categoryA">Library</span>
+            <span class="categoryB">Home &nbsp; > &nbsp; Library</span>
+        </div>
     </div>
     <div class="searchBar">
         <input type="text" v-model="search" placeholder="Search" class="search" @keyup.enter="search">
@@ -47,18 +51,49 @@ const filteredExercises = computed(() => {
         font-family: 'SUITE-Regular';
     }
 
+    .libraryHeader {
+        /* border: 1px solid lightgray; */
+        width: 100%;
+        height: 250px;
+        text-align: center;
+        font-family: 'SUITE-Regular';
+        font-weight: 700;
+        position: relative;
+    }
+    .libraryHeader img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+    .libraryHeader .category {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        flex-direction: column;
+    }
+    .libraryHeader .category .categoryA {
+        font-size: 2em;
+    }
+
+    .libraryHeader .category .categoryB {
+        font-size: 0.8em;
+    }
+
     .container {
         width: 70%;
-        margin: 0 auto;
+        margin: 30px auto;
     }
 
     .libraryHeader {
-        border: 1px solid lightgray;
+        /* border: 1px solid lightgray; */
         height: 200px;
         text-align: center;
     }
     .searchBar {
-        border: 1px solid lightblue;
+        /* border: 1px solid lightblue; */
         background-color: #7FABB2;
         height: 60px;
         display: flex;

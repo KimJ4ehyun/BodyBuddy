@@ -1,7 +1,5 @@
 <template>
     <div>
-        <h3>Board Detail</h3>
-
         <div class="detailContainer">
             <div class="detailBox" v-if="boardLoaded">
                 <div class="timetable">
@@ -89,27 +87,34 @@ import { useUserStore } from '@/stores/user'
 </script>
 
 <style scoped>
+    * {
+        font-family: 'SUITE-Regular';
+    }
     .detailBox {
-        border: 1px solid lightgray;
+        /* border: 1px solid lightgray; */
         width: 80%;
         margin: 10px auto;
         display: flex;
         flex-direction: row;
         padding: 10px;
         margin-bottom: 100px;
+        margin-top: 40px;
     }
 
     .detailBox .timetable {
-        border: 1px solid skyblue;
+        /* border: 1px solid skyblue; */
         width: 50%;
+        /* margin: auto 0; */
     }
 
     .detailBox .info {
-        border: 1px solid orange;
+        /* border: 1px solid orange; */
         display: flex;
         flex-direction: column;
-        width: 50%;
-        padding: 10px;
+        width: 45%;
+        /* padding: 10px; */
+        padding-left: 20px;
+        margin-left: 30px;
     }
 
     .info span {
