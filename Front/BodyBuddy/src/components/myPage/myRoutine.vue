@@ -97,6 +97,10 @@
         color: #9F9F9F;
         text-decoration: none;
         font-weight: bold;
+        margin-right: 7px;
+        font-family: "Gowun Dodum";
+        font-weight: 600;
+        font-style: normal;
     }
     
     main .bar a.router-link-exact-active {
@@ -118,8 +122,9 @@
         background-color: #7FABB2;
         border: 1px solid #7FABB2;
         border-radius: 5px;
+        font-family: "Gowun Dodum";
         font-size: 0.8em;
-        font-weight: bold;
+        font-weight: 500;
         color: white;
         margin-top: 5px;
     }

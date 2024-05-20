@@ -16,6 +16,7 @@
   import LikeList from '@/components/myPage/LikeList.vue'
   import MyRoutineRegist from '@/components/myPage/MyRoutineRegist.vue'
   import UserInfoEdit from '@/components/myPage/UserInfoEdit.vue'
+  import Library from '@/views/LibraryView.vue'
 
   const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -44,6 +45,11 @@
         path: '/PopupUserId',
         name: 'PopupUserId',
         component: PopupUserId
+      },
+      {
+        path: '/library',
+        name: 'Library',
+        component: Library
       },
       
 
