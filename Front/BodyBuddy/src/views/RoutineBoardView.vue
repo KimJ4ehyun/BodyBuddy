@@ -22,6 +22,7 @@
     const store = useBoardStore()
 
     const search = (() => {
+        store.currentPage = 0
         store.getBoardList(keyword.value)
     })
 
