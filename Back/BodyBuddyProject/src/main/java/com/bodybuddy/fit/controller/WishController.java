@@ -49,6 +49,8 @@ public class WishController {
 		wish.setRoutineId(routineId);
 		wish.setUserId(loginId);
 		
+//		System.out.println(111);
+		
 		int check = wService.wishCheck(wish);
 		System.out.println("wishCheck"+check);
 		int n = 0;

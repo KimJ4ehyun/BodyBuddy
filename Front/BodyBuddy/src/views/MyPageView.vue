@@ -26,7 +26,7 @@
 <style scoped>
     .myPageHeader {
         border: 1px solid lightgray;
-        height: 160px;
+        height: 200px;
         text-align: center;
     }
 

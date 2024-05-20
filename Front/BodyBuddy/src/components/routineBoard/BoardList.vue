@@ -1,7 +1,5 @@
 <template>
     <div>
-        <h2>BoardList</h2>
-
         <div id="container">
             <div class="boardBox" 
                 v-for="(routine, index) in paginatedBoardList"
@@ -79,15 +77,17 @@
         display: flex;
         flex-direction: column;
         justify-content: space-around;
+        margin-top: 50px;
     }
 
     .boardBox {
         background-color: #F0F6F6;
-        width: 60%;
+        width: 50%;
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         margin: 20px auto;
         padding: 10px 20px;
+
     }
 
     .pagination {
