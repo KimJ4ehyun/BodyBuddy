@@ -12,17 +12,17 @@
         </div>
 
         <div class="pagination">
-            <button @click="prevPage" :style="{ visibility: (currentPage === 0) ? 'hidden' : 'visible' }" class="btn btn-primary">Prev</button>
+            <button @click="prevPage" :style="{ visibility: (store.currentPage === 0) ? 'hidden' : 'visible' }" class="btn btn-primary">Prev</button>
             <button 
                 v-for="pageNumber in totalPages" 
                 :key="pageNumber" 
                 @click="gotoPage(pageNumber - 1)"
-                :class="{ active: currentPage === pageNumber - 1 }"
+                :class="{ active: store.currentPage === pageNumber - 1 }"
                 class="btn btn-primary"
             >
                 {{ pageNumber }}
             </button>
-            <button @click="nextPage" :style="{ visibility: (currentPage === totalPages - 1 || totalPages === 0) ? 'hidden' : 'visible' }" class="btn btn-primary">Next</button>
+            <button @click="nextPage" :style="{ visibility: (store.currentPage === totalPages - 1 || totalPages === 0) ? 'hidden' : 'visible' }" class="btn btn-primary">Next</button>
         </div>
     </div>
 </template>
@@ -33,11 +33,10 @@
     import { onMounted, ref, computed } from 'vue';
 
     const store = useBoardStore()
-    const currentPage = ref(0);
-    const pageSize = 4;
+    const pageSize = 3;
 
     const paginatedBoardList = computed(() => {
-        const start = currentPage.value * pageSize;
+        const start = store.currentPage * pageSize;
         const end = start + pageSize;
         return store.boardList.slice(start, end);
     });
@@ -49,14 +48,14 @@
     });
 
     const prevPage = () => {
-        if (currentPage.value > 0) {
-            currentPage.value--;
+        if (store.currentPage.value > 0) {
+            store.currentPage.value--;
         }
     };
 
     const nextPage = () => {
-        if (currentPage.value < totalPages.value - 1) {
-            currentPage.value++;
+        if (store.currentPage.value < totalPages.value - 1) {
+            store.currentPage.value++;
         }
     };
 
@@ -69,7 +68,7 @@
     // };
 
     const gotoPage = (page) => {
-        currentPage.value = page;
+        store.currentPage = page;
     };
 </script>
 
