@@ -9,7 +9,7 @@
             <div id="nav">
                 <RouterLink :to="{ name: 'home'}">Home</RouterLink> 
                 <RouterLink :to="{ name: 'routineList'}">Routines</RouterLink>
-                Library
+                <RouterLink :to="{ name: 'Library'}">Library</RouterLink>
             </div>
             <div id="user">
                 <!-- 재현 수정 
@@ -62,7 +62,6 @@ const router = useRouter()
   </script>
   
   <style scoped>
-
   
 
         /* ========= 예림 수정 ========== */
