@@ -67,7 +67,7 @@ public class RoutineServiceImpl implements RoutineService {
 	public int updateText(int routineId, String routineTitle, String description) {
 		Map<String, Object> map = new ConcurrentHashMap<>();
 		// 루틴 제목을 입력 안 하면 제목 없음으로 생성 
-		if (routineTitle == null) routineTitle = "제목 없음";
+		if (routineTitle == null || routineTitle.equals("")) routineTitle = "제목 없음";
 		map.put("routineId", routineId);
 		map.put("routineTitle", routineTitle);
 		map.put("description", description);
