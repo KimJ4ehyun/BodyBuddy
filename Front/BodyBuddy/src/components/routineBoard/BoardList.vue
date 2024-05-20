@@ -46,14 +46,14 @@
     });
 
     const prevPage = () => {
-        if (store.currentPage.value > 0) {
-            store.currentPage.value--;
+        if (store.currentPage > 0) {
+            store.currentPage--;
         }
     };
 
     const nextPage = () => {
-        if (store.currentPage.value < totalPages.value - 1) {
-            store.currentPage.value++;
+        if (store.currentPage < totalPages.value - 1) {
+            store.currentPage++;
         }
     };
 

@@ -170,8 +170,9 @@ const submitExercises = () => {
 <style scoped>
 .routine-container {
   max-width: 800px;
+  width: 60%;
   margin: auto;
-  padding: 20px;
+  padding: 20px 5px;
   background-color: #f9f9f9;
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
@@ -198,16 +199,19 @@ h2 {
 }
 
 .partBtn {
-  padding: 10px 15px;
+  font-size: 1em;
+  padding: 5px 10px;
   margin-left: 5px;
   color: #324B4F;
   background-color: #FFFFFF;
-  border-radius: 5px;
+  border-radius: 20px;
   cursor: pointer;
+  width: 13%;
 }
 
 .partBtn.active, .partBtn:hover {
   background-color: #324B4F;
+  transition: background-color 0.3s;
   color: #FFFFFF;
 }
 
