@@ -7,8 +7,9 @@
                 로고
             </div>
             <div id="nav">
-                <RouterLink :to="{ name: 'home'}">Home</RouterLink> |
-                <RouterLink :to="{ name: 'routineList'}">루틴게시판</RouterLink>
+                <RouterLink :to="{ name: 'home'}">Home</RouterLink> 
+                <RouterLink :to="{ name: 'routineList'}">Routines</RouterLink>
+                Library
             </div>
             <div id="user">
                 <!-- 재현 수정 
@@ -82,8 +83,17 @@ const router = useRouter()
             margin-left: 10px;
         }
         header #nav {
+            /* border: 1px solid blue; */
+            width: 30%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
             text-align: center;
             margin: 0 auto;
+            font-weight: bold;
+        }
+        header #nav .router-link-exact-active {
+            color: #7FABB2;
         }
         header #user {
             margin-right: 10px;

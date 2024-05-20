@@ -24,8 +24,8 @@ public class RoutineServiceImpl implements RoutineService {
 
 	// 루틴 전체 목록
 	@Override
-	public List<Routine> getAllRoutine() {
-		return routineDao.selectAll();
+	public List<Routine> getAllRoutine(String keyword) {
+		return routineDao.selectAll(keyword);
 	}
 
 	// 해당 루틴의 운동 정보 리스트 가져오기

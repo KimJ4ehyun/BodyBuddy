@@ -7,7 +7,7 @@
         <label for="userId">ID</label>
       </div>
       <div class="form-floating mb-3">
-        <input type="password" id="password" class="form-control" v-model="user.password">
+        <input type="password" id="password" class="form-control" v-model="user.password" @keyup.enter="login">
         <label for="password">Password</label>
       </div>
       <br>

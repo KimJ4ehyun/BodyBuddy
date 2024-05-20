@@ -77,12 +77,12 @@
         display: flex;
         flex-direction: column;
         justify-content: space-around;
-        margin-top: 50px;
+        margin-top: 40px;
     }
 
     .boardBox {
         background-color: #F0F6F6;
-        width: 50%;
+        width: 60%;
         display: flex;
         flex-direction: column;
         margin: 20px auto;

@@ -9,7 +9,7 @@ import com.bodybuddy.fit.model.dto.Routine;
 public interface RoutineService {
 	
 	// 루틴 전체 목록 보여주기
-	List<Routine> getAllRoutine();
+	List<Routine> getAllRoutine(String keyword);
 	
 	// 루틴 상세보기
 	Routine getOneRoutine(int routineId);

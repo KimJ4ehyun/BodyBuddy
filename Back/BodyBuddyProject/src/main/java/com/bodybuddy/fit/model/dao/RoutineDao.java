@@ -9,7 +9,7 @@ import com.bodybuddy.fit.model.dto.Routine;
 public interface RoutineDao {
 	
 	// 루틴 전체 목록 보여주기
-	List<Routine> selectAll();
+	List<Routine> selectAll(String keyword);
 	
 	// 해당 루틴의 운동 정보 리스트 가져오기
 	List<Exercise> selectAllExercise(int routineId);
