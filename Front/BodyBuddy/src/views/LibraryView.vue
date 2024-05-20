@@ -49,14 +49,45 @@ const filteredExercises = computed(() => {
         font-family: 'SUITE-Regular';
     }
 
+    .libraryHeader {
+        /* border: 1px solid lightgray; */
+        width: 100%;
+        height: 250px;
+        text-align: center;
+        font-family: 'SUITE-Regular';
+        font-weight: 700;
+        position: relative;
+    }
+    .libraryHeader img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+    .libraryHeader .category {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        flex-direction: column;
+    }
+    .libraryHeader .category .categoryA {
+        font-size: 2em;
+    }
+
+    .libraryHeader .category .categoryB {
+        font-size: 0.8em;
+    }
+
     .container {
         width: 70%;
-        margin: 0 auto;
+        margin: 30px auto;
     }
 
     .libraryHeader {
-        width: 100%;
-        height: 250px;
+        /* border: 1px solid lightgray; */
+        height: 200px;
         text-align: center;
         font-family: 'SUITE-Regular';
         font-weight: 700;
