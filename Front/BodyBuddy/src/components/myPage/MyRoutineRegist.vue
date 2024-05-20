@@ -1,7 +1,11 @@
 <template>
   <div class="routine-container">
     <h2>루틴 추가하기</h2>
-    <input type="text" v-model="search" placeholder="운동이름 검색" class="exInput" />
+    <div class="searchBar">
+      <label id="searchLabel" for="searchInput">운동이름 검색</label>
+      <input id="searchInput" type="text" v-model="search" placeholder="Search" class="search" @keyup.enter="search"/>
+      <button class="searchBtn" @click="search">검색</button>
+    </div>
     <div class="partBtns">
       <button
         v-for="part in parts"
@@ -13,6 +17,7 @@
         {{ part }}
       </button>
     </div>
+    <hr>
     <div class="ex-container">
       <div class="ex-col" v-for="exercise in filteredExercises" :key="exercise.id">
         <input 
@@ -28,10 +33,8 @@
     <div v-for="(exercise, index) in selectedExercises" :key="'selected-' + exercise.id" class="ex-block">
       <div class="info">
         <div>
-          <span>{{ index + 1 }}</span>
-        </div>
-        <div>
-          <span>{{ exercise.exercisePart }}</span>&nbsp;&nbsp; | &nbsp;&nbsp;
+          <span style="color: #7FABB2">{{ index + 1 }}</span>&nbsp;
+          <span>{{ exercise.exercisePart }}</span>&nbsp; | &nbsp;
           <span>{{ exercise.exerciseName }}</span>
         </div>
         <div>
@@ -64,14 +67,16 @@
             </label>
           </div>
         </div>
-        <div>
+        <div class="timeBox">
           <label for="floatingSelectGrid">시간</label>&nbsp;
-          <select id="floatingSelectGrid" class="timeInput" v-model="exercise.time">
-            <option value="">선택</option>
-            <option value="오전">오전</option>
-            <option value="오후">오후</option>
-            <option value="저녁">저녁</option>
-          </select>
+          <div class="selectBox">
+            <select id="floatingSelectGrid" class="timeInput" v-model="exercise.time">
+              <option value="">선택</option>
+              <option value="오전">오전</option>
+              <option value="오후">오후</option>
+              <option value="저녁">저녁</option>
+            </select>
+          </div>
         </div>
       </div>
     </div>
@@ -171,11 +176,7 @@ const submitExercises = () => {
 .routine-container {
   max-width: 800px;
   width: 60%;
-  margin: auto;
-  padding: 20px 5px;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  margin: 20px auto;
   text-align: center;
 }
 
@@ -186,27 +187,49 @@ h2 {
   margin-bottom: 20px;
 }
 
-.exInput {
-  width: calc(100% - 20px);
-  margin: 10px auto;
-  padding: 10px;
-  border: 1px solid #ccc;
+.searchBar .search {
+  margin-right: 10px;
+   width: 40%;
+  padding: 3px 10px;
+  font-size: 0.9em;
   border-radius: 5px;
+  border: 1px solid lightgray;
 }
 
+  .searchBtn{
+    background-color: #7FABB2;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 50px;
+    height: 30px;
+    font-size: 0.9em;
+    border-radius: 5px;
+  }
+
+  #searchLabel{
+    font-size: 0.8em;
+    margin-right: 20px;
+  }
+
+  button:hover {
+    background-color: #A9DDDE;
+  }
+
 .partBtns {
-  margin: 15px 0;
+  margin: 20px 0;
 }
 
 .partBtn {
-  font-size: 1em;
-  padding: 5px 10px;
+  font-size: 0.9em;
+  padding: 5px;
   margin-left: 5px;
+  margin-right: 5px;
   color: #324B4F;
   background-color: #FFFFFF;
-  border-radius: 20px;
+  border-radius: 15px;
   cursor: pointer;
-  width: 13%;
+  width: 12%;
 }
 
 .partBtn.active, .partBtn:hover {
@@ -250,13 +273,16 @@ h2 {
 }
 
 .remove-button {
-  margin-left: auto;
   background-color: #FFFFFF;
-  color: #324B4F;
   border: none;
-  border-radius: 5px;
-  padding: 5px 10px;
+  font-weight: bold;
   cursor: pointer;
+  font-size: 20px;
+  height: 5px;
+}
+
+.remove-button:hover {
+  background-color:white;
 }
 
 .exInfo {
@@ -269,8 +295,7 @@ h2 {
   border: 1px solid #ccc;
   border-radius: 5px;
   width: 90px;
-  margin-left: 10px;
-  margin-top: 10px;
+  margin: 10px auto;
 }
 
 .dayCheck {
@@ -297,6 +322,35 @@ h2 {
 .info {
   display: flex;
   justify-content: space-between;
+  font-weight: bold;
+  align-items: center;
+  margin-bottom: 10px;
 }
+
+.ex-check {
+    display: inline-block;
+    width: 17px;
+    height: 17px;
+    border: 2px solid #7FABB2;
+    border-radius: 5px;
+    margin-top: 5px;
+    accent-color: #324B4F;
+}
+
+.timeBox{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 50%;
+}
+.timeBox label {
+  width: 20%;
+}
+
+.timeBox .selectBox {
+  width: 80%;
+  text-align: left;
+}
+
 
 </style>

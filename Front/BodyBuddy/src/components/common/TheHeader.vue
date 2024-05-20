@@ -9,7 +9,7 @@
             <div id="nav">
                 <RouterLink :to="{ name: 'home'}">Home</RouterLink> 
                 <RouterLink :to="{ name: 'routineList'}">Routines</RouterLink>
-                Library
+                <RouterLink :to="{ name: 'Library'}">Library</RouterLink>
             </div>
             <div id="user">
                 <!-- 재현 수정 
@@ -41,10 +41,13 @@
   </script>
   
   <style scoped>
+
     * {
         font-family: 'SUITE-Regular';
         font-weight: 600;
     }
+        /* ========= 예림 수정 ========== */
+
         #headerBox {
             width: 100%;
             height: 50px;
