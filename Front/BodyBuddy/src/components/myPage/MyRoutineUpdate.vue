@@ -180,9 +180,10 @@
 import { ref, computed, onMounted } from "vue";
 import { exercises } from "@/data/exercises.js";
 import { useMyPageStore } from "@/stores/myPage";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 
 const route = useRoute();
+const router = useRouter();
 
 const store = useMyPageStore();
 const search = ref("");
@@ -290,6 +291,11 @@ onMounted(() => {
             });
         }
     });
+});
+
+// 뒤로가기 버튼을 클릭할 때 저장소에 저장된 값 초기화
+window.addEventListener("popstate", () => {
+    router.push("/my-routine");
 });
 </script>
 
