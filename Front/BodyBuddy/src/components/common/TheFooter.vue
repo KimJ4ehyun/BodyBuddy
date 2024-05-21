@@ -2,7 +2,10 @@
   <hr class="footerhr">
   <div class="footerBox">
     <div class="leftBox">
-      <span class="name">BODYBUDDY</span>
+      <span class="name">
+        <RouterLink :to="{ name: 'home'}">
+            <img src="@/assets/img/logo4.png">
+        </RouterLink></span>
       <p class="description">
         서울시 강남구 테헤란로 212<br/>
         BODYBUDDY<br/>
@@ -28,7 +31,7 @@
   margin-top: 100px;
 }
 .footerBox {
-  margin-top: 50px;
+  margin-top: 40px;
   display: flex;
   flex-direction: row;
   margin-bottom: 50px;
@@ -47,6 +50,10 @@
   font-size: 1.2em;
 }
 
+.name img {
+    width: 160px;
+}
+
 .footerBox .leftBox p, .footerBox .rightBox p {
   margin: 0;
 }
@@ -54,14 +61,14 @@
 .footerBox .leftBox .description {
   color: gray;
   font-size: 0.9em;
-  margin-top: 40px;
+  margin-top: 30px;
 }
 
 
 .footerBox .rightBox {
   /* border: 1px solid gray; */
   width: 400px;
-
+  margin-top: 10px;
 }
 
 .footerBox .rightBox .links {
@@ -70,7 +77,7 @@
 }
 
 .footerBox .rightBox .category {
-  margin-top: 40px;
+  margin-top: 45px;
 }
 
 .footerBox .rightBox .category a {
