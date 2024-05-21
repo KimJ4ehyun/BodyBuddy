@@ -1,14 +1,19 @@
 <template>
-    <div class=timetable>
-        <TimeTable v-if="exercises && exercises.length > 0" :exercises="exercises" />
+    <div class="timetable">
+        <TimeTable
+            v-if="exercises && exercises.length > 0"
+            :exercises="exercises"
+        />
     </div>
     <div class="col">
-        <p class="contents">     
+        <p class="contents">
             <!-- <span>
                 {{ boardOne.routineId }}
             </span>            -->
             <span class="rTitle">
-                <RouterLink :to="`/board/${boardOne.routineId}`">{{ boardOne.routineTitle }}</RouterLink>
+                <RouterLink :to="`/board/${boardOne.routineId}`">{{
+                    boardOne.routineTitle
+                }}</RouterLink>
             </span>
             <span class="rWriter">{{ boardOne.nickname }}</span>
             <span class="rDate">{{ boardOne.date }}</span>
@@ -23,106 +28,106 @@
 </template>
 
 <script setup>
-    import TimeTable from '@/components/routineBoard/TimeTable.vue'
-    import { useBoardStore } from '@/stores/board'
-    import { useUserStore } from '@/stores/user';
-    import { useWishStore } from '@/stores/wish';
-    import { computed, onMounted, ref } from 'vue';
+import TimeTable from "@/components/routineBoard/TimeTable.vue";
+import { useBoardStore } from "@/stores/board";
+import { useUserStore } from "@/stores/user";
+import { useWishStore } from "@/stores/wish";
+import { computed, onMounted, ref } from "vue";
 
-    const store = useBoardStore()
-    const wishStore = useWishStore()
-    const userStore = useUserStore()
+const store = useBoardStore();
+const wishStore = useWishStore();
+const userStore = useUserStore();
 
-    const { boardOne } = defineProps({
-        boardOne: Object
-    })
+const { boardOne } = defineProps({
+    boardOne: Object,
+});
 
-    // console.log(boardOne)
-    const isWished = ref(false)
+// console.log(boardOne)
+const isWished = ref(false);
 
-    const exercises = ref([])
-    const isLoaded = ref(false)
+const exercises = ref([]);
+const isLoaded = ref(false);
 
-    // 컴포넌트가 마운트될 때 현재 찜 상태를 확인
-    onMounted(async () => {
-        await store.getExerciseList(boardOne.routineId)
+// 컴포넌트가 마운트될 때 현재 찜 상태를 확인
+onMounted(async () => {
+    await store.getExerciseList(boardOne.routineId);
 
-        exercises.value = store.exerciseList
-        console.log(exercises.value)
+    exercises.value = store.exerciseList;
+    console.log(exercises.value);
 
-        isLoaded.value = true
+    isLoaded.value = true;
 
-        isWished.value = wishStore.wishList.some(item =>
-            item.routineId === boardOne.routineId && item.userId === userStore.loginInfo.userId
-        );
-    });
+    isWished.value = wishStore.wishList.some(
+        (item) =>
+            item.routineId === boardOne.routineId &&
+            item.userId === userStore.loginInfo.userId
+    );
+});
 
-    // 클릭 이벤트 핸들러
-    const checkWish = (routineId) => {
-        console.log(routineId)
-        console.log(isWished.value)
-        // 현재 찜 상태를 바탕으로 조건을 체크하고 찜 상태를 변경
-        if (isWished.value) {
-            wishStore.delWish(routineId);
-            isWished.value = false;  // 상태 업데이트
-        } else {
-            wishStore.addWish(routineId);
-            isWished.value = true;  // 상태 업데이트
-        }
+// 클릭 이벤트 핸들러
+const checkWish = (routineId) => {
+    console.log(routineId);
+    console.log(isWished.value);
+    // 현재 찜 상태를 바탕으로 조건을 체크하고 찜 상태를 변경
+    if (isWished.value) {
+        wishStore.delWish(routineId);
+        isWished.value = false; // 상태 업데이트
+    } else {
+        wishStore.addWish(routineId);
+        isWished.value = true; // 상태 업데이트
     }
-   
-    
+};
 </script>
 
 <style scoped>
-    * {
-        font-family: 'SUITE-Regular';
-    }
-    .timetable {
-        width: 390px;
-        margin: 0 auto;
-        font-weight: 600;
-    }
-    .col {
-        display: flex;
-        flex-direction: row;
-    }
-    .contents {
-        display: flex;
-        flex-direction: column;
-        width: 90%;
-        margin: 0;
-    }
+* {
+    font-family: "SUITE-Regular";
+}
+.timetable {
+    width: 390px;
+    margin: 0 auto;
+    font-weight: 600;
+}
+.col {
+    display: flex;
+    flex-direction: row;
+}
+.contents {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin: 0;
+}
 
-    .contents span {
-        margin-bottom: 10px;
-    }
-    .contents a {
-        text-decoration: none;
-        
-        color: #324B4F;
-    }
-    .contents a:hover {
-        text-decoration: underline;
-        color: #7FABB2;
-    }
-    .rTitle {
-        font-weight: bold;
-        font-size: 1.4em;
-    }
-    .rWriter {
-        color: gray;
-    }
-    .rDate {
-        font-size: 0.9em;
-    }
-    
-    .heart {
-        width: 10%;
-        font-size: 1.2em;
-        text-align: right;
-    }
-    .heart:hover {
-        cursor: pointer;
-    }
+.contents span {
+    margin-bottom: 10px;
+}
+.contents a {
+    text-decoration: none;
+
+    color: #324b4f;
+}
+.contents a:hover {
+    text-decoration: underline;
+    color: #7fabb2;
+}
+.rTitle {
+    font-weight: bold;
+    font-size: 1.4em;
+}
+.rWriter {
+    color: gray;
+}
+.rDate {
+    font-size: 0.9em;
+}
+
+.heart {
+    width: 10%;
+    font-size: 1.2em;
+    text-align: right;
+}
+.heart:hover {
+    cursor: pointer;
+}
 </style>
