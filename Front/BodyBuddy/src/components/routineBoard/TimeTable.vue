@@ -1,5 +1,5 @@
 <template>
-    <table class="table table-bordered">
+    <table class="table">
         <tr>
             <th></th>
             <th>월</th>
@@ -780,6 +780,10 @@ const updateExerciseData = () => {
 </script>
 
 <style scoped>
+.table {
+    /* background: transparent !important; */
+    --bs-table-bg: none;
+}
 table {
     width: 100%;
     height: 250px;
@@ -814,7 +818,7 @@ td div {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-color: #e7f0ff;
+    /* background-color: #e7f0ff; */
 }
 
 .isExist span:hover {

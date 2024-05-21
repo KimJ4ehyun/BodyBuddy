@@ -4,7 +4,9 @@
     <div id="headerBox">
         <header>
             <div id="logo">
-                <RouterLink :to="{ name: 'home'}">BodyBuddy</RouterLink>
+                <RouterLink :to="{ name: 'home'}">
+                    <img src="@/assets/img/logo4.png">
+                </RouterLink>
             </div>
             <div id="nav">
                 <RouterLink :to="{ name: 'home'}">Home</RouterLink> 
@@ -62,9 +64,13 @@
             flex-direction: row;
         }
         header #logo {
-            margin-left: 20px;
-            font-size: 0.9em;
+            margin-left: 10px;
         }
+        /* ==========예림 수정===========*/
+        #logo img {
+            width: 150px;
+        }
+
         header #nav {
             /* border: 1px solid blue; */
             width: 30%;
@@ -72,6 +78,7 @@
             flex-direction: row;
             justify-content: space-around;
             text-align: center;
+            align-items: center;
             margin: 0 auto;
             font-size: 0.9em;
         }
@@ -80,8 +87,12 @@
             font-weight: 900;
         }
         header #user {
+            width: 130px;
             margin-right: 10px;
             font-size: 0.9em;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
         }
         /* ========= 재현 수정 ========== */
         a {
@@ -89,6 +100,8 @@
             color: black;
             cursor: pointer;    
         }
+
+        
 
   </style>
   

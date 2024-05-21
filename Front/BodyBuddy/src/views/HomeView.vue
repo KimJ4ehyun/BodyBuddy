@@ -340,30 +340,39 @@ onMounted(() => {
     transition: transform 0.6s ease-in-out; /* 기본값은 0.6s인 경우가 많으나, 'ease-in-out'을 추가하여 더 부드러운 전환 효과를 줄 수 있음 */
 }
 
-.carousel-item.active {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-}
-.carousel-item img {
-    width: 100%;
-    height: auto;
-}
-.mainRecBox {
-    /* border: 1px solid blue; */
-    margin: 5px 25px;
-    height: 200px;
-    text-align: center;
-    width: 300px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-.mainRecBox img {
-    width: 100%;
-    height: 150px;
-}
+    .carousel-item.active, .carousel-item-start, .carousel-item-end {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+    }
+
+    .carousel-item-start {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+    }
+
+
+    .carousel-item img {
+        width: 100%; 
+        height: auto;
+    }
+    .mainRecBox {
+        /* border: 1px solid blue; */
+        margin: 5px 25px;
+        height: 200px;
+        text-align: center;
+        width: 300px; 
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .mainRecBox img {
+        width: 100%; 
+        height: 150px;
+    }
 
 .mainRecBox p {
     margin: 0;

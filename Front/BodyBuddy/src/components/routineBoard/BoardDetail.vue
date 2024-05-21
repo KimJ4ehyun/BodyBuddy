@@ -92,7 +92,7 @@ import { useUserStore } from '@/stores/user'
     }
     .detailBox {
         /* border: 1px solid lightgray; */
-        width: 80%;
+        width: 830px;
         margin: 10px auto;
         display: flex;
         flex-direction: row;
