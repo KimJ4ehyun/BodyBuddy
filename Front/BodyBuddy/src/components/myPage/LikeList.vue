@@ -56,7 +56,7 @@
 
     .likeBox {
         /* border: 1px solid lightblue; */
-        width: 70%;
+        width: 500px;
         margin: 20px auto;
         padding: 20px 30px;
         background-color: #F0F6F6;
@@ -70,6 +70,6 @@
         color: white;
         border-radius: 5px;
         font-size: 0.8em;
-        font-weight: bold;
+        font-weight: 500;
     }
 </style>
