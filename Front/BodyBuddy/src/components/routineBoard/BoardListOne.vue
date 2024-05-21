@@ -84,13 +84,16 @@ const checkWish = (routineId) => {
     font-family: "SUITE-Regular";
 }
 .timetable {
-    width: 390px;
+    width: 400px;
     margin: 0 auto;
     font-weight: 600;
+    margin-bottom: 10px;
 }
 .col {
     display: flex;
     flex-direction: row;
+    margin-left: 30px;
+    margin-right: 30px;
 }
 .contents {
     display: flex;
@@ -113,13 +116,14 @@ const checkWish = (routineId) => {
 }
 .rTitle {
     font-weight: bold;
-    font-size: 1.4em;
+    font-size: 1.3em;
 }
 .rWriter {
     color: gray;
 }
 .rDate {
     font-size: 0.9em;
+    color: gray;
 }
 
 .heart {

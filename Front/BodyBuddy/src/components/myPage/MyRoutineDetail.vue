@@ -136,4 +136,16 @@ const updateRoutine = function (routineId) {
     background-color: #a9ddde;
     color: white;
 }
+
+@media (max-width: 600px) {
+  .timetable, .myR .info {
+    width: 100%; /* 타임테이블과 정보 섹션 너비 조정 */
+  }
+
+  .myR .info {
+    flex-direction: column; /* 정보 섹션 내부 요소들을 세로로 정렬 */
+  }
+}
+
+
 </style>

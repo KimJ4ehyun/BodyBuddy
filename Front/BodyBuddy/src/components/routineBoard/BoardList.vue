@@ -51,6 +51,7 @@
 import BoardListOne from "@/components/routineBoard/BoardListOne.vue";
 import { useBoardStore } from "@/stores/board";
 import { onMounted, ref, computed } from "vue";
+import ScrollOut from "scroll-out";
 
 const store = useBoardStore();
 const pageSize = 3;
@@ -90,6 +91,8 @@ const nextPage = () => {
 const gotoPage = (page) => {
     store.currentPage = page;
 };
+
+
 </script>
 
 <style scoped>
@@ -154,4 +157,5 @@ button:hover {
 .fade-enter-from {
     opacity: 0;
 }
+
 </style>
