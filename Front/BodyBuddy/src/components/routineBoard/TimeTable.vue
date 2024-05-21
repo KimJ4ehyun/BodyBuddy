@@ -343,14 +343,14 @@ const mon1 = ref({})
 
 <style scoped>
   table {
-      width: 100% !important;
+      width: 100%;
       height: 250px;
       font-family: 'SUITE-Regular';
+      margin: 10px auto;
   }
   table th {
       text-align: center;
       border: 1px solid lightgray;
-      background-color: #f5f5f5; /* 배경색 지정 */
   }
 
   table td {
@@ -360,7 +360,7 @@ const mon1 = ref({})
       text-align: center;
       font-size: 0.9em;
       width: 12%;
-      border: 1px solid lightgray; /* 테두리 지정 */
+      border: 1px solid lightgray; 
   }
 
   td div {
@@ -376,8 +376,8 @@ const mon1 = ref({})
       display: flex;
       flex-direction: column;
       justify-content: center;
-      background-color: #e7f0ff; /* 배경색 지정 */
-      transition: background-color 0.3s; /* 배경색 전환 애니메이션 추가 */
+      background-color: #e7f0ff;
+      transition: background-color 0.3s;
   }
 
   .isExist span:hover {

@@ -79,14 +79,15 @@
         width: 90%;
         margin: 0 auto;
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
+        flex-wrap: wrap;
         justify-content: space-around;
         margin-top: 40px;
     }
 
     .boardBox {
         background-color: #F0F6F6;
-        width: 60%;
+        width: 500px;
         display: flex;
         flex-direction: column;
         margin: 20px auto;
@@ -105,21 +106,21 @@
         margin: 0 5px;
         color: black;
         background-color: #EEFEFF;
-        transition: background-color 0.3s; /* 색상 변경을 부드럽게 처리 */
+        transition: background-color 0.3s; 
         border: none;
     }
 
     .pagination button.active {
         color: white;
         background-color: #7FABB2;
-        transition: background-color 0.3s; /* 색상 변경을 부드럽게 처리 */
+        transition: background-color 0.3s; 
         border: none;
     }
 
     .pagination button:active, button:hover {
         color: white;
         background-color: #7FABB2;
-        transition: background-color 0.3s; /* 색상 변경을 부드럽게 처리 */
+        transition: background-color 0.3s;
         border: none;
     }
 </style>

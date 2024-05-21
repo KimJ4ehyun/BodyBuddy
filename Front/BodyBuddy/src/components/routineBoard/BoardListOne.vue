@@ -79,7 +79,7 @@
         font-family: 'SUITE-Regular';
     }
     .timetable {
-        width: 80%;
+        width: 390px;
         margin: 0 auto;
         font-weight: 600;
     }
