@@ -2,6 +2,7 @@
     <div class="routineHeader">
         <img src="@/assets/img/banner4.jpg">
         <div class="category">
+            <img src="@/assets/img/symbol2.png">
             <span class="categoryA">Routines</span>
             <span class="categoryB">Home &nbsp; > &nbsp; Routines</span>
         </div>
@@ -55,6 +56,12 @@
         display: flex;
         flex-direction: column;
     }
+
+    .routineHeader .category img {
+        width: 25px;
+        margin: 0 auto;
+    }
+
     .routineHeader .category .categoryA {
         font-size: 2em;
     }
