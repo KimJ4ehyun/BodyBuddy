@@ -16,7 +16,7 @@
                     class="form-control"
                     @input="nameValid(user.name)"
                     v-model="user.name"
-                    placeholder="이름"
+                    placeholder=""
                 />
                 <label for="name">name</label>
             </div>
@@ -37,7 +37,7 @@
                     id="userId"
                     class="form-control form-control-sm"
                     v-model="store.joinInfo.userId"
-                    placeholder="알파벳 소문자, 숫자 6~12자"
+                    placeholder=""
                     disabled
                 />
                 <label for="userId">ID</label>
@@ -59,7 +59,7 @@
                     id="nickname"
                     class="form-control form-control-sm"
                     v-model="store.joinInfo.nickname"
-                    placeholder="특수문자 제외 2~8자"
+                    placeholder=""
                     disabled
                 />
                 <label for="nickname">Nickname</label>
@@ -82,7 +82,7 @@
                     class="form-control form-control-sm"
                     @input="passwordValid(user.password, user.passwordCheck)"
                     v-model="user.password"
-                    placeholder="알파벳 대소문자, 숫자, 특수문자 8~16자"
+                    placeholder=""
                 />
                 <label for="password">Password</label>
             </div>
@@ -110,7 +110,7 @@
                     class="form-control form-control-sm"
                     @input="passwordValid(user.password, user.passwordCheck)"
                     v-model="user.passwordCheck"
-                    placeholder="알파벳 대소문자, 숫자, 특수문자 8~16자"
+                    placeholder=""
                 />
                 <label for="passwordCheck">Password Check</label>
             </div>
@@ -135,7 +135,7 @@
                     class="form-control form-control-sm"
                     @input="emailValid(user.email)"
                     v-model="user.email"
-                    placeholder="Abc@def.com"
+                    placeholder=""
                 />
                 <label for="email">Email address</label>
             </div>

@@ -56,6 +56,12 @@
 		WHERE routine_id = #{routineId};
 	</update>
 	
+	<!-- 루틴에 운동 전부 삭제 (루틴 수정용) -->
+	<delete id="deleteExercises" parameterType="int" >
+		DELETE FROM exercises
+		WHERE routine_id = #{routineId};
+	</delete>
+	
 	<!-- 루틴 삭제 -->
 	<delete id="deleteRoutine" parameterType="int" >
 		DELETE FROM routines

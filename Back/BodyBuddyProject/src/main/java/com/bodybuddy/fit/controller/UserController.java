@@ -143,8 +143,13 @@ public class UserController {
 		if (!email.matches("^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"))
 			return new ResponseEntity<>("올바르지 않은 이메일 형식입니다.", HttpStatus.BAD_REQUEST);
 		// 회원 정보 수정이 잘 됐는지 확인
-		if (userService.edit(user) == 1)
+		if (userService.edit(user) == 1) {
+			User updateUser = new User();
+			updateUser.setNickname(nickname);
+			updateUser.setUserId(loginUserId);
+			httpSession.setAttribute("user" , updateUser);
 			return new ResponseEntity<>("회원 정보 수정 완료", HttpStatus.OK);
+		}
 
 		return new ResponseEntity<>("회원 정보 수정 실패", HttpStatus.BAD_REQUEST);
 	}

@@ -16,6 +16,13 @@
                 <!-- 나중에 type 수정하기 -->
                 <div class="btns">
                     <button
+                        class="btn btn-sm updateBtn"
+                        type="button"
+                        @click="updateRoutine(route.params.routineId)"
+                    >
+                        수정
+                    </button>
+                    <button
                         class="btn btn-sm deleteBtn"
                         type="button"
                         @click="store.deleteRoutine(route.params.routineId)"
@@ -32,7 +39,7 @@
 import TimeTable from "@/components/routineBoard/TimeTable.vue";
 import { useMyPageStore } from "@/stores/myPage";
 import { onMounted, ref, watch } from "vue";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 
 const store = useMyPageStore();
 
@@ -43,6 +50,8 @@ const myLoaded = ref(false);
 const routine = ref({});
 
 const exercises = ref([]);
+
+const router = useRouter();
 
 // const rId = ref('')
 
@@ -71,7 +80,9 @@ watch(
     { immediate: true }
 );
 
-console.log(routine.value);
+const updateRoutine = function (routineId) {
+    router.push({ path: `/mypage/update/${routineId}` });
+};
 </script>
 
 <style scoped>

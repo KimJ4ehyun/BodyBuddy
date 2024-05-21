@@ -28,6 +28,9 @@ public interface RoutineDao {
 
 	// 3. 루틴 수정 - 제목, 내용 추가 (루틴 처음 만들 떄 사용)
 	int updateText(Map<String, Object> map);
+
+	// 루틴에 운동 전부 삭제 (루틴 수정용)
+	int deleteExercises(int routineId);
 	
 	// 루틴 삭제
 	int deleteRoutine(int routineId);
@@ -38,6 +41,7 @@ public interface RoutineDao {
 	
 	// 내 루틴에 추가 (운동 추가)
 	int insertMyExercise(Map<String, Object> dataMap);
+
 	
 	// -------------------
 	

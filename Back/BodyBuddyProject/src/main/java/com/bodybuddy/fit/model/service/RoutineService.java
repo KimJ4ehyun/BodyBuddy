@@ -28,6 +28,9 @@ public interface RoutineService {
 
 	// 3. 루틴 등록 - 제목, 내용 추가 -> 이미 있는 거에 추가하는 거라서 PutMapping
 	int updateText(int routineId, String routineTitle, String description);
+
+	// 루틴에 있는 운동 전부 삭제 (루틴 수정용)
+	int deleteExercises(int routineId);
 	
 	// 루틴 삭제
 	int deleteRoutine(int routineId);
@@ -38,6 +41,7 @@ public interface RoutineService {
 	
 	// 내 루틴에 추가 (운동 추가)
 	int addMyExercise(Map<String, Object> dataMap);
+
 	
 	// -----------------------
 	
