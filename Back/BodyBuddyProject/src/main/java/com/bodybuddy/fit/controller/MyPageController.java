@@ -76,11 +76,29 @@ public class MyPageController {
 	}
 	
 	// 3. 루틴 수정 - 제목, 내용 추가 (루틴 처음 만들 떄 사용)
-	@PutMapping("/my-routine/regist/{routineId}")
+	@PutMapping("/my-routine/update-text/{routineId}")
 	@Operation(summary="해당 루틴의 제목, 내용을 추가한다.", description="기존에 만들어놓은 루틴에 추가하는거여서 PutMapping")
 	public ResponseEntity<?> updateText(@PathVariable("routineId") int routineId, 
 			@RequestParam(value = "routineTitle", required = false) String routineTitle, @RequestParam(value = "description", required = false) String description) {
 		rService.updateText(routineId, routineTitle, description);
+		
+		return new ResponseEntity<>(HttpStatus.CREATED);
+	}
+	
+	// 루틴 수정 
+	@PutMapping("/my-routine/update/{routineId}")
+	@Operation(summary="해당 루틴의 제목, 내용을 추가한다.", description="기존에 만들어놓은 루틴에 추가하는거여서 PutMapping")
+	public ResponseEntity<?> updateRoutine(@PathVariable("routineId") int routineId, @RequestBody Exercise[] exercises,
+			@RequestParam(value = "routineTitle", required = false) String routineTitle, @RequestParam(value="description", required = false) String description) {
+		
+		rService.deleteExercises(routineId); // 루틴에 있는 운동 전부 삭제
+		
+		for(Exercise exercise : exercises) { // 루틴에 운동 추가
+			exercise.setRoutineId(routineId);
+			rService.addExercise(exercise);
+		}
+		
+		rService.updateText(routineId, routineTitle, description); // 루틴에 있는 제목, 내용 수정
 		
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}

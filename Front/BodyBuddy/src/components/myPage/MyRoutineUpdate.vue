@@ -1,6 +1,6 @@
 <template>
     <div class="routine-container">
-        <h2>루틴 등록하기</h2>
+        <h2>루틴 수정하기</h2>
         <div class="searchBar">
             <label id="searchLabel" for="searchInput">운동이름 검색</label>
             <input
@@ -169,7 +169,7 @@
                     class="btn btn-primary"
                     @click="submitExercises()"
                 >
-                    등록하기
+                    수정하기
                 </button>
             </div>
         </div>
@@ -177,12 +177,14 @@
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
+import { ref, computed, onMounted } from "vue";
 import { exercises } from "@/data/exercises.js";
 import { useMyPageStore } from "@/stores/myPage";
+import { useRoute } from "vue-router";
+
+const route = useRoute();
 
 const store = useMyPageStore();
-
 const search = ref("");
 const selectedPart = ref("");
 const selectedExercises = ref([]);
@@ -256,12 +258,39 @@ const submitExercises = () => {
         ...exercise,
         dayOfTheWeek: exercise.dayOfTheWeek.join(","),
     }));
-    store.addRoutine(
+    console.log("title " + text.value.routineTitle);
+    console.log("description " + text.value.description);
+    store.updateRoutine(
         formattedExercises,
         text.value.routineTitle,
-        text.value.description
+        text.value.description,
+        route.params.routineId
     );
 };
+
+onMounted(() => {
+    store.myRoutine.exList.forEach((storedExercise) => {
+        const selectedExercise = exercises.find(
+            (exercise) => exercise.exerciseName === storedExercise.exerciseName
+        );
+        if (selectedExercise) {
+            // dayOfTheWeek을 배열로 변환합니다.
+            const dayOfTheWeekArray = storedExercise.dayOfTheWeek.split(",");
+
+            const initialChecked = true;
+            selectedExercises.value.push({
+                ...selectedExercise,
+                // 변환된 배열을 dayOfTheWeek에 할당합니다.
+                dayOfTheWeek: dayOfTheWeekArray,
+                setCnt: storedExercise.setCnt,
+                weight: storedExercise.weight,
+                repetitions: storedExercise.repetitions,
+                time: storedExercise.time,
+                checked: initialChecked,
+            });
+        }
+    });
+});
 </script>
 
 <style scoped>

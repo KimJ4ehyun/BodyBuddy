@@ -73,6 +73,12 @@ public class RoutineServiceImpl implements RoutineService {
 		map.put("description", description);
 		return routineDao.updateText(map);
 	}
+	
+	// 루틴에 운동 전부 삭제 (루틴 수정용)
+	@Override
+	public int deleteExercises(int routineId) {
+		return routineDao.deleteExercises(routineId);
+	}
 
 	// 내 루틴 삭제
 	@Override
@@ -92,6 +98,8 @@ public class RoutineServiceImpl implements RoutineService {
 	public int addMyExercise(Map<String, Object> dataMap) {
 		return routineDao.insertMyExercise(dataMap);
 	}
+
+	
 	
 	// ------------------------
 
