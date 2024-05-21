@@ -35,7 +35,7 @@ import { ref, computed } from 'vue';
 import { exercises } from '@/data/allExercises.js';
 
 const search = ref('');
-const selectedPart = ref('');
+const selectedPart = ref('전체');
 const parts = ['전체', '하체', '가슴', '등', '어깨', '팔', '복근', '유산소'];
 
 const filteredExercises = computed(() => {
@@ -81,39 +81,10 @@ const filteredExercises = computed(() => {
     }
 
     .container {
-        width: 70%;
+        width: 65%;
         margin: 30px auto;
     }
 
-    .libraryHeader {
-        /* border: 1px solid lightgray; */
-        height: 200px;
-        text-align: center;
-        font-family: 'SUITE-Regular';
-        font-weight: 700;
-        position: relative;
-    }
-    .libraryHeader img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-    }
-    .libraryHeader .category {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        display: flex;
-        flex-direction: column;
-    }
-    .libraryHeader .category .categoryA {
-        font-size: 2em;
-    }
-
-    .libraryHeader .category .categoryB {
-        font-size: 0.8em;
-    }
     .searchBar {
         /* border: 1px solid lightblue; */
         background-color: #7FABB2;
