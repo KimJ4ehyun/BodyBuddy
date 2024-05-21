@@ -114,4 +114,20 @@
   color: #324b4f;
   font-weight: 700;
 }
+
+@media (max-width: 900px) {
+  .myPageContainer {
+    flex-direction: column; /* 화면이 작아지면 컬럼 방향으로 변경 */
+  }
+
+  .sideBar {
+    width: 100%; /* 사이드바 너비를 전체로 조정 */
+    margin-left: 0; /* 사이드 마진 제거 */
+  }
+
+  .myPageContainer hr {
+    width: 80%; /* hr 요소 너비 조정 */
+  }
+}
+
 </style>

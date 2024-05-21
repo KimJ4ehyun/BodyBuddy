@@ -168,5 +168,17 @@ main .bar a.router-link-exact-active {
 .carousel-control-prev, .carousel-control-next {
     filter: invert(100%); 
 }
+
+@media (max-width: 768px) {
+  main .bar {
+    flex-direction: column; /* 요소들을 세로로 정렬 */
+    width: 100%; /* 너비 100%로 조정 */
+  }
+
+  .carousel-inner {
+    width: 100%; /* 카루셀 내부 너비 조정 */
+  }
+}
+
 </style>
   

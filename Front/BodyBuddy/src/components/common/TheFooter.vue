@@ -77,7 +77,7 @@
 }
 
 .footerBox .rightBox .category {
-  margin-top: 45px;
+  margin-top: 50px;
 }
 
 .footerBox .rightBox .category a {

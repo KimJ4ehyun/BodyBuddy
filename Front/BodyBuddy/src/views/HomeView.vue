@@ -96,7 +96,7 @@
                     </div>
                     <div class="carousel-item">
                         <div class="mainRecBox">
-                            <img src="@/assets/img/view1.jpg" alt="Routine 1" />
+                            <img src="@/assets/img/view4.jpg" alt="Routine 1" />
                             <div class="info">
                                 <p class="rTitle">
                                     <RouterLink
@@ -112,7 +112,7 @@
                             </div>
                         </div>
                         <div class="mainRecBox">
-                            <img src="@/assets/img/view2.jpg" alt="Routine 2" />
+                            <img src="@/assets/img/view5.jpg" alt="Routine 2" />
                             <div class="info">
                                 <p class="rTitle">
                                     <RouterLink
@@ -128,7 +128,7 @@
                             </div>
                         </div>
                         <div class="mainRecBox">
-                            <img src="@/assets/img/view3.jpg" alt="Routine 3" />
+                            <img src="@/assets/img/view6.jpg" alt="Routine 3" />
                             <div class="info">
                                 <p class="rTitle">
                                     <RouterLink
@@ -195,6 +195,7 @@ onMounted(() => {
     boardStore.getBoardList();
     console.log(boardStore.boardList);
 });
+
 </script>
 
 <style scoped>
@@ -404,4 +405,5 @@ onMounted(() => {
 .carousel-control-next {
     filter: invert(100%);
 }
+
 </style>
