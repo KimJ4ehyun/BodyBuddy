@@ -87,7 +87,7 @@ const updateRoutine = function (routineId) {
 
 <style scoped>
 * {
-    font-family: "Gowun Dodum";
+    font-family: "SUITE-Regular";
     font-weight: 600;
 }
 .timetable {

@@ -50,7 +50,7 @@
 <style scoped>
     .likeContainer {
         /* border: 1px solid gray; */
-        width: 70%;
+        width: 720px;
         margin: 60px auto;
     }
 

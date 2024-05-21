@@ -2,6 +2,7 @@
     <div class="libraryHeader">
         <img src="@/assets/img/banner4.jpg">
         <div class="category">
+            <img src="@/assets/img/symbol2.png">
             <span class="categoryA">Library</span>
             <span class="categoryB">Home &nbsp; > &nbsp; Library</span>
         </div>
@@ -72,6 +73,12 @@ const filteredExercises = computed(() => {
         display: flex;
         flex-direction: column;
     }
+
+    .libraryHeader .category img {
+        width: 25px;
+        margin: 0 auto;
+    }
+
     .libraryHeader .category .categoryA {
         font-size: 2em;
     }
