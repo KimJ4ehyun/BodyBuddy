@@ -170,7 +170,7 @@
         display: flex;
         flex-direction: column;
         justify-content: space-around;
-        width: 40%;
+        width: 360px;
         height: 60%;
     }
 
@@ -234,7 +234,7 @@
     }
     
     .mainMyR img {
-        width: 80%;
+        width: 400px;
         height: 240px;
     }
 

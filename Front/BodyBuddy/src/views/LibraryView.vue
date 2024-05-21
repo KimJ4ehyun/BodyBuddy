@@ -81,7 +81,7 @@ const filteredExercises = computed(() => {
     }
 
     .container {
-        width: 65%;
+        width: 690px;
         margin: 30px auto;
     }
 
