@@ -5,29 +5,31 @@
         <div class="form-floating mb-3">
             <input type="text" class="form-control" id="userNickname" @input="nicknameValid(user.nickname)" v-model="user.nickname" placeholder="특수문자 제외 2~8자">
             <label for="userNickname">nickname</label>
-            <button @click="checkNicknameValid(user.nickname)" :disabled="nicknameFlag !== 1">중복 확인</button>
+          </div>
         </div>
         <div v-if="nicknameFlag === 0">
-        <span>&nbsp;</span>
-      </div>
-      <div v-else-if="nicknameFlag === 1">
-        <small class="color-green">형식에 맞는 닉네임입니다.</small>
-      </div>
-      <div v-else-if="nicknameFlag === 2">
-        <small class="color-red">닉네임을 입력해주세요.</small>
-      </div>
-      <div v-else-if="nicknameFlag === 3">
-       <small class="color-red">닉네임은 특수문자 제외 2~8자로 입력해주세요.</small>
-      </div>
-      <div v-else-if="nicknameFlag === 4">
-       <small class="color-red">이미 사용 중인 닉네임입니다.</small>
-      </div>
-      <div v-else-if="nicknameFlag === 5">
-       <small class="color-green">사용 가능한 닉네임입니다.</small>
-       <button @click="closeWindow(user.nickname)">사용하기</button>
-      </div>
+          <small>&nbsp;</small>
+        </div>
+        <div v-else-if="nicknameFlag === 1">
+          <small class="color-green">형식에 맞는 닉네임입니다.</small>
+        </div>
+        <div v-else-if="nicknameFlag === 2">
+          <small class="color-red">닉네임을 입력해주세요.</small>
+        </div>
+        <div v-else-if="nicknameFlag === 3">
+          <small class="color-red">닉네임은 특수문자 제외 2~8자로 입력해주세요.</small>
+        </div>
+        <div v-else-if="nicknameFlag === 4">
+          <small class="color-red">이미 사용 중인 닉네임입니다.</small>
+        </div>
+        <div v-else-if="nicknameFlag === 5">
+          <div>
+            <small class="color-green">사용 가능한 닉네임입니다.</small>
+          </div>
+          <button id="useBtn" @click="closeWindow(user.nickname)">사용하기</button>
+        </div>
+        <button @click="checkNicknameValid(user.nickname)" :disabled="nicknameFlag !== 1" :hidden="nicknameFlag === 5">중복 확인</button>
     </div>
-  </div>
 </template>
 
 <script setup>
@@ -67,34 +69,38 @@ const checkNicknameValid = function(nickname){
 const closeWindow = function(nickname)  {
   store.storeNickname(nickname)
   window.opener.postMessage({ type: 'nicknameUpdate', nickname: nickname }, '*');
-  window.close(); // 현재 창 닫기
+  window.close();
 }
 
 </script>
 
-
 <style scoped>
+* {
+        font-family: 'SUITE-Regular';
+    }
 .item {
   text-align: center;
+  width: 60%;
+  margin: 20px auto;
 }
-/* 팝업 내 버튼 스타일 */
+
 button {
   margin-left: 10px;
-  margin-top: 10px; /* 버튼 위쪽 여백 추가 */
-  padding: 5px 10px; /* 버튼 내부 여백 추가 */
-  border-radius: 5px; /* 버튼 둥글게 만들기 */
-  background-color: #7FABB2; /* 버튼 배경색 */
-  color: white; /* 버튼 텍스트 색상 */
-  border: none; /* 테두리 없애기 */
-  cursor: pointer; /* 커서를 포인터로 변경하여 클릭 가능한 상태 표시 */
+  margin-top: 10px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  background-color: #A9DDDE;
+  color: white;
+  border: none;
+  cursor: pointer;
 }
 
 button:disabled {
-  cursor: not-allowed; /* 비활성화된 상태일 때 마우스 커서를 금지 표시로 변경 */
+  cursor: not-allowed;
 }
 
-button:hover {
-  background-color: #A9DDDE; /* 마우스 호버 시 배경색 변경 */
+#useBtn {
+  background-color: #7FABB2;
 }
 
 .color-red{
