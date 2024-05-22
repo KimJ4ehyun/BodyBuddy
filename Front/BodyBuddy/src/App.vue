@@ -73,6 +73,7 @@ router.beforeEach((to, from, next) => {
     src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Rg.woff2') format('woff2');
     font-weight: 400;
     font-style: normal;
+}
 
 .swal2-title {
   font-size: 20px !important;

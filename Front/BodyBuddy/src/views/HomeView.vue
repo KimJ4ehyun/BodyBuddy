@@ -6,8 +6,8 @@
             <div class="mainText">
                 <span class="mainT"> Manage your routine </span>
                 <span class="mainD">
-                    설명설명<br />
-                    설명설명
+                    규칙적인 운동 루틴을 <br>
+                    보다 편하게 관리하고 싶으신가요?
                 </span>
                 <button class="mainBtn">
                     <RouterLink :to="{ name: 'myRoutineList' }">
@@ -22,8 +22,8 @@
             <div class="mainMyL">
                 <span class="mainMyT">나만의 운동 루틴</span>
                 <span class="mainMyD">
-                    내가 하고 싶은 운동을 원하는 요일과 시간에 할 수 있도록
-                    시간표로 편하게 관리해요!<br />
+                    개인의 운동 목표에 맞춘 루틴을 쉽게 설정하고,<br>
+                    시간표로 관리하며 함께 습관을 만들어가요!<br />
                     <button class="mainMyBtn" @click="confirmAddRoutine">
                         루틴 만들기
                     </button>
