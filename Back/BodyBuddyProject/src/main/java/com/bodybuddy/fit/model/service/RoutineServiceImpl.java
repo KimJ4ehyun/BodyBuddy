@@ -90,6 +90,9 @@ public class RoutineServiceImpl implements RoutineService {
 	// 내 루틴에 추가 (루틴 추가)
 	@Override
 	public int addMyRoutine(Routine routine) {
+		String routineTitle = routine.getRoutineTitle();
+		if (routineTitle == null || routineTitle.equals("")) routineTitle = "제목 없음";
+		routine.setRoutineTitle(routineTitle);
 		return routineDao.insertMyRoutine(routine);
 	}
 
