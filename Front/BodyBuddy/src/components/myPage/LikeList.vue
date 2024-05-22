@@ -1,5 +1,6 @@
 <template>
     <div class="likeContainer">
+        <p class="noWish" v-if="store.wishList.length == 0">찜한 목록이 없습니다.</p>
         <!-- <h4>찜 목록</h4> -->
         <div v-if="isLoading">
            
@@ -51,6 +52,11 @@
         /* border: 1px solid gray; */
         width: 720px;
         margin: 60px auto;
+    }
+
+    .noWish {
+        text-align: center;
+        margin-top: 15px;
     }
 
     .likeBox {

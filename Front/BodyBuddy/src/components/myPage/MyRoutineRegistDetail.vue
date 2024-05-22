@@ -151,16 +151,20 @@
 
     .day-label {
         margin-right: 10px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
     }
 
     .dayCheck {
         margin-left: 15px;
-        margin-right: 5px;
+        margin-right: 7px;
         width: 17px;
         height: 17px;
         border: 2px solid #7fabb2;
         border-radius: 5px;
         accent-color: #324b4f;
+        margin-top: 2px;
     }
     
 

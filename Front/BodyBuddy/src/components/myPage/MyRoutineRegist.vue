@@ -176,12 +176,13 @@ const submitExercises = () => {
     width: 570px;
     margin: 20px auto;
     text-align: center;
+    margin-top: 50px;
 }
 
 h2 {
     color: #333;
     font-size: 24px;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 .searchBar .search {
@@ -191,6 +192,7 @@ h2 {
     font-size: 0.9em;
     border-radius: 5px;
     border: 1px solid lightgray;
+    margin-bottom: 20px;
 }
 
 .searchBtn {
@@ -245,6 +247,10 @@ button:hover {
 .ex-col {
     width: 50%;
     padding: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 7px;
 }
 
 .ex-check {

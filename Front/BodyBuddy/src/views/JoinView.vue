@@ -347,11 +347,11 @@ h4 {
 }
 .container {
     text-align: center;
-    width: 600px;
+    width: 550px;
 }
 
 button {
-    padding: 5px 10px;
+    padding: 5px 5px;
     border-radius: 5px;
     background-color: #a9ddde;
     color: white;
