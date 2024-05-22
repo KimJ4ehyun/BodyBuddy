@@ -8,8 +8,8 @@
         </div>
     </div>
     <div class="searchBar">
-        <input type="text" v-model="search" placeholder="Search" class="search" @keyup.enter="search">
-        <button class="searchBtn" @click="search">검색</button>
+        <input type="text" @input="updateSearch" placeholder="Search" class="search">
+        <button class="searchBtn">검색</button>
     </div>
     <div class="container">
         <div class="partBtns">
@@ -42,6 +42,10 @@ const parts = ['전체', '하체', '가슴', '등', '어깨', '팔', '복근', '
 const filteredExercises = computed(() => {
   return exercises.filter(exercise => (exercise.exercisePart === selectedPart.value || selectedPart.value === '전체') && exercise.exerciseName.includes(search.value));
 });
+
+const updateSearch = (event) => {
+  search.value = event.target.value;
+};
 
 </script>
 

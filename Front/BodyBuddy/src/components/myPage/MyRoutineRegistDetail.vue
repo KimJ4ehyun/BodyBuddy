@@ -90,7 +90,6 @@
 </template>
 
 <script setup>
-    import { defineProps, defineEmits, ref } from 'vue';
     const { exerciseOne, index } = defineProps(['exerciseOne', 'index']);
     const emit = defineEmits(['deleteExercise']);
 

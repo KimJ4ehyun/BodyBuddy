@@ -17,7 +17,7 @@
 </template>
 
 <script setup>
-    import { defineProps, ref } from 'vue';
+    import { ref } from 'vue';
     const { reviewOne } = defineProps(['reviewOne']);   
 
     import { useReviewStore } from '@/stores/review'

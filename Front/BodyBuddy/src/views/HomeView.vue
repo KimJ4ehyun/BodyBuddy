@@ -9,11 +9,11 @@
                     규칙적인 운동 루틴을 <br>
                     보다 편하게 관리하고 싶으신가요?
                 </span>
+                <RouterLink :to="{ name: 'myRoutineList' }">
                 <button class="mainBtn">
-                    <RouterLink :to="{ name: 'myRoutineList' }">
                         함께하기
-                    </RouterLink>
-                </button>
+                    </button>
+                </RouterLink>
             </div>
         </div>
 
@@ -120,11 +120,12 @@ onMounted(() => {
 
 .mainBtn {
     background-color: #7fabb2;
-    border: 1px solid #7fabb2;
+    border: none;
     width: 140px;
     height: 40px;
     color: white;
     font-size: 0.9em;
+    border-radius: 5px;
 }
 
 .mainBtn a {
@@ -178,12 +179,18 @@ onMounted(() => {
 
 .mainMyBtn {
     background-color: #7fabb2;
-    border: 1px solid #7fabb2;
-    width: 120px;
-    height: 35px;
+    border: none;
+    width: 140px;
+    height: 40px;
     color: white;
     font-size: 0.9em;
     margin-top: 20px;
+    border-radius: 5px;
+}
+
+.mainMyBtn:hover, .mainBtn:hover {
+    background-color: #A9DDDE;
+    transition: background-color 0.3s;
 }
 
 /* mainRec */
@@ -199,5 +206,4 @@ onMounted(() => {
     font-weight: bold;
     font-size: 1.2em;
 }
-
 </style>
