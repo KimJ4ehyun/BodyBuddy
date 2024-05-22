@@ -1,8 +1,9 @@
-import { ref, onMounted,computed, reactive } from 'vue'
+import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import axios from 'axios'
 import router from '@/router'
 import { useMyPageStore } from './myPage'
+import Swal from 'sweetalert2'
 
 const REST_ROUTINE_BOARD_API = `http://localhost:8080/routine/board`
 
@@ -19,7 +20,6 @@ export const useBoardStore = defineStore('board', () => {
         })
             .then((response) => {
                 boardList.value = response.data
-                // console.log(response.data)
             })
     }
 
@@ -29,7 +29,6 @@ export const useBoardStore = defineStore('board', () => {
         await axios.get(`${REST_ROUTINE_BOARD_API}/${routineId}`)
             .then((response) => {
                 exerciseList.value = response.data.exList
-                // console.log(response.data.exList);
             })
     }
 
@@ -37,12 +36,9 @@ export const useBoardStore = defineStore('board', () => {
     const board = ref({})
 
     const getBoard = (async (routineId) => {
-        console.log(routineId)
         await axios.get(`${REST_ROUTINE_BOARD_API}/${routineId}`)
             .then((response) => {
                 board.value = response.data
-                // console.log(board.value)
-                // console.log(board.value.routine.routineTitle)
             })
     })
 
@@ -62,9 +58,16 @@ export const useBoardStore = defineStore('board', () => {
             .then((response) => {
                 const myStore = useMyPageStore()
                 myStore.myRoutineList.push(response.data)
-                console.log(response.data)
 
-                alert("내 루틴에 추가되었습니다.")
+                Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: "내 루틴에 추가되었습니다.",
+                    confirmButtonColor: "#7fabb2",
+                    timer: 1500,
+                    backdrop: 'rgba(0,0,0,0.75)',
+                    width: 450
+                  });
             })
     })
 

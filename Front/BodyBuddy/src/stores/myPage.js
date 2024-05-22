@@ -2,6 +2,7 @@ import { ref, computed } from "vue";
 import { defineStore } from "pinia";
 import axios from "axios";
 import router from "@/router";
+import Swal from 'sweetalert2';
 
 const REST_MYPAGE_API = `http://localhost:8080/mypage`;
 
@@ -13,7 +14,6 @@ export const useMyPageStore = defineStore(
         const getMyRoutines = function () {
             axios.get(`${REST_MYPAGE_API}/my-routine`).then((response) => {
                 myRoutineList.value = response.data;
-                // console.log(response.data)
             });
         };
 
@@ -21,12 +21,10 @@ export const useMyPageStore = defineStore(
 
         const getMyRoutine = async (routineId) => {
             myRoutine.value = {}; // 초기화
-            // console.log(`routineID: ${routineId}`);
             await axios
                 .get(`${REST_MYPAGE_API}/my-routine/${routineId}`)
                 .then((response) => {
                     myRoutine.value = response.data;
-                    // console.log(myRoutine.value);
                 });
         };
 
@@ -43,8 +41,7 @@ export const useMyPageStore = defineStore(
                     );
                     router.push(`/mypage`);
                 })
-                .catch((error) => {
-                    console.log(error);
+                .catch(() => {
                 });
         };
 
@@ -65,12 +62,19 @@ export const useMyPageStore = defineStore(
                         },
                     }
                 )
-                .then((response) => {
-                    console.log(response);
+                .then(() => {
+                    Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: "루틴 수정이 완료되었습니다.",
+                        confirmButtonColor: "#7fabb2",
+                        timer: 1500,
+                        backdrop: 'rgba(0,0,0,0.75)',
+                        width: 450
+                    });
                     router.push(`/my-routine`);
                 })
-                .catch((error) => {
-                    console.log(error);
+                .catch(() => {
                     router.push(`/my-routine`);
                 });
         };
@@ -79,6 +83,13 @@ export const useMyPageStore = defineStore(
             await axios
                 .delete(`${REST_MYPAGE_API}/my-routine/${routineId}`)
                 .then(() => {
+                    Swal.fire({
+                        title: "삭제되었습니다.",
+                        timer: 1500,
+                        icon: "success",
+                        confirmButtonColor: "#7fabb2",
+                        width: 450
+                    });
                     getMyRoutines();
                     router.push(`{ name: "myRoutineList" }`);
                 })
@@ -101,8 +112,7 @@ export const useMyPageStore = defineStore(
                 .then(() => {
                     updateText(routineId, routineTitle, description);
                 })
-                .catch((error) => {
-                    console.log(error);
+                .catch(() => {
                 });
         };
 
@@ -120,10 +130,18 @@ export const useMyPageStore = defineStore(
                     }
                 )
                 .then(() => {
+                    Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: "루틴 등록이 완료되었습니다.",
+                        confirmButtonColor: "#7fabb2",
+                        timer: 1500,
+                        backdrop: 'rgba(0,0,0,0.75)',
+                        width: 450
+                    });
                     router.push(`/my-routine`);
                 })
-                .catch((error) => {
-                    console.log(error);
+                .catch(() => {
                 });
         };
 

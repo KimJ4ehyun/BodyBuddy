@@ -47,101 +47,15 @@
         </div>
         <transition-group name="fade" tag="div">
             <div
-                v-for="(exercise, index) in selectedExercises"
-                :key="'selected-' + exercise.id"
+                v-for="(exerciseOne, index) in selectedExercises"
+                :key="'selected-' + exerciseOne.id"
                 class="ex-block"
             >
-                <div class="info">
-                    <div>
-                        <span style="color: #7fabb2">{{ index + 1 }}</span
-                        >&nbsp; <span>{{ exercise.exercisePart }}</span
-                        >&nbsp; | &nbsp;
-                        <span>{{ exercise.exerciseName }}</span>
-                    </div>
-                    <div>
-                        <button
-                            @click="removeExercise(exercise.id)"
-                            class="remove-button"
-                        >
-                            -
-                        </button>
-                    </div>
-                </div>
-                <div>
-                    <div class="exInfo">
-                        <div class="input-group">
-                            <label class="left-align">세트</label>
-                            <input
-                                type="number"
-                                v-model="exercise.setCnt"
-                                class="numInput"
-                                min="0"
-                            />
-                        </div>
-                        <div class="input-group">
-                            <label class="left-align">무게</label>
-                            <div class="weight-input-group">
-                                <input
-                                    type="number"
-                                    v-model="exercise.weight"
-                                    class="numInput"
-                                    min="0"
-                                />
-                                <span>kg</span>
-                            </div>
-                        </div>
-                        <div class="input-group">
-                            <label class="left-align">횟수(시간)</label>
-                            <input
-                                type="number"
-                                v-model="exercise.repetitions"
-                                class="numInput"
-                                min="0"
-                            />
-                        </div>
-                    </div>
-                    <div class="input-group">
-                        <label class="left-align">요일</label>
-                        <div class="days">
-                            <label
-                                v-for="day in allDays"
-                                :key="day"
-                                class="day-label"
-                            >
-                                <input
-                                    type="checkbox"
-                                    :value="day"
-                                    @change="() => toggleDay(exercise, day)"
-                                    :checked="
-                                        exercise.dayOfTheWeek.includes(day)
-                                    "
-                                    class="dayCheck"
-                                />
-                                {{ day }}
-                            </label>
-                        </div>
-                    </div>
-                    <div class="input-group">
-                        <label for="floatingSelectGrid" class="left-align"
-                            >시간</label
-                        >&nbsp;
-                        <div class="selectBox">
-                            <select
-                                id="floatingSelectGrid"
-                                class="timeInput"
-                                v-model="exercise.time"
-                            >
-                                <option value="">선택</option>
-                                <option value="오전">오전</option>
-                                <option value="오후">오후</option>
-                                <option value="저녁">저녁</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
+            <MyRoutineRegistDetail :exercise-one="exerciseOne" :index="index" @delete-exercise="removeExercise"/>
             </div>
         </transition-group>
-
+    
+        <transition-group name="fade" tag="div">
         <div v-if="isFormValid" class="ex-block">
             <div class="text">
                 <div class="input-group">
@@ -173,6 +87,7 @@
                 </button>
             </div>
         </div>
+    </transition-group>
     </div>
 </template>
 
@@ -181,6 +96,7 @@ import { ref, computed, onMounted } from "vue";
 import { exercises } from "@/data/exercises.js";
 import { useMyPageStore } from "@/stores/myPage";
 import { useRoute, useRouter } from "vue-router";
+import MyRoutineRegistDetail from "./MyRoutineRegistDetail.vue";
 
 const route = useRoute();
 const router = useRouter();
@@ -190,7 +106,6 @@ const search = ref("");
 const selectedPart = ref("");
 const selectedExercises = ref([]);
 const parts = ["하체", "가슴", "등", "어깨", "팔", "복근", "유산소"];
-const allDays = ["월", "화", "수", "목", "금", "토", "일"];
 
 const filteredExercises = computed(() => {
     return exercises.filter(
@@ -240,15 +155,6 @@ const toggleExercise = (exercise) => {
     }
 };
 
-const toggleDay = (exercise, day) => {
-    const index = exercise.dayOfTheWeek.indexOf(day);
-    if (index === -1) {
-        exercise.dayOfTheWeek.push(day);
-    } else {
-        exercise.dayOfTheWeek.splice(index, 1);
-    }
-};
-
 const text = ref({
     routineTitle: "",
     description: "",
@@ -259,8 +165,6 @@ const submitExercises = () => {
         ...exercise,
         dayOfTheWeek: exercise.dayOfTheWeek.join(","),
     }));
-    console.log("title " + text.value.routineTitle);
-    console.log("description " + text.value.description);
     store.updateRoutine(
         formattedExercises,
         text.value.routineTitle,
@@ -291,11 +195,6 @@ onMounted(() => {
             });
         }
     });
-});
-
-// 뒤로가기 버튼을 클릭할 때 저장소에 저장된 값 초기화
-window.addEventListener("popstate", () => {
-    router.push("/my-routine");
 });
 </script>
 
@@ -399,40 +298,6 @@ button:hover {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.remove-button {
-    background-color: #ffffff;
-    border: none;
-    font-weight: bold;
-    cursor: pointer;
-    font-size: 20px;
-}
-
-.remove-button:hover {
-    background-color: #ffffff;
-}
-
-.exInfo {
-    display: flex;
-    justify-content: space-around;
-}
-
-.numInput,
-.timeInput {
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px !important;
-    width: 90px;
-    margin: 10px auto;
-}
-
-/* .numInput {
-  margin-left: 5px;
-} */
-
-.dayCheck {
-    margin-left: 30px;
-}
-
 #registBtn {
     background-color: #7fabb2;
     color: white;
@@ -450,42 +315,15 @@ button:hover {
     background-color: #a9ddde;
 }
 
-.info {
-    display: flex;
-    justify-content: space-between;
-    font-weight: bold;
-    align-items: center;
-    margin-bottom: 10px;
-}
+    .input-group {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+    }
 
-.input-group {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-}
-
-.input-group label {
-    margin-right: 10px; /* 레이블과 입력창 사이의 간격을 추가합니다. */
-}
-
-.weight-input-group {
-    display: flex;
-    align-items: center;
-}
-
-.weight-input-group span {
-    margin-left: 5px;
-}
-
-.days {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-}
-
-.day-label {
-    margin-right: 10px;
-}
+    .input-group label {
+        margin-right: 10px;
+    }
 
 #inputDescription {
     height: 200px;
@@ -505,12 +343,4 @@ button:hover {
 .fade-leave-from {
     opacity: 1;
 }
-
-/* .fade-enter-active {
-    transition: opacity 0.5s;
-}
-
-.fade-enter-from {
-    opacity: 0;
-} */
 </style>

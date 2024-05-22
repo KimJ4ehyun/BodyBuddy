@@ -14,7 +14,7 @@
                 
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-primary myAddBtn" @click="add" data-bs-dismiss="modal">내 루틴에 추가</button>
+                    <button id="regBtn" class="btn btn-primary myAddBtn" @click="add" data-bs-dismiss="modal">내 루틴에 추가</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -36,8 +36,6 @@
         routineTitle: '',
         description: ''
     })
-
-    console.log(props.myRid)
 
     const store = useBoardStore()
 
@@ -78,4 +76,20 @@
         width: 70%;
         margin-bottom: 20px;
     }
+    
+    .btn {
+        border: none;
+    }
+
+    #regBtn {
+        background-color: #7fabb2;
+        color: white;
+        cursor: pointer;
+    }
+
+    #regBtn:hover {
+        background-color: #a9ddde;
+        transition: background-color 0.3s;
+    }
+
 </style>

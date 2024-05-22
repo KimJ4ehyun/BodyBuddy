@@ -25,7 +25,7 @@
                     <button
                         class="btn btn-sm deleteBtn"
                         type="button"
-                        @click="store.deleteRoutine(route.params.routineId)"
+                        @click="deleteSelection"
                     >
                         삭제
                     </button>
@@ -40,6 +40,7 @@ import TimeTable from "@/components/routineBoard/TimeTable.vue";
 import { useMyPageStore } from "@/stores/myPage";
 import { onMounted, ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
+import Swal from 'sweetalert2'
 
 const store = useMyPageStore();
 
@@ -83,6 +84,23 @@ watch(
 const updateRoutine = function (routineId) {
     router.push({ path: `/mypage/update/${routineId}` });
 };
+
+const deleteSelection = function() {
+    Swal.fire({
+        title: "삭제하시겠습니까?",
+        showCancelButton: true,
+        confirmButtonText: "확인",
+        showCancelButtonText: "취소",
+        icon: "warning",
+        confirmButtonColor: "#7fabb2",
+        width: 450
+    })
+    .then((result) => {
+        if (result.isConfirmed) {
+            store.deleteRoutine(route.params.routineId)
+        } 
+    });
+}
 </script>
 
 <style scoped>

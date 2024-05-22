@@ -40,7 +40,6 @@
     onMounted(async () => {
         await boardStore.getBoardList();
         await isWish();
-        console.log(wRoutines.value)
         isLoading.value = true; 
     });
 

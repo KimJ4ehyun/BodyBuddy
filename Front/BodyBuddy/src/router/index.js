@@ -118,7 +118,18 @@ const router = createRouter({
             redirect: "/login",
         },
     ],
+    scrollBehavior(to, from, savedPosition) {
+        // savedPosition이 있으면 해당 위치로 스크롤
+        if (savedPosition) {
+          return savedPosition;
+        } else {
+          // 그렇지 않으면 맨 위로 스크롤
+          return { top: 0 };
+        }
+    }
 });
+
+
 
 router.beforeEach((to, from, next) => {
     const loggedIn =
