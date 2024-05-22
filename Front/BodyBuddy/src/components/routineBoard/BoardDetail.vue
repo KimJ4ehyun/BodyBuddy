@@ -80,7 +80,6 @@ import { useUserStore } from '@/stores/user'
         exercises.value = store.board.exList
 
         rId.value = store.board.routine.routineId;
-        console.log(rId.value)
     })
     
 
@@ -139,12 +138,17 @@ import { useUserStore } from '@/stores/user'
         width: 110px;
         height: 30px;
         background-color: #A9DDDE;
-        border: 1px solid #A9DDDE;
+        border: none;
         border-radius: 5px;
         font-size: 0.8em;
-        font-weight: bold;
+        font-weight: 500;
         color: white;
         margin-top: 5px;
+    }
+
+    .myAddBtn:hover {
+        background-color: #7fabb2;
+        transition: background-color 0.3s;
     }
 
     .heart:hover {

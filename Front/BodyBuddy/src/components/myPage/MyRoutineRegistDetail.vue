@@ -1,5 +1,5 @@
 <template>
-<div class="info">
+    <div class="info">
                     <div>
                         <span style="color: #7fabb2">{{ index + 1 }}</span
                         >&nbsp; <span>{{ exerciseOne.exercisePart }}</span
@@ -154,8 +154,15 @@
     }
 
     .dayCheck {
-        margin-left: 30px;
+        margin-left: 15px;
+        margin-right: 5px;
+        width: 17px;
+        height: 17px;
+        border: 2px solid #7fabb2;
+        border-radius: 5px;
+        accent-color: #324b4f;
     }
+    
 
     .days {
         display: flex;
@@ -174,4 +181,5 @@
     .remove-button:hover {
         background-color: #ffffff;
     }
+    
 </style>

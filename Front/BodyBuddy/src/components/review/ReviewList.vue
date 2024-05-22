@@ -27,10 +27,12 @@
     import ReviewDetail from '@/components/review/ReviewDetail.vue'
     import { useReviewStore } from '@/stores/review'
     import { onMounted, ref } from 'vue';
-    import { useRoute } from 'vue-router';
+    import { useRoute, useRouter } from 'vue-router';
+    import Swal from 'sweetalert2'
 
     const store = useReviewStore()
     const route = useRoute();
+    const router = useRouter();
     
     const review = ref({
         routineId: '',
@@ -49,7 +51,21 @@
                 review.value.content = '';
             })
         }
-        else alert('내용을 입력해주세요')
+        else {
+          if(sessionStorage.getItem("userId") && sessionStorage.getItem("nickname")){
+            Swal.fire({
+              title: "내용을 입력해주세요.",
+              confirmButtonText: "확인",
+              icon: "warning",
+              confirmButtonColor: "#7fabb2",
+              width: 450
+            })
+          }
+          else {
+            router.push({ name: 'login' })
+          }
+          
+        }
         review.value.content = '';
     }
 
@@ -64,27 +80,26 @@
 <style scoped>
 
 .review-list {
-  max-height: 400px; /* 원하는 최대 높이 설정 */
-  overflow-y: auto; /* 세로 스크롤바 추가 */
-  padding: 10px; /* 선택사항: 패딩 추가 */
+  max-height: 400px;
+  overflow-y: auto;
+  padding: 10px;
 }
 
 button {
-  background-color: #7FABB2; /* 버튼 배경색 */
-  color: white; /* 버튼 텍스트 색상 */
-  border: none; /* 테두리 없애기 */
-  cursor: pointer; /* 커서를 포인터로 변경하여 클릭 가능한 상태 표시 */
+  background-color: #7FABB2;
+  color: white;
+  border: none;
+  cursor: pointer;
 }
 
 button:disabled {
-    cursor: not-allowed; /* 비활성화된 상태일 때 마우스 커서를 금지 표시로 변경 */
+    cursor: not-allowed;
 }
 
 button:hover {
-  background-color: #A9DDDE; /* 마우스 호버 시 배경색 변경 */
+  background-color: #A9DDDE;
 }
 
-/* 반응형 높이 설정 */
 @media (max-width: 1200px) {
   .review-list {
     max-height: 300px;

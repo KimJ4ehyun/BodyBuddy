@@ -165,8 +165,6 @@ const submitExercises = () => {
         ...exercise,
         dayOfTheWeek: exercise.dayOfTheWeek.join(","),
     }));
-    console.log("title " + text.value.routineTitle);
-    console.log("description " + text.value.description);
     store.updateRoutine(
         formattedExercises,
         text.value.routineTitle,

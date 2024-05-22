@@ -42,7 +42,6 @@ const { boardOne } = defineProps({
     boardOne: Object,
 });
 
-// console.log(boardOne)
 const isWished = ref(false);
 
 const exercises = ref([]);
@@ -53,7 +52,6 @@ onMounted(async () => {
     await store.getExerciseList(boardOne.routineId);
 
     exercises.value = store.exerciseList;
-    console.log(exercises.value);
 
     isLoaded.value = true;
 
@@ -66,8 +64,7 @@ onMounted(async () => {
 
 // 클릭 이벤트 핸들러
 const checkWish = (routineId) => {
-    console.log(routineId);
-    console.log(isWished.value);
+    
     // 현재 찜 상태를 바탕으로 조건을 체크하고 찜 상태를 변경
     if (isWished.value) {
         wishStore.delWish(routineId);

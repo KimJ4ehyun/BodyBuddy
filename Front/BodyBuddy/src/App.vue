@@ -61,4 +61,12 @@ router.beforeEach((to, from, next) => {
     font-style: normal;
 }
 
+.swal2-title {
+  font-size: 20px !important;
+}
+
+.swal2-html-container {
+  font-size: 14px !important;
+}
+
 </style>
