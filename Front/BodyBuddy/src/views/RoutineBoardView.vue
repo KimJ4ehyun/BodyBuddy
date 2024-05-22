@@ -31,14 +31,13 @@
 
 <style scoped>
     * {
-        font-family: 'SUITE-Regular';
+        font-family: "LINESeedKR-Rg";
     }
     .routineHeader {
         /* border: 1px solid lightgray; */
         width: 100%;
         height: 250px;
         text-align: center;
-        font-family: 'SUITE-Regular';
         font-weight: 700;
         position: relative;
     }
@@ -94,7 +93,7 @@
         font-size: 0.9em;
         width: 50px;
         height: 30px;
-        font-weight: bold;
+        /* font-weight: bold; */
     }
 
 </style>

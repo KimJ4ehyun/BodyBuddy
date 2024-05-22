@@ -31,7 +31,7 @@ const props = defineProps({
 
 <style scoped>
     * {
-        font-family: 'SUITE-Regular';
+        font-family: "LINESeedKR-Rg";
     }
     .modal-body {
         display: flex;

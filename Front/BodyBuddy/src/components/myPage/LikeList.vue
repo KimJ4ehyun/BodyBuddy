@@ -56,9 +56,9 @@
 
     .likeBox {
         /* border: 1px solid lightblue; */
-        width: 500px;
+        width: 530px;
         margin: 20px auto;
-        padding: 20px 30px;
+        padding: 20px 20px;
         background-color: #F0F6F6;
     }
     
@@ -71,5 +71,12 @@
         border-radius: 5px;
         font-size: 0.8em;
         font-weight: 500;
+        margin-left: 5px;
+    }
+
+    @media (max-width: 900px) {
+        .likeContainer {
+            margin-top: 30px;
+        }
     }
 </style>

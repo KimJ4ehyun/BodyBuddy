@@ -80,7 +80,7 @@ export const useMyPageStore = defineStore(
                 .delete(`${REST_MYPAGE_API}/my-routine/${routineId}`)
                 .then(() => {
                     getMyRoutines();
-                    router.push({ name: "myRoutineList" });
+                    router.push(`{ name: "myRoutineList" }`);
                 })
                 .catch((error) => {
                     console.error(error);

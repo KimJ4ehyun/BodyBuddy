@@ -9,10 +9,10 @@
                 <span class="rTitle">
                     {{ store.myRoutine.routine.routineTitle }}
                 </span>
-                <span class="rDate">{{ store.myRoutine.routine.date }}</span>
                 <span class="rDesc">{{
                     store.myRoutine.routine.description
                 }}</span>
+                <span class="rDate">{{ store.myRoutine.routine.date }}</span>
                 <!-- 나중에 type 수정하기 -->
                 <div class="btns">
                     <button
@@ -87,8 +87,9 @@ const updateRoutine = function (routineId) {
 
 <style scoped>
 * {
-    font-family: "SUITE-Regular";
-    font-weight: 600;
+    /* font-family: "TheJamsil3Regular"; */
+    font-family: "LINESeedKR-Rg";
+    /* font-weight: 500; */
 }
 .timetable {
     /* border: 1px solid skyblue; */
@@ -111,19 +112,22 @@ const updateRoutine = function (routineId) {
 }
 
 .myR .info .rTitle {
-    font-size: 1.5em;
-    font-weight: bold;
+    font-size: 1.3em;
+    /* font-weight: 700; */
+    font-family: "LINESeedKR-Bd";
 }
 
 .myR .info .rDate {
-    font-size: 0.9em;
+    font-size: 0.8em;
     color: gray;
+    /* font-family:"TheJamsil2Light" */
 }
 .myR .info .rDesc {
-    font-size: 1.2em;
+    font-size: 1.1em;
+    /* font-family:"TheJamsil2Light" */
 }
 .myR .info .btns {
-    align-self: flex-end; /* 자체적으로 하단 정렬 */
+    align-self: flex-end; 
     margin-left: auto;
     margin-top: 10px;
 }
@@ -139,11 +143,11 @@ const updateRoutine = function (routineId) {
 
 @media (max-width: 600px) {
   .timetable, .myR .info {
-    width: 100%; /* 타임테이블과 정보 섹션 너비 조정 */
+    width: 100%;
   }
 
   .myR .info {
-    flex-direction: column; /* 정보 섹션 내부 요소들을 세로로 정렬 */
+    flex-direction: column; 
   }
 }
 

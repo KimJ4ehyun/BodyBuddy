@@ -84,7 +84,7 @@
         }
         header #nav .router-link-exact-active {
             color: #7FABB2;
-            font-weight: 900;
+            font-weight: 700;
         }
         header #user {
             width: 130px;
