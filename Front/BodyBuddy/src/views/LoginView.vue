@@ -2,6 +2,7 @@
     <div class="loginHeader">
         <img src="@/assets/img/banner4.jpg" />
         <div class="category">
+            <img src="@/assets/img/symbol2.png" />
             <span class="categoryA">Login</span>
             <span class="categoryB">Home &nbsp; > &nbsp; Login</span>
         </div>
@@ -61,7 +62,7 @@ const login = function () {
 
 <style scoped>
 * {
-    font-family: "SUITE-Regular";
+    font-family: "LINESeedKR-Rg";
 }
 
 h4 {
@@ -73,7 +74,6 @@ h4 {
     width: 100%;
     height: 250px;
     text-align: center;
-    font-family: "SUITE-Regular";
     font-weight: 700;
     position: relative;
 }
@@ -91,6 +91,12 @@ h4 {
     display: flex;
     flex-direction: column;
 }
+
+.loginHeader .category img {
+  width: 25px;
+  margin: 0 auto;
+}
+
 .loginHeader .category .categoryA {
     font-size: 2em;
 }

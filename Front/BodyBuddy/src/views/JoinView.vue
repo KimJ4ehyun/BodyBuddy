@@ -309,14 +309,13 @@ window.addEventListener("popstate", () => {
 
 <style scoped>
 * {
-    font-family: "SUITE-Regular";
+    font-family: "LINESeedKR-Rg";
 }
 
 .joinHeader {
     width: 100%;
     height: 250px;
     text-align: center;
-    font-family: "SUITE-Regular";
     font-weight: 700;
     position: relative;
 }

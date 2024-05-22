@@ -25,7 +25,7 @@
 
 <style scoped>
 * {
-  font-family: "SUITE-Regular";
+  font-family: "LINESeedKR-Rg";
 }
 
 .myPageHeader {
@@ -117,16 +117,41 @@
 
 @media (max-width: 900px) {
   .myPageContainer {
-    flex-direction: column; /* 화면이 작아지면 컬럼 방향으로 변경 */
+    flex-direction: column; 
   }
 
   .sideBar {
-    width: 100%; /* 사이드바 너비를 전체로 조정 */
-    margin-left: 0; /* 사이드 마진 제거 */
+    width: 100%;
+    margin-left: 0; 
+    margin-top: 50px;
+    display: flex;
+    flex-direction: row;
+    height: 50px;
+    justify-content: center;
+    align-items: center;
   }
 
+.sideBar .cHead {
+  margin-bottom: 0px;
+  margin-right: 30px;
+}
+
+.sideBar .cName {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 0px;
+}
+
+.sideBar .cName a {
+  font-size: 0.9em;
+  color: #9f9f9f;
+  text-decoration: none;
+  margin-right: 30px;
+  margin-bottom: 0px;
+}
+
   .myPageContainer hr {
-    width: 80%; /* hr 요소 너비 조정 */
+    width: 80%; 
   }
 }
 

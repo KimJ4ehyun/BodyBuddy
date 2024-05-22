@@ -91,7 +91,7 @@ export const useMyPageStore = defineStore(
                         width: 450
                     });
                     getMyRoutines();
-                    router.push({ name: "myRoutineList" });
+                    router.push(`{ name: "myRoutineList" }`);
                 })
                 .catch((error) => {
                     console.error(error);

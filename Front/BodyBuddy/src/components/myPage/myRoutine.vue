@@ -84,6 +84,9 @@
 
 
 <style scoped>
+* {
+  font-family: "LINESeedKR-Rg";
+}
 main {
   width: 75%;
   margin-top: 60px;
@@ -120,15 +123,12 @@ main .noRoutine hr {
 main .bar a {
   color: #9f9f9f;
   text-decoration: none;
-  font-weight: bold;
   margin-right: 7px;
-  font-family: "Gowun Dodum";
-  font-weight: 600;
-  font-style: normal;
 }
 
 main .bar a.router-link-exact-active {
   color: #324b4f;
+  font-weight: 700;
 }
 
 .myBox {
@@ -146,9 +146,8 @@ main .bar a.router-link-exact-active {
   background-color: #7fabb2;
   border: 1px solid #7fabb2;
   border-radius: 5px;
-  font-family: "Gowun Dodum";
   font-size: 0.8em;
-  font-weight: 500;
+  /* font-family: "TheJamsil2Light"; */
   color: white;
   margin-top: 5px;
 }
@@ -169,7 +168,11 @@ main .bar a.router-link-exact-active {
     filter: invert(100%); 
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
+  main {
+    margin: 30px  auto;
+  }
+
   main .bar {
     flex-direction: column; /* 요소들을 세로로 정렬 */
     width: 100%; /* 너비 100%로 조정 */
@@ -178,6 +181,7 @@ main .bar a.router-link-exact-active {
   .carousel-inner {
     width: 100%; /* 카루셀 내부 너비 조정 */
   }
+
 }
 
 </style>

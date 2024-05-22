@@ -78,10 +78,11 @@ const checkWish = (routineId) => {
 
 <style scoped>
 * {
-    font-family: "SUITE-Regular";
+    font-family: "LINESeedKR-Rg";
 }
+
 .timetable {
-    width: 400px;
+    width: 480px;
     margin: 0 auto;
     font-weight: 600;
     margin-bottom: 10px;
@@ -89,8 +90,8 @@ const checkWish = (routineId) => {
 .col {
     display: flex;
     flex-direction: row;
-    margin-left: 30px;
-    margin-right: 30px;
+    margin-left: 5px;
+    margin-right: 10px;
 }
 .contents {
     display: flex;
@@ -112,14 +113,14 @@ const checkWish = (routineId) => {
     color: #7fabb2;
 }
 .rTitle {
-    font-weight: bold;
+    font-family: 'LINESeedKR-Bd';
     font-size: 1.3em;
 }
 .rWriter {
     color: gray;
 }
 .rDate {
-    font-size: 0.9em;
+    font-size: 0.8em;
     color: gray;
 }
 

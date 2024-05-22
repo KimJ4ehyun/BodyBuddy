@@ -47,7 +47,7 @@ const filteredExercises = computed(() => {
 
 <style  scoped>
     * {
-        font-family: 'SUITE-Regular';
+        font-family: "LINESeedKR-Rg";
     }
 
     .libraryHeader {
@@ -55,7 +55,6 @@ const filteredExercises = computed(() => {
         width: 100%;
         height: 250px;
         text-align: center;
-        font-family: 'SUITE-Regular';
         font-weight: 700;
         position: relative;
     }
@@ -116,7 +115,6 @@ const filteredExercises = computed(() => {
         font-size: 0.9em;
         width: 50px;
         height: 30px;
-        font-weight: bold;
     }
 
     .partBtns {

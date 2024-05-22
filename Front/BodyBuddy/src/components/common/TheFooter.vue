@@ -27,6 +27,9 @@
 <script setup></script>
 
 <style scoped>
+*{
+  font-family: "LINESeedKR-Rg";
+}
 .footerhr {
   margin-top: 100px;
 }
