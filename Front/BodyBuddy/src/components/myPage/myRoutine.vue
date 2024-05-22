@@ -41,7 +41,7 @@
         <hr />
         내 루틴이 없습니다.
       </div>
-      <hr />
+      <hr>
       <div class="myBox">
         <router-view />
       </div>
@@ -80,6 +80,14 @@
   const confirmAddRoutine = () => {
     router.push(`/mypage/regist`);
   };
+
+
+  var mql = window.matchMedia("screen and (max-width: 900px)");
+
+if (mql.matches) {
+	
+}
+
   </script>
 
 
@@ -89,7 +97,7 @@
 }
 main {
   width: 75%;
-  margin-top: 60px;
+  margin-top: 40px;
 }
 main .bar {
   /* border: 1px solid lightgray; */
@@ -166,7 +174,27 @@ main .bar a.router-link-exact-active {
 
 .carousel-control-prev, .carousel-control-next {
     filter: invert(100%); 
+    width: 20px;
 }
+
+#carouselExample {
+  position: relative;
+}
+
+.carousel-control-prev, .carousel-control-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%); 
+}
+
+.carousel-control-prev {
+    left: 10px; 
+}
+
+.carousel-control-next {
+    right: 10px; 
+}
+
 
 @media (max-width: 900px) {
   main {
@@ -174,12 +202,13 @@ main .bar a.router-link-exact-active {
   }
 
   main .bar {
-    flex-direction: column; /* 요소들을 세로로 정렬 */
-    width: 100%; /* 너비 100%로 조정 */
+    flex-direction: row; 
+    width: 100%; 
   }
 
   .carousel-inner {
-    width: 100%; /* 카루셀 내부 너비 조정 */
+    width: 480px;
+
   }
 
 }

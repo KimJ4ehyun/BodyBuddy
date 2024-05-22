@@ -1,7 +1,7 @@
 <template>
     <div>
         <div id="container">
-            <transition-group name="fade" tag="div">
+            <transition-group name="fade" tag="div" class="tgroup">
                 <div
                     class="boardBox"
                     v-for="(routine, index) in paginatedBoardList"
@@ -54,7 +54,7 @@ import { onMounted, ref, computed } from "vue";
 
 
 const store = useBoardStore();
-const pageSize = 3;
+const pageSize = 4;
 
 const paginatedBoardList = computed(() => {
     const start = store.currentPage * pageSize;
@@ -101,7 +101,7 @@ const gotoPage = (page) => {
 }
 
 #container {
-    width: 90%;
+    width: 80%;
     margin: 0 auto;
     display: flex;
     flex-direction: row;
@@ -156,6 +156,12 @@ button:hover {
 
 .fade-enter-from {
     opacity: 0;
+}
+
+#container .tgroup {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 
 </style>
