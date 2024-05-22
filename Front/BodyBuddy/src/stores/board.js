@@ -3,6 +3,7 @@ import { defineStore } from 'pinia'
 import axios from 'axios'
 import router from '@/router'
 import { useMyPageStore } from './myPage'
+    import Swal from 'sweetalert2'
 
 const REST_ROUTINE_BOARD_API = `http://localhost:8080/routine/board`
 
@@ -64,7 +65,14 @@ export const useBoardStore = defineStore('board', () => {
                 myStore.myRoutineList.push(response.data)
                 console.log(response.data)
 
-                alert("내 루틴에 추가되었습니다.")
+                Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: "내 루틴에 추가되었습니다.",
+                    showConfirmButton: false,
+                    timer: 1500,
+                    backdrop: 'rgba(0,0,0,0.75)'
+                  });
             })
     })
 
