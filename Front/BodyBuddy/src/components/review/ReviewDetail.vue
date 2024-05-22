@@ -49,8 +49,7 @@
                 // 갱신하기
                 store.getReviewList(routineId)
             })
-            .catch(error => {
-                console.log(error)
+            .catch(() => {
             });
     }
     

@@ -4,6 +4,7 @@ import { useMyPageStore } from '@/stores/myPage'
 import axios from 'axios'
 import router from '@/router'
 import { useWishStore } from './wish'
+import Swal from 'sweetalert2'
 
 axios.defaults.withCredentials = true;
 const REST_USER_API = `http://localhost:8080/users`
@@ -27,6 +28,15 @@ export const useUserStore = defineStore('user', () => {
       data: user
     })
     .then(() => {
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "회원가입이 완료되었습니다.",
+        confirmButtonColor: "#7fabb2",
+        timer: 1500,
+        backdrop: 'rgba(0,0,0,0.75)',
+        width: 450
+      });
       router.push({name: 'login'})
     })
     .catch(() => {})
@@ -40,12 +50,19 @@ export const useUserStore = defineStore('user', () => {
       joinInfo.nickname = ''
       joinInfo.userId = ''
       router.push({name: 'home'})
-      alert("회원 정보 수정 완료");
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "회원 정보가 수정되었습니다.",
+        confirmButtonColor: "#7fabb2",
+        timer: 1500,
+        backdrop: 'rgba(0,0,0,0.75)',
+        width: 450
+      });
     })
-    .catch((error) => {
+    .catch(() => {
       joinInfo.nickname = ''
       joinInfo.userId = ''
-      console.log(error)
     })
   }
 
@@ -72,7 +89,15 @@ export const useUserStore = defineStore('user', () => {
       router.push({name: 'home'})
     })
     .catch(() => {
-      alert("아이디 또는 비밀번호가 일치하지 않습니다");
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "아이디 또는 비밀번호가 일치하지 않습니다.",
+        confirmButtonColor: "#7fabb2",
+        timer: 1500,
+        backdrop: 'rgba(0,0,0,0.75)',
+        width: 450
+      });
     })
   })
 

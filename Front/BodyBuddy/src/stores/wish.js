@@ -14,7 +14,6 @@ export const useWishStore = defineStore('wish', () => {
     const getwishList = (() => {
         axios.get(`${REST_WISH_API}/wishList`)
             .then((response) => {
-                console.log(response.data)
                 wishList.value = response.data
             })
     })
@@ -22,7 +21,6 @@ export const useWishStore = defineStore('wish', () => {
     const addWish = ((routineId) => {
         axios.get(`${REST_WISH_API}/add-heart/${routineId}`)
             .then((response) => {
-                console.log(response.data)
                 const userStore = useUserStore()
                 wishList.value.push({userId: userStore.loginInfo.userId, routineId: routineId})
             })
@@ -31,7 +29,6 @@ export const useWishStore = defineStore('wish', () => {
     const delWish = ((routineId) => {
         axios.delete(`${REST_WISH_API}/delete-heart/${routineId}`)
             .then((response) => {
-                console.log(response.data)
                 const index = wishList.value.findIndex(item => item.routineId === routineId);
                 if (index !== -1) {
                     wishList.value.splice(index, 1);

@@ -25,7 +25,7 @@
                     <button
                         class="btn btn-sm deleteBtn"
                         type="button"
-                        @click="store.deleteRoutine(route.params.routineId)"
+                        @click="deleteSelection"
                     >
                         삭제
                     </button>
@@ -40,6 +40,7 @@ import TimeTable from "@/components/routineBoard/TimeTable.vue";
 import { useMyPageStore } from "@/stores/myPage";
 import { onMounted, ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
+import Swal from 'sweetalert2'
 
 const store = useMyPageStore();
 
@@ -83,6 +84,23 @@ watch(
 const updateRoutine = function (routineId) {
     router.push({ path: `/mypage/update/${routineId}` });
 };
+
+const deleteSelection = function() {
+    Swal.fire({
+        title: "삭제하시겠습니까?",
+        showCancelButton: true,
+        confirmButtonText: "확인",
+        showCancelButtonText: "취소",
+        icon: "warning",
+        confirmButtonColor: "#7fabb2",
+        width: 450
+    })
+    .then((result) => {
+        if (result.isConfirmed) {
+            store.deleteRoutine(route.params.routineId)
+        } 
+    });
+}
 </script>
 
 <style scoped>
@@ -139,11 +157,11 @@ const updateRoutine = function (routineId) {
 
 @media (max-width: 600px) {
   .timetable, .myR .info {
-    width: 100%; /* 타임테이블과 정보 섹션 너비 조정 */
+    width: 100%;
   }
 
   .myR .info {
-    flex-direction: column; /* 정보 섹션 내부 요소들을 세로로 정렬 */
+    flex-direction: column;
   }
 }
 

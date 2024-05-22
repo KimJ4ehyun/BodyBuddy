@@ -21,8 +21,7 @@ export const useReviewStore = defineStore('review', () => {
         .then((response) => {
             return response.data
         })
-        .catch((error) => {
-            console.log(error)
+        .catch(() => {
         })
   }
 
