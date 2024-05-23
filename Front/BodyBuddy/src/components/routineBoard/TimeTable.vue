@@ -662,6 +662,7 @@ const sun3 = ref({});
 
 onMounted(async () => {
   await updateExerciseData();
+  console.log(fri1.value)
 });
 
 const updateExerciseData = () => {
@@ -736,6 +737,7 @@ const updateExerciseData = () => {
   });
 };
 
+
 </script>
 
 <style scoped>
@@ -747,7 +749,7 @@ const updateExerciseData = () => {
   --bs-table-bg: none;
 }
 table {
-  width: 100%;
+  width: 95%;
   height: 250px;
   font-family: "LINESeedKR-Rg";
   margin: 10px auto;

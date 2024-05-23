@@ -123,6 +123,7 @@ const deleteSelection = function() {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    padding-left: 10px;
 }
 
 .myR .info span {
@@ -131,7 +132,6 @@ const deleteSelection = function() {
 
 .myR .info .rTitle {
     font-size: 1.3em;
-    /* font-weight: 700; */
     font-family: "LINESeedKR-Bd";
 }
 
@@ -148,6 +148,7 @@ const deleteSelection = function() {
     align-self: flex-end; 
     margin-left: auto;
     margin-top: 10px;
+    margin-right: 10px;
 }
 .myR .info .btns .updateBtn {
     background-color: #7fabb2;

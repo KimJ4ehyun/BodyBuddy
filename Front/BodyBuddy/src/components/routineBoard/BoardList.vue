@@ -111,8 +111,10 @@ const gotoPage = (page) => {
 }
 
 .boardBox {
-    background-color: #f0f6f6;
-    width: 530px;
+    /* background-color: #f0f6f6; */
+    border: 1px solid #7fabb2;
+    border-radius: 7px;
+    width: 520px;
     display: flex;
     flex-direction: column;
     margin: 20px auto;
