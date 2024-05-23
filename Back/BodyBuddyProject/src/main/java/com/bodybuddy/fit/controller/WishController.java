@@ -37,6 +37,7 @@ public class WishController {
 		
 		Map<String, Integer> map = new HashMap<>();
 		
+		// 로그인 유저 확인
 		User loginUser = (User) session.getAttribute("user");
 		if (loginUser == null) {
 			map.put("result", -1);
@@ -44,25 +45,29 @@ public class WishController {
 		
 		String loginId = "";
 		
+		// 로그인한 유저 아이디 저장
 		if (loginUser != null) {
 			loginId = loginUser.getUserId();
 		}
 		
+		// wish 객체 생성
 		Wish wish = new Wish();
 		
+		// 받아온 routineId와 로그인한 유저 아이디 wish 객체에 넣어주기
 		wish.setRoutineId(routineId);
 		wish.setUserId(loginId);
 		
-//		System.out.println(111);
-		
+		// 찜 했는지 확인
 		int check = wService.wishCheck(wish);
-		System.out.println("wishCheck"+check);
+
 		int n = 0;
 		
 		// 찜이 되어있지 않은 상태이면 찜 추가
 		if (check == 0) {
 			n = wService.addWish(wish);
 		}
+		
+		// 찜 추가하면 result값 1로 저장
 		map.put("result", n);
 		
 		return new ResponseEntity<>(map, HttpStatus.CREATED);
@@ -75,6 +80,7 @@ public class WishController {
 	public ResponseEntity<?> delWish(@PathVariable("routine_id") int routineId, HttpSession session){
 		Map<String, Integer> map = new HashMap<>();
 		
+		// 로그인 유저 체크
 		User loginUser = (User)session.getAttribute("user");
 		if (loginUser == null) {
 			map.put("result", -1);
@@ -94,7 +100,6 @@ public class WishController {
 		
 		map.put("result", n);
 		
-		System.out.println("해제: "+n);
 		return new ResponseEntity<>(map, HttpStatus.CREATED);
 	}
 	
@@ -108,7 +113,6 @@ public class WishController {
 		
 		List<Wish> wishList = wService.wishList(loginId);
 		
-		System.out.println(wishList);
 		return new ResponseEntity<>(wishList, HttpStatus.OK);
 	}
 	
