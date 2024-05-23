@@ -68,7 +68,7 @@ public class UserController {
 		User user = userService.login(map);
 		if(user != null) {
 			httpSession.setAttribute("user", user);
-			System.out.println(httpSession.getAttribute("user"));
+			
 			return new ResponseEntity<>(user, HttpStatus.OK);
 		}
 		return new ResponseEntity<>("로그인 실패", HttpStatus.UNAUTHORIZED);	
@@ -79,7 +79,7 @@ public class UserController {
 	@Operation(summary="로그아웃", description="세션 로그아웃")
 	public ResponseEntity<?> logout(HttpSession httpSession){
 		User user = (User)httpSession.getAttribute("user");
-		System.out.println(user);
+		
 		if(user != null) {
 			httpSession.invalidate();
 			return new ResponseEntity<>("로그아웃 성공", HttpStatus.OK);
@@ -126,7 +126,6 @@ public class UserController {
 		
 		User loginUser = (User) httpSession.getAttribute("user");
 		String loginUserId = loginUser.getUserId();
-		System.out.println(loginUserId);
 		
 		// 프론트 로그인 정보와 백엔드 로그인 정보가 일치하는지 확인
 		if(!userId.equals(loginUserId)) {

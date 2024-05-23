@@ -44,10 +44,10 @@ public class ReviewController {
 	@PostMapping("/{routineId}/regist")
 	@Operation(summary="리뷰 등록", description="리뷰 등록")
 	public ResponseEntity<?> reviewRegist(@RequestBody Review review, @PathVariable("routineId") int routineId, HttpSession session){
-		System.out.println("프론트 닉네임 " + review.getNickname());
+
 		User user = (User)session.getAttribute("user");
 		String nickname = user.getNickname();
-		System.out.println("백엔드 닉네임 " + nickname);
+
 		String userId = user.getUserId();
 		review.setNickname(nickname);
 		review.setUserId(userId);
@@ -62,12 +62,9 @@ public class ReviewController {
 	@PutMapping("/update")
 	@Operation(summary="리뷰 수정", description="리뷰 수정")
 	public ResponseEntity<?> reviewUpdate(@RequestParam("reviewId") int reviewId, @RequestParam("content") String content){
-		System.out.println("reviewId " + reviewId);
-		System.out.println("content " + content);
-		System.out.println(reviewService.reviewUpdate(reviewId, content));
+		
 		return new ResponseEntity<>("리뷰 수정 완료", HttpStatus.OK);
 		
-//		return new ResponseEntity<>("리뷰 수정 실패", HttpStatus.BAD_REQUEST);
 	}
 	
 	// 리뷰 삭제

@@ -61,8 +61,6 @@ public class RBoardController {
 		map.put("routine", routine);
 		map.put("exList", exList);
 		
-		System.out.println(routine);
-		
 		return new ResponseEntity<>(map, HttpStatus.OK);
 	}
 	
@@ -94,9 +92,6 @@ public class RBoardController {
 		// 로그인한 유저 아이디 저장
 		String loginId = loginUser.getUserId();;
 		
-		// 루틴 객체 생성
-//		Routine routine = new Routine();
-		
 		// 로그인한 유저 아이디 값 넣어주기
 		routine.setUserId(loginId);
 		
@@ -126,7 +121,6 @@ public class RBoardController {
 		
 		rService.addMyExercise(dataMap);
 		
-		System.out.println(exercise);
 		Map<String, Object> map = new HashMap<>();
 		
 		map.put("routine", routine);
