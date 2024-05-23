@@ -8,19 +8,19 @@
                     <img src="@/assets/img/logo4.png">
                 </RouterLink>
             </div>
-            <div id="nav" class="menu align-center expanded text-center SMN_effect-13">
-                <RouterLink :to="{ name: 'home'}" data-hover="Home">Home</RouterLink> 
-                <RouterLink :to="{ name: 'routineList'}" data-hover="Routines">Routines</RouterLink>
-                <RouterLink :to="{ name: 'Library'}" data-hover="Library">Library</RouterLink>
+            <div id="nav">
+                <RouterLink :to="{ name: 'home'}">Home</RouterLink> 
+                <RouterLink :to="{ name: 'routineList'}">Routines</RouterLink>
+                <RouterLink :to="{ name: 'Library'}">Library</RouterLink>
             </div>
-            <div id="user" class="menu align-center expanded text-center SMN_effect-13">
+            <div id="user">
                 <!-- 재현 수정 
                     로그인 상태에서 로그아웃, 마이페이지
                     로그아웃 상태에서 로그인, 회원가입이 보이게 함 -->
-                <RouterLink v-if="(store.loginInfo.userId.length==0)" :to="{ name: 'login' }" data-hover="Login">Login</RouterLink>
-                <RouterLink v-else :to="{ name: 'myRoutineList'}" :data-hover="`${store.loginInfo.nickname} 님`">{{ store.loginInfo.nickname }} 님</RouterLink> |
-                <RouterLink v-if="(store.loginInfo.userId.length==0)" :to="{ name: 'join' }" data-hover="Sign Up">Sign Up</RouterLink>
-                <RouterLink v-else id="logoutBtn" @click="store.logout()" :to="{ name: 'home' }" data-hover="Logout">Logout</RouterLink> 
+                <RouterLink v-if="(store.loginInfo.userId.length==0)" :to="{ name: 'login' }" >Login</RouterLink>
+                <RouterLink v-else :to="{ name: 'myRoutineList'}" >{{ store.loginInfo.nickname }} 님</RouterLink> |
+                <RouterLink v-if="(store.loginInfo.userId.length==0)" :to="{ name: 'join' }">Sign Up</RouterLink>
+                <RouterLink v-else id="logoutBtn" @click="store.logout()" :to="{ name: 'home' }">Logout</RouterLink> 
             </div>
         </header>
     </div>
@@ -96,56 +96,6 @@
             color: black;
             cursor: pointer;    
         }
-
-        .SMN_effect-13 a {
-        color: #7FABB2;
-        text-shadow: none;
-        padding: 10px 0;
-        }
-
-        .SMN_effect-13 a:before {
-        color: black;
-        text-shadow: 0 0 1px rgba(255, 255, 255, 0.3);
-        content: attr(data-hover);
-        position: absolute;
-        -webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
-        -moz-transition: -moz-transform 0.3s, opacity 0.3s;
-        transition: transform 0.3s, opacity 0.3s;
-        pointer-events: none;
-        }
-
-        .SMN_effect-13 a:after {
-        content: '';
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        width: 100%;
-        height: 2px;
-        background: #fff;
-        opacity: 0;
-        -webkit-transform: translateY(5px);
-        -moz-transform: translateY(5px);
-        transform: translateY(5px);
-        -webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
-        -moz-transition: -moz-transform 0.3s, opacity 0.3s;
-        transition: transform 0.3s, opacity 0.3s;
-        pointer-events: none;
-        }
-
-        .SMN_effect-13 a:hover:before, .SMN_effect-13 a:focus:before {
-        opacity: 0;
-        -webkit-transform: translateY(-2px);
-        -moz-transform: translateY(-2px);
-        transform: translateY(-2px);
-        }
-
-        .SMN_effect-13 a:hover:after, .SMN_effect-13 a:focus:after {
-        opacity: 1;
-        -webkit-transform: translateY(0px);
-        -moz-transform: translateY(0px);
-        transform: translateY(0px);
-        }
-
 
   </style>
   
