@@ -111,15 +111,15 @@ const deleteSelection = function() {
 }
 .timetable {
     /* border: 1px solid skyblue; */
-    width: 80%;
+    width: 90%;
     margin: 10px auto;
 }
 
 .myR .info {
     /* border: 1px solid skyblue; */
-    width: 80%;
+    width: 90%;
     height: auto;
-    margin: 10px auto;
+    margin: 15px auto;
     display: flex;
     flex-direction: column;
     justify-content: space-around;

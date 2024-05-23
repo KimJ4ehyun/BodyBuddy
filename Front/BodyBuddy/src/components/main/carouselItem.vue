@@ -157,21 +157,15 @@ onMounted(() => {
 }
 
     .carousel-item.active, .carousel-item-start, .carousel-item-end {
-        width: 1050px;
+        /* width: 1050px; */
         display: flex;
         justify-content: center;
         align-items: center;
         flex-direction: row;
-        margin: 0 auto;
+        /* margin: 0 auto; */
         /* border: 1px solid gray; */
     }
 
-    .carousel-item-start {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: row;
-    }
 
 
     .carousel-item img {
@@ -183,7 +177,7 @@ onMounted(() => {
         margin: 5px 25px;
         height: 200px;
         text-align: center;
-        width: 20%; 
+        width: 250px; 
         display: flex;
         flex-direction: column;
         justify-content: center;
