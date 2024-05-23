@@ -18,10 +18,13 @@ import com.bodybuddy.fit.model.dto.User;
 import com.bodybuddy.fit.model.dto.Wish;
 import com.bodybuddy.fit.model.service.WishService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping("/routine/wish")
+@Tag(name="WishController", description="Wish Rest Controller")
 public class WishController {
 	
 	@Autowired
@@ -29,6 +32,7 @@ public class WishController {
 	
 	// 찜 추가
 	@GetMapping("/add-heart/{routine_id}")
+	@Operation(summary="찜 추가", description="빈 하트 눌러서 찜 추가하기")
 	public ResponseEntity<?> addWish(@PathVariable("routine_id") int routineId, HttpSession session){
 		
 		Map<String, Integer> map = new HashMap<>();
@@ -67,6 +71,7 @@ public class WishController {
 
 	// 찜 해제
 	@DeleteMapping("/delete-heart/{routine_id}")
+	@Operation(summary="찜 해제", description="꽉 찬 하트 눌러서 찜 해제하기")
 	public ResponseEntity<?> delWish(@PathVariable("routine_id") int routineId, HttpSession session){
 		Map<String, Integer> map = new HashMap<>();
 		
@@ -95,6 +100,7 @@ public class WishController {
 	
 	// 찜 목록 불러오기
 	@GetMapping("/wishList")
+	@Operation(summary="찜 목록 가져오기", description="내가 찜한 목록 가져오기")
 	public ResponseEntity<?>wishList(HttpSession session) {
 		
 		User loginUser = (User)session.getAttribute("user");
