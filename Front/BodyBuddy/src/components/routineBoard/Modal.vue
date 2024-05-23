@@ -27,6 +27,7 @@ const props = defineProps({
     myEx: Object,
     modalId: String
 })
+
 </script>
 
 <style scoped>

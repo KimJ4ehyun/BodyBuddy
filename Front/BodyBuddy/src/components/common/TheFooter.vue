@@ -31,7 +31,7 @@
   font-family: "LINESeedKR-Rg";
 }
 .footerhr {
-  margin-top: 100px;
+  margin-top: 150px;
 }
 .footerBox {
   margin-top: 40px;

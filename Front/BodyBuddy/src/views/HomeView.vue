@@ -2,7 +2,7 @@
     <div class="bigContainer">
         <!-- 메인 배너 -->
         <div class="mainBanner">
-            <img src="@/assets/img/main.png" />
+            <img src="@/assets/img/main4.jpg" />
             <div class="mainText">
                 <span class="mainT"> Manage your routine </span>
                 <span class="mainD">
@@ -31,7 +31,7 @@
             </div>
             <div class="mainMyR">
                 <img src="@/assets/img/ex1.png" />
-                <!-- <img src="@/assets/img/ex2.png"> -->
+                <img class="hiddenImg" src="@/assets/img/ex2.png">
             </div>
         </div>
 
@@ -136,13 +136,13 @@ onMounted(() => {
 /* mainMy */
 .mainMy {
     /* border: 1px solid lightgray;   */
-    height: 350px;
+    height: 400px;
     display: flex;
     flex-direction: row;
 }
 .mainMy .mainMyL {
     /* border: 1px solid lightgray; */
-    width: 40%;
+    width: 35%;
     text-align: left;
     display: flex;
     flex-direction: column;
@@ -175,6 +175,7 @@ onMounted(() => {
 .mainMyR img {
     width: 400px;
     height: 240px;
+    margin-right: 10px;
 }
 
 .mainMyBtn {
@@ -205,5 +206,14 @@ onMounted(() => {
 .mainRec .mainRecHead {
     font-weight: bold;
     font-size: 1.2em;
+}
+
+@media (max-width: 1390px) {
+    .hiddenImg {
+        visibility: hidden;
+    }
+    .mainMyR {
+        margin-top: 50px;
+    }
 }
 </style>

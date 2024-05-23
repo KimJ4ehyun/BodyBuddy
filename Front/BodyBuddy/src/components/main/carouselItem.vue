@@ -6,23 +6,6 @@
     >
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <!-- <div v-for="(item, index) in boardStore.boardList" :key="index">
-                
-                    <div class="mainRecBox">
-                        <img src="`@/assets/img/view1.jpg`">
-                        <div class="info">
-                            <p class="rTitle">
-                                <RouterLink :to="`/board/${item.routineId}`">
-                                    {{ item.routineTitle }}
-                                </RouterLink>
-                            </p>
-                            <p class="rWriter">
-                                {{ item.nickname }}
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
                 <p v-if="boardStore.boardList.length==0">운동 루틴이 없습니다.</p>
                 <div class="mainRecBox" v-if="boardStore.boardList.length >= 1">
                     <RouterLink :to="`/board/${boardStore.boardList[0].routineId}`">
@@ -174,10 +157,12 @@ onMounted(() => {
 }
 
     .carousel-item.active, .carousel-item-start, .carousel-item-end {
+        width: 1050px;
         display: flex;
         justify-content: center;
         align-items: center;
         flex-direction: row;
+        margin: 0 auto;
         /* border: 1px solid gray; */
     }
 
